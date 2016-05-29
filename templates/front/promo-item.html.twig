@@ -1,0 +1,16 @@
+{% extends '/front/index.html.twig' %}
+{% block content %}
+    <section>
+        <div class="container">
+            {% for value in promo %}
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-header">
+                        <h1>{{ value.title }}</h1>
+                    </div>
+                    {{ value.text|raw }}
+                </div>
+            </div>
+                {% endfor %}
+    </section>
+{% endblock %}

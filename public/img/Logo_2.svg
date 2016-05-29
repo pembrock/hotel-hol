@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X7 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="588px" height="156px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 588 156"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil1 {fill:#D4AF37}
+    .fil2 {fill:white}
+    .fil0 {fill:#D4AF37;fill-rule:nonzero}
+   ]]>
+  </style>
+ </defs>
+ <g id="Слой_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <path class="fil0" d="M191 69c0,-16 -10,-22 -28,-22 -19,0 -29,6 -29,22l0 40c0,16 10,22 29,22 18,0 28,-6 28,-22l0 -40zm-19 40c0,4 -3,4 -9,4 -7,0 -10,0 -10,-4l0 -37c0,-3 3,-6 10,-6 6,0 9,3 9,6l0 37zm72 -59l-16 0 0 -16 -3 0 -15 4 0 12 -7 0 0 19 7 0 0 40c0,13 9,22 28,22l9 0 0 -18 -9 0c-7,0 -10,-4 -10,-7l0 -37 16 0 0 -19 0 0zm69 19c0,-16 -10,-22 -28,-22 -19,0 -29,6 -29,22l0 40c0,16 10,22 29,22 18,0 28,-6 28,-22l0 -9 -19 0 0 9c0,4 -3,4 -9,4 -7,0 -10,0 -10,-4l0 -12 38 0 0 -28 0 0zm-38 3c0,-3 3,-6 10,-6 6,0 9,3 9,6l0 9 -19 0 0 -9 0 0zm75 59l0 -118 -22 0 0 118 22 0zm13 -37l37 0 0 -16 -37 0 0 16zm97 -25l-25 0 0 -47 -19 0 0 109 19 0 0 -43 25 0 0 43 19 0 0 -109 -19 0 0 47zm94 0c0,-16 -13,-22 -32,-22 -18,0 -28,6 -28,22l0 40c0,16 10,22 28,22 19,0 32,-6 32,-22l0 -40zm-22 40c0,4 -3,4 -10,4 -3,0 -6,0 -6,-4l0 -37c0,-3 3,-6 6,-6 7,0 10,3 10,6l0 37zm56 22l0 -118 -19 0 0 118 19 0z"/>
+  <path class="fil1" d="M9 0l100 0c7,0 10,3 10,9l0 138c0,6 -3,9 -10,9l-100 0c-6,0 -9,-3 -9,-9l0 -138c0,-6 3,-9 9,-9zm63 69l-25 0 0 -44 -19 0 0 106 19 0 0 -43 25 0 0 43 19 0 0 -106 -19 0 0 44z"/>
+  <polygon class="fil2" points="72,69 47,69 47,25 28,25 28,131 47,131 47,88 72,88 72,131 91,131 91,25 72,25 "/>
+ </g>
+</svg>

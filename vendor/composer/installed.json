@@ -1,0 +1,150 @@
+[
+    {
+        "name": "fpdo/fluentpdo",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/fpdo/fluentpdo.git",
+            "reference": "669310efae4adfc54ae08b4f4f5db88a6d1b4d5b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/fpdo/fluentpdo/zipball/669310efae4adfc54ae08b4f4f5db88a6d1b4d5b",
+            "reference": "669310efae4adfc54ae08b4f4f5db88a6d1b4d5b",
+            "shasum": ""
+        },
+        "time": "2016-02-18 19:12:21",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "files": [
+                "FluentPDO/FluentPDO.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0",
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "Marek Lichtner",
+                "homepage": "http://licht.sk/"
+            }
+        ],
+        "description": "FluentPDO is small PHP library for rapid query building. Killer feature is smart join builder which generates joins automatically.",
+        "homepage": "https://github.com/fpdo/fluentpdo",
+        "keywords": [
+            "database",
+            "dbal",
+            "pdo"
+        ]
+    },
+    {
+        "name": "twig/twig",
+        "version": "v1.24.0",
+        "version_normalized": "1.24.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/twigphp/Twig.git",
+            "reference": "3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/twigphp/Twig/zipball/3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8",
+            "reference": "3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2.7"
+        },
+        "require-dev": {
+            "symfony/debug": "~2.7",
+            "symfony/phpunit-bridge": "~2.7"
+        },
+        "time": "2016-01-25 21:22:18",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.24-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Twig_": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com",
+                "homepage": "http://fabien.potencier.org",
+                "role": "Lead Developer"
+            },
+            {
+                "name": "Armin Ronacher",
+                "email": "armin.ronacher@active-4.com",
+                "role": "Project Founder"
+            },
+            {
+                "name": "Twig Team",
+                "homepage": "http://twig.sensiolabs.org/contributors",
+                "role": "Contributors"
+            }
+        ],
+        "description": "Twig, the flexible, fast, and secure template language for PHP",
+        "homepage": "http://twig.sensiolabs.org",
+        "keywords": [
+            "templating"
+        ]
+    },
+    {
+        "name": "verot/class.upload.php",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/verot/class.upload.php.git",
+            "reference": "f1c6e3c3d54b42171c4fdb67c8087c553a9e8d07"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/verot/class.upload.php/zipball/f1c6e3c3d54b42171c4fdb67c8087c553a9e8d07",
+            "reference": "f1c6e3c3d54b42171c4fdb67c8087c553a9e8d07",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=4"
+        },
+        "time": "2016-02-14 22:52:12",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "classmap": [
+                "src/class.upload.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPLv2"
+        ],
+        "authors": [
+            {
+                "name": "Colin Verot",
+                "email": "colin@verot.net"
+            }
+        ],
+        "description": "This PHP class uploads files and manipulates images very easily.",
+        "homepage": "http://www.verot.net/php_class_upload.htm",
+        "keywords": [
+            "gd",
+            "upload"
+        ]
+    }
+]

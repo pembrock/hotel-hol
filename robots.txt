@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /cgi-bin/
+Sitemap: http://www.hotel-hol.ru/sitemap.xml
+
+User-agent: Yandex
+Disallow: /admin/
+Disallow: /cgi-bin/
+host: www.hotel-hol.ru
+Sitemap: http://www.hotel-hol.ru/sitemap.xml

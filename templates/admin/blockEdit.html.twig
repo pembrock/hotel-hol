@@ -1,0 +1,50 @@
+{% extends "/admin/index.html.twig" %}
+{% set menu_selected = 'blocks' %}
+
+{% block content %}
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <ol class="breadcrumb">
+                <li><a href="blocks.php"><i class="fa fa-list"></i> Блоки</a></li>
+                <li class="active">{% if blocks is defined %}{{ blocks.title }}{% else %} Новый блок {% endif %}</li>
+            </ol>
+        </div>
+        <form class="form-horizontal" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="id" id="id" value="{% if blocks is defined %}{{ blocks.id }}{% else %}0{% endif %}">
+            <div class="box-body">
+                {% if error is defined  %}
+                    {{ error }}
+                {% endif %}
+                <div class="form-group">
+                    <label for="isActive" class="col-sm-2 control-label">Активно</label>
+                    <div class="col-sm-6">
+                        <input type="checkbox" class="form-control-static" name="isActive" id="isActive" value="1" {% if blocks is defined %}{% if blocks.isActive == 1 %} checked {% endif %}{% endif %} style="width: 25px;">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="title" class="col-sm-2 control-label">Название</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="title" id="title" placeholder="Название" value="{% if blocks is defined %}{{ blocks.title }}{% endif %}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="text" class="col-sm-2 control-label">Текст</label>
+                    <div class="col-sm-6">
+                        <textarea name="text" id="editor1" rows="10" cols="80">
+                            {% if blocks is defined %}{{ blocks.text}}{% endif %}
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="system" class="col-sm-2 control-label">Системное имя</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="system" id="system" placeholder="Системное имя" value="{% if blocks is defined %}{{ blocks.system }}{% endif %}">
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <button type="submit" class="btn btn-success" name="save" id="save">Сохранить</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

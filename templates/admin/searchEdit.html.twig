@@ -1,0 +1,43 @@
+{% extends "/admin/index.html.twig" %}
+{% set menu_selected = 'search' %}
+
+{% block content %}
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <ol class="breadcrumb">
+                <li><a href="search.php"><i class="fa fa-search"></i> Настройки для поисковых сервисов</a></li>
+                <li class="active">{% if search is defined %}{{ search.title }}{% endif %}</li>
+            </ol>
+        </div>
+        <form class="form-horizontal" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="id" id="id" value="{% if search is defined %}{{ search.id }}{% endif %}">
+            <div class="box-body">
+                {% if error is defined  %}
+                    {{ error }}
+                {% endif %}
+                <div class="form-group">
+                    <label for="title" class="col-sm-2 control-label">Название</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="title" id="title" placeholder="Название" value="{% if search is defined %}{{ search.title }}{% endif %}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="meta_desc" class="col-sm-2 control-label">Описание</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="meta_desc" id="meta_desc" placeholder="Описание" value="{% if search is defined %}{{ search.meta_desc }}{% endif %}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="meta_key" class="col-sm-2 control-label">Ключевые слова</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="meta_key" id="meta_key" placeholder="Ключевые слова" value="{% if search is defined %}{{ search.meta_key }}{% endif %}">
+                    </div>
+                </div>
+                
+            </div>
+            <div class="box-footer">
+                <button type="submit" class="btn btn-success" name="save" id="save">Сохранить</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

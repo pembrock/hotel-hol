@@ -1,0 +1,30 @@
+{% extends "/admin/index.html.twig" %}
+{% set menu_selected = 'groups' %}
+{% block content %}
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Группы пользователей</h3>
+                <a href="?edit=0" title="Добавить" class="btn btn-success pull-right">
+                    <i class="fa fa-plus"></i>
+                </a>
+            </div>
+            <div class="box-body no-padding">
+                <table class="table">
+                    {% for value in groups %}
+                        <tr>
+                            <td style="width: 10px">{{ loop.index }}.</td>
+                            <td><a href="?edit={{ value.id }}">{{ value.name }}</a></td>
+                            <td style="width: 10px">
+                                <a href="?edit={{ value.id }}" type="button" class="btn btn-block btn-primary">Редактировать</a>
+                            </td>
+                            <td style="width: 10px">
+                                <a href="?del={{ value.id }}" type="button" class="btn btn-block btn-danger">Удалить</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

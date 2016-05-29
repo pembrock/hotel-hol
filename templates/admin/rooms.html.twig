@@ -1,0 +1,66 @@
+{% extends "/admin/index.html.twig" %}
+{% set menu_selected = 'rooms' %}
+{% block content %}
+    <style>
+        table {float: left; /*margin: 20px;*/ font-size: 14px; font-family: tahoma, arial, sans-serif;}
+        table.sorting-table {cursor: move; /*box-shadow: 0 0 16px rgba(0, 0, 0, 0.2);*/}
+        table thead th {/*background-color: #ccc;*/ padding: 5px 8px;}
+        table td {/*background-color: #ddd;*/ padding: 5px 8px;}
+        table tr.sorting-row td {/*background-color: #8b8;*/}
+        table td.sorter {/*background-color: #255625; */width: 50px; cursor: move;}
+        .sort-handler {float: right; /*background-color: #f80;*/ width: 14px; height: 14px; margin: 2px 0 0 6px; cursor: move;}
+
+        table.sorting-table tbody tr:not(.sorting-row) td {opacity: 0.2;}
+
+    </style>
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Номера</h3>
+                <a href="?edit=0" title="Добавить" class="btn btn-success pull-right">
+                    <i class="fa fa-plus"></i>
+                </a>
+            </div>
+            <div class="box-body no-padding">
+                <table class="table" id="table-sorter">
+                    {% for value in rooms %}
+                        <tr id="{{ value.id }}">
+                            <td style="width: 50px" class="sorter"><i class="fa fa-sort"> {{ loop.index }}.</i></td>
+                            <td><a href="?edit={{ value.id }}">{{ value.title }}</a></td>
+                            <td style="width: 10px">
+                                <a href="?edit={{ value.id }}" type="button" class="btn btn-block btn-primary">Редактировать</a>
+                            </td>
+                            <td style="width: 10px">
+                                <a href="?del={{ value.id }}" type="button" class="btn btn-block btn-danger">Удалить</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function gebi(id)
+        {
+            return document.getElementById(id);
+        }
+
+        window.onload = function() {
+            RowSorter(gebi('table-sorter'), {
+                handler: 'td.sorter, td.sorter i',
+                onDrop: function() {
+                    var hid = [];
+                    $('table tr').each(function(){
+                        hid.push($(this).attr('id'));
+                    });
+                    var data = JSON.stringify(hid);
+                    $.ajax({
+                        type: "POST",
+                        url: location.href,
+                        data: {sort: 1, data: data}
+                    });
+                }
+            });
+        }
+    </script>
+{% endblock %}

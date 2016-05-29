@@ -1,0 +1,61 @@
+{% extends "/admin/index.html.twig" %}
+{% set menu_selected = 'rooms' %}
+
+{% block content %}
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <ol class="breadcrumb">
+                <li><a href="rooms.php"><i class="fa fa-bed"></i> Номера</a></li>
+                <li class="active">{% if rooms is defined %}{{ rooms.title }}{% else %}Новый номер{% endif %}</li>
+            </ol>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form class="form-horizontal" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="id" id="id" value="{% if rooms is defined %}{{ rooms.id }}{% else %}0{% endif %}">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="title" class="col-sm-2 control-label">Название</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="title" id="title" placeholder="Название" value="{% if rooms is defined %}{{ rooms.title }}{% endif %}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="seats_count" class="col-sm-2 control-label">Количество гостей</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="seats_count" id="seats_count" placeholder="Количество гостей в номере" value="{% if rooms is defined %}{{ rooms.seats_count }}{% endif %}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="isActive" class="col-sm-2 control-label">Активно</label>
+                    <div class="col-sm-6">
+                        <input type="checkbox" class="form-control-static" name="isActive" id="isActive" value="1" {% if rooms is defined %}{% if rooms.isActive == 1 %} checked {% endif %}{% endif %} style="width: 25px;">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="description" class="col-sm-2 control-label">Описание</label>
+                    <div class="col-sm-6">
+                        <textarea name="description" id="editor1" rows="10" cols="80">
+                            {% if rooms is defined %}{{ rooms.description }}{% endif %}
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="logo" class="col-sm-2 control-label">Фото номера</label>
+                    <div class="col-sm-8">
+                        {% if rooms.image is not null %}
+                            <div><img src="{{ rooms.image }}" > </div>
+                            <br>
+                        {% endif %}
+                        <input type="file" name="image" class="form-control" id="image">
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+            <!-- /.box-footer -->
+            <div class="box-footer">
+                <button type="submit" class="btn btn-success" name="save" id="save">Сохранить</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

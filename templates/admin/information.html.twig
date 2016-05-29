@@ -1,0 +1,42 @@
+{% extends "/admin/index.html.twig" %}
+{% set menu_selected = 'info' %}
+{% block content %}
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Полезная информация</h3>
+                <a href="?edit=0" title="Добавить" class="btn btn-success pull-right">
+                    <i class="fa fa-plus"></i>
+                </a>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+                <table class="table table-striped">
+                    <tbody><tr>
+                        <th style="width: 10px"></th>
+                        <th>Заголовок</th>
+                        <th>Дата</th>
+                        <th>Опубликовано</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    {% for item in information %}
+                    <tr>
+                        <td>1.</td>
+                        <td><a href="?edit={{ item.id }}">{{ item.title }}</a></td>
+                        <td>{{ item.date }}</td>
+                        <td><span class="badge bg-{% if item.isActive == 0 %}red{% else %}green{% endif %}">{% if item.isActive == 0 %}Нет{% else %}Да{% endif %}</span></td>
+                        <td style="width: 10px">
+                            <a href="?edit={{ item.id }}" type="button" class="btn btn-block btn-primary">Редактировать</a>
+                        </td>
+                        <td style="width: 10px">
+                            <a href="?del={{ item.id }}" type="button" class="btn btn-block btn-danger">Удалить</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody></table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+{% endblock %}

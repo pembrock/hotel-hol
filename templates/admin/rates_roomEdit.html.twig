@@ -1,0 +1,89 @@
+{% extends "/admin/index.html.twig" %}
+{% set menu_selected = 'rates_room' %}
+
+{% block content %}
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <ol class="breadcrumb">
+                <li><a href="rates_room.php"><i class="fa fa-money"></i> Тарифы на проживание</a></li>
+                <li class="active">{% if rates is defined %}{{ rates.title }}{% else %}Новый тариф{% endif %}</li>
+            </ol>
+        </div>
+        <form class="form-horizontal" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="id" id="id" value="{% if rates is defined %}{{ rates.id }}{% else %}0{% endif %}">
+            <div class="box-body">
+                {% if error is defined  %}
+                    {{ error }}
+                {% endif %}
+                {#{% if rates is defined %}#}
+                {#<div class="form-group">#}
+                    {#<div class="col-sm-4">#}
+                        {#<a href="rates_tables.php?tid={{ rates.id }}" type="button" class="btn btn-block btn-facebook">#}
+                            {#<i class="fa fa-table"> Тарифные таблицы для тарифа "{{ rates.title }}"</i>#}
+                        {#</a>#}
+                    {#</div>#}
+                {#</div>#}
+                {#{% endif %}#}
+                <div class="form-group">
+                    <label for="isDefault" class="col-sm-2 control-label">По умолчанию</label>
+                    <div class="col-sm-6">
+                        <input type="checkbox" class="form-control-static" name="isDefault" id="isDefault" value="1" {% if rates is defined %}{% if rates.isDefault == 1 %} checked {% endif %}{% endif %} style="width: 25px;">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="isActive" class="col-sm-2 control-label">Активно</label>
+                    <div class="col-sm-6">
+                        <input type="checkbox" class="form-control-static" name="isActive" id="isActive" value="1" {% if rates is defined %}{% if rates.isActive == 1 %} checked {% endif %}{% endif %} style="width: 25px;">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="type" class="col-sm-2 control-label">Тип</label>
+                    <div class="col-sm-6">
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-primary {% if rates is defined %}{% if rates.type == 1 %}active{% endif %}{% endif %}">
+                                <input type="radio" name="type" id="option1" value="1" autocomplete="off" {% if rates is defined %}{% if rates.type == 1 %}checked{% endif %}{% endif %}> Посуточный
+                            </label>
+                            <label class="btn btn-primary {% if rates is defined %}{% if rates.type == 2 %}active{% endif %}{% endif %}">
+                                <input type="radio" name="type" id="option2" value="2" autocomplete="off" {% if rates is defined %}{% if rates.type == 2 %}checked{% endif %}{% endif %}> Почасовой
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="title" class="col-sm-2 control-label">Название</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="title" id="title" placeholder="Название" value="{% if rates is defined %}{{ rates.title }}{% endif %}">
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label for="description" class="col-sm-2 control-label">Описание</label>
+                    <div class="col-sm-6">
+                        <textarea name="description" id="editor1" rows="10" cols="80">
+                            {% if rates is defined %}{{ rates.description }}{% endif %}
+                        </textarea>
+                    </div>
+                </div>
+                {% if rates.id > 0 %}
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Тарифные таблицы гостиницы</label>
+                    <div class="col-sm-6">
+                        <table class="table">
+                            {% for value in hotels %}
+                            <tr>
+                                <td>{{ value.title }}</td>
+                                <td><a href="?tid={{ rates.id}}&hid={{ value.id }}&ttid=0" type="button" class="btn btn-block btn-success">Создать</a></td>
+                                <td><a href="?list&tid={{ rates.id}}&hid={{ value.id }}" type="button" class="btn btn-block btn-primary">Список таблиц</a></td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+                {% endif %}
+
+            </div>
+            <div class="box-footer">
+                <button type="submit" class="btn btn-success" name="save" id="save">Сохранить</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

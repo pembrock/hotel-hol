@@ -1,0 +1,43 @@
+{% extends "/admin/index.html.twig" %}
+{% set menu_selected = 'settings' %}
+
+{% block content %}
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <ol class="breadcrumb">
+                <li><a href="settings.php"><i class="fa fa-laptop"></i> Основные настройки сайта</a></li>
+                <li class="active">{% if settings is defined %}{{ settings.title }}{% else %}Новая настройка{% endif %}</li>
+            </ol>
+        </div>
+        <form class="form-horizontal" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="id" id="id" value="{% if settings is defined %}{{ settings.id }}{% else %}0{% endif %}">
+            <div class="box-body">
+                {% if error is defined  %}
+                    {{ error }}
+                {% endif %}
+                <div class="form-group">
+                    <label for="title" class="col-sm-2 control-label">Название</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="title" id="title" placeholder="Название" value="{% if settings is defined %}{{ settings.title }}{% endif %}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="title" class="col-sm-2 control-label">Значение</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="value" id="title" placeholder="Значение" value="{% if settings is defined %}{{ settings.value }}{% endif %}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="title" class="col-sm-2 control-label">Системное имя</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="sysname" id="title" placeholder="Системное имя" value="{% if settings is defined %}{{ settings.sysname }}{% endif %}">
+                    </div>
+                </div>
+                
+            </div>
+            <div class="box-footer">
+                <button type="submit" class="btn btn-success" name="save" id="save">Сохранить</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

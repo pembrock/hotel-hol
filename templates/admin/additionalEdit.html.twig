@@ -1,0 +1,55 @@
+{% extends "/admin/index.html.twig" %}
+{% set menu_selected = 'additional' %}
+
+{% block content %}
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <ol class="breadcrumb">
+                <li><a href="additional.php"><i class="fa fa-wrench"></i> Дополнительные услуги</a></li>
+                <li class="active">{% if service is defined %}{{ service.title }}{% else %}Новая услуга{% endif %}</li>
+            </ol>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form class="form-horizontal" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="id" id="id" value="{% if service is defined %}{{ service.id }}{% else %}0{% endif %}">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="title" class="col-sm-2 control-label">Название</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="title" id="title" placeholder="Название" value="{% if service is defined %}{{ service.title }}{% endif %}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="isActive" class="col-sm-2 control-label">Активно</label>
+                    <div class="col-sm-6">
+                        <input type="checkbox" class="form-control-static" name="isActive" id="isActive" value="1" {% if service is defined %}{% if service.isActive == 1 %} checked {% endif %}{% endif %} style="width: 25px;">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="description" class="col-sm-2 control-label">Описание</label>
+                    <div class="col-sm-6">
+                        <textarea name="description" id="editor1" rows="10" cols="80">
+                            {% if service is defined %}{{ service.description }}{% endif %}
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="logo" class="col-sm-2 control-label">Логотип</label>
+                    <div class="col-sm-8">
+                        {% if service.logo is not null %}
+                            <div><img src="{{ service.logo }}" > </div>
+                            <br>
+                        {% endif %}
+                        <input type="file" name="logo" class="form-control" id="logo">
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+            <!-- /.box-footer -->
+            <div class="box-footer">
+                <button type="submit" class="btn btn-success" name="save" id="save">Сохранить</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

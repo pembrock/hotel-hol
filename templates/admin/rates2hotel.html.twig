@@ -1,0 +1,42 @@
+{% extends "/admin/index.html.twig" %}
+{% set menu_selected = 'home' %}
+
+{% block content %}
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <ol class="breadcrumb">
+                <li><a href="hotels.php"><i class="fa fa-home"></i> Гостиницы</a></li>
+                <li><a href="hotels.php?edit={{ data.hid }}"> {{ data.chain }}</a></li>
+                <li class="active">Тарифы на проживание</li>
+            </ol>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form class="form-horizontal" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="hid" id="hid" value="{% if data.hid is defined %}{{ data.hid }}{% else %}0{% endif %}">
+            <div class="box-body">
+                {% if data.error is defined %}
+                <div class="form-group">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-6 alert-error">{{ data.error }}</div>
+                </div>
+                {% endif %}
+                <div class="form-group">
+                        <label for="rid" class="control-label col-sm-2">Тариф</label>
+                    <div class="col-sm-6">
+                        {% if rates is defined %}
+                        <select class="form-control select2 select2-hidden-accessible" name="rid" id="rid" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                            {% for value in rates %}
+                                <option value="{{ value.id }}" >{{ value.title }}</option>
+                            {% endfor %}
+                        </select>
+                        {% endif %}
+                    </div>
+                </div>
+            <div class="box-footer">
+                <button type="submit" class="btn btn-success" name="save" id="save">Продолжить</button>
+            </div>
+
+        </form>
+    </div>
+{% endblock %}

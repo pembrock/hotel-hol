@@ -1,0 +1,68 @@
+{% extends "/admin/index.html.twig" %}
+{% set menu_selected = 'users' %}
+
+{% block content %}
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <ol class="breadcrumb">
+                <li><a href="users.php"><i class="fa fa-users"></i> Пользователи</a></li>
+                <li class="active">{% if users is defined %}{{ users.Username }}{% else %}Новый пользователь{% endif %}</li>
+            </ol>
+        </div>
+        <form class="form-horizontal" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="id" id="id" value="{% if users is defined %}{{ users.ID }}{% else %}0{% endif %}">
+            <div class="box-body">
+                {% if error is defined  %}
+                    {{ error }}
+                {% endif %}
+                <div class="form-group">
+                    <label for="Activated" class="col-sm-2 control-label">Активно</label>
+                    <div class="col-sm-6">
+                        <input type="checkbox" class="form-control-static" name="Activated" id="Activated" value="1" {% if users is defined %}{% if users.Activated == 1 %} checked {% endif %}{% endif %} style="width: 25px;">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Username" class="col-sm-2 control-label">Имя</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="Username" id="Username" placeholder="Имя" value="{% if users is defined %}{{ users.Username }}{% endif %}" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Email" class="col-sm-2 control-label">E-mail</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="Email" id="Email" placeholder="E-mail" value="{% if users is defined %}{{ users.Email }}{% endif %}" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="GroupID" class="control-label col-sm-2">Группа</label>
+                    <div class="col-sm-6">
+                        {% if groups is defined %}
+                            <select class="form-control select2 select2-hidden-accessible" name="GroupID" id="GroupID" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                {% for value in groups %}
+                                    <option value="{{ value.id }}" {% if users is defined and users.GroupID == value.id %}selected="selected"{% endif %}>{{ value.name }}</option>
+                                {% endfor %}
+                            </select>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Password" class="col-sm-2 control-label">Пароль</label>
+                    <div class="col-sm-6">
+                        <input type="password" class="form-control" name="Password" id="Password" placeholder="Изменить пароль" {% if users is not defined %}required{% endif %}>
+                    </div>
+                </div>
+                {% if users is defined %}
+                    <div class="form-group">
+                        <label for="Activated" class="col-sm-2 control-label">Изменить пароль</label>
+                        <div class="col-sm-6">
+                            <input type="checkbox" class="form-control-static" name="savePass" id="savePass" value="1" style="width: 25px;">
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="box-footer">
+                <button type="submit" class="btn btn-success" name="save" id="save">Сохранить</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
