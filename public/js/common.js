@@ -54,4 +54,29 @@ $(document).ready(function(){
                 $menu.removeClass("fixed").addClass("default");
             }
         });//scroll
+
+	//страница номера и цены
+	$('select[name=guests]').on('change', function(){
+		var guests = $(this).val();
+		var tid = $('select[name=tariff]').val();
+		$.ajax({
+			type: "POST",
+			url: "/prices",
+			data: {getRates: 1, guests: guests, tid: tid},
+			error: function (xhr, ajaxOptions, thrownError) {
+				alert(xhr.status);
+				alert(xhr.responseText);
+				alert(thrownError);
+			},
+			success: function(e){
+				console.log(e);
+			}
+		});
+
+	});
+
+	$('select[name=tariff]').on('change', function(){
+		alert($(this).val());
+	});
+
     });

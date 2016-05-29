@@ -8,23 +8,49 @@
 
 $block = $fpdo->from('blocks')->where(array('system' => 'prices'))->fetch();
 $rooms = $fpdo->from('rooms')->select(null)->select(array('id', 'title'))->orderBy('orderBy')->fetchAll();
-$rates = $fpdo->from('rates')->where(array('isActive' => 1))->fetchAll();
+$rates = $fpdo->from('rates')->where(array('isActive' => 1))->orderBy('isDefault DESC')->fetchAll();
 $hotels = $fpdo->from('hotel')->fetchAll();
-/*
- *      select tt.id, r.title, tt.title, tt.start_ts from rates r
-        inner join tarif_tables tt ON tt.tid = r.id
-        where r.isDefault = 1 and tt.start_ts <= NOW()
-        order by tt.start_ts DESC
-        limit 1
- */
-$query = "select tt.id from rates r inner join tarif_tables tt ON tt.tid = r.id where r.isDefault = 1 and tt.start_ts <= NOW() order by tt.start_ts DESC limit 1";
-$res = $pdo->query($query, PDO::FETCH_ASSOC);
-$tt = $res->fetchColumn();
 
-foreach($hotels as $key => $value){
-        $rates_ar = $fpdo->from('rates2room')->innerJoin('rates ON rates.id = rates2room.tid')->where(array('rates.isActive' => 1, 'rates2room.hid' => $hotels[$key]['id'], 'rates2room.guests' => 1, 'rates2room.ttid' => $tt))->fetchAll();
+if (isset($_POST['getRates']))
+{
+        echo "123";
+        die();
+        $rate = intval($_POST['tid']);
+        $guests = intval($_POST['guests']);
+        $hotels_rates = array();
+        foreach ($hotels as $hotel)
+        {
+                $query = "SELECT id FROM tarif_tables WHERE tid = " . $rates . " AND hid = " . $hotel['id'] . " AND isACtive = 1 AND start_ts <= NOW()";
+                $res = $pdo->query($query, PDO::FETCH_ASSOC);
+                $ttid = $res->fetchColumn();
 
-        $hotels[$key]['rates'] = $rates_ar;
+                foreach($rooms as $room)
+                {
+                        $query = "SELECT cost FROM rates2room WHERE hid = " . $hotel['id'] . " AND rid = " . $room['id'] . " AND tid = " . $rate . " AND ttid = " . $ttid . " AND guests = " . $guests;
+                        $res = $pdo->query($query, PDO::FETCH_ASSOC);
+                        $cost = $res->fetchColumn();
+                        $hotels_rates[$hotel['id'] . '_' . $room['id']] = $cost;
+                }
+        }
+
+        echo json_encode($hotels_rates);
+        die();
 }
 
-echo $twig->render('/front/prices.html.twig', array('block' => $block, 'rooms' => $rooms, 'hotels' => $hotels, 'rates' => $rates));
+$default_rate = $fpdo->from('rates')->select(null)->select(array('id'))->where(array('isDefault' => 1, 'isActive' => 1))->fetch();
+$hotels_rates = array();
+foreach ($hotels as $hotel)
+{
+        $query = "SELECT id FROM tarif_tables WHERE tid = " . $default_rate['id'] . " AND hid = " . $hotel['id'] . " AND isACtive = 1 AND start_ts <= NOW()";
+        $res = $pdo->query($query, PDO::FETCH_ASSOC);
+        $ttid = $res->fetchColumn();
+
+        foreach($rooms as $room)
+        {
+                $query = "SELECT cost FROM rates2room WHERE hid = " . $hotel['id'] . " AND rid = " . $room['id'] . " AND tid = " . $default_rate['id'] . " AND ttid = " . $ttid . " AND guests = 1";
+                $res = $pdo->query($query, PDO::FETCH_ASSOC);
+                $cost = $res->fetchColumn();
+                $hotels_rates[$hotel['id']][$room['id']] = $cost;
+        }
+}
+echo $twig->render('/front/prices.html.twig', array('block' => $block, 'rooms' => $rooms, 'hotels' => $hotels, 'rates' => $rates, 'hotels_rates' => $hotels_rates));

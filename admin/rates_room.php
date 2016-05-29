@@ -75,7 +75,7 @@ if (isset($_GET['list'], $_GET['tid'], $_GET['hid']))
     $hid = intval($_GET['hid']);
     $rate = $fpdo->from('rates')->where(array('id' => $tid))->fetch();
     $hotel = $fpdo->from('hotel')->where(array('id' => $hid))->fetch();
-    $tables = $fpdo->from('tarif_tables')->where(array('tid' => $tid, 'hid' => $hid))->fetchAll();
+    $tables = $fpdo->from('tarif_tables')->where(array('tid' => $tid, 'hid' => $hid))->orderBy('start_ts')->fetchAll();
     echo $twig->render('/admin/tariff_list.html.twig', array('tables' => $tables, 'rate' => $rate, 'hotel' => $hotel, 'tid' => $tid, 'hid' => $hid));
 
     die();

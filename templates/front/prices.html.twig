@@ -21,7 +21,6 @@
                             <label class="col-sm-4 control-label">Выберите количество гостей в номере</label>
                             <div class="col-sm-8">
                                 <select name="guests" class="form-control input-sm">
-                                    <option></option>
                                     {% for i in 1..settings.guests_count %}
                                         <option value="{{ i }}">{{ i }}</option>
                                     {% endfor %}
@@ -32,7 +31,6 @@
                             <label class="col-sm-4 control-label">Выберите тариф</label>
                             <div class="col-sm-8">
                                 <select name="tariff" class="form-control input-sm">
-                                    <option></option>
                                     {% for t in rates %}
                                         <option value="{{ t.id }}">{{ t.title }}</option>
                                     {% endfor %}
@@ -40,7 +38,9 @@
                             </div>
                         </div>
                         <div style="clear: both"></div>
-                        {#<div>Текстовое описание тарифа</div>#}
+                        <div class="card_2 caption color_4">
+                            <p>{{ rates.0.description|raw }}</p>
+                        </div>
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
@@ -55,10 +55,12 @@
                                 {% for hotel in hotels %}
                                 <tr>
                                     <td><a class="ab1" href="/hotels?id={{ hotel.id }}">«{{ hotel.title }}»</td>
-                                    {% for rate in hotel.rates %}
-                                    <td>{% if rate.cost_hour is not null or rate.cost_day is not null %}сутки - {{ rate.cost_day }}<br> час - {{ rate.cost_hour }}{% endif %}</td>
 
-                                    {% endfor %}
+                                        {% for room in rooms %}
+                                    <td class="{{ hotel.id }}_{{ room.id }}">{{ hotels_rates[hotel.id][room.id] }}</td>
+                                            {% endfor %}
+
+
                                 </tr>
                                 {% endfor %}
                                 </tbody>
