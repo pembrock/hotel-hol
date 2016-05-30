@@ -63,20 +63,36 @@ $(document).ready(function(){
 			type: "POST",
 			url: "/prices",
 			data: {getRates: 1, guests: guests, tid: tid},
-			error: function (xhr, ajaxOptions, thrownError) {
-				alert(xhr.status);
-				alert(xhr.responseText);
-				alert(thrownError);
-			},
 			success: function(e){
-				console.log(e);
+				var response = JSON.parse(e);
+				for (var key in response) {
+					if (response[key] != null)
+						$('.' + key).text(response[key]);
+					else
+						$('.' + key).text('');
+				}
 			}
 		});
 
 	});
 
 	$('select[name=tariff]').on('change', function(){
-		alert($(this).val());
+		var guests = $('select[name=guests]').val();
+		var tid = $(this).val();
+		$.ajax({
+			type: "POST",
+			url: "/prices",
+			data: {getRates: 1, guests: guests, tid: tid},
+			success: function(e){
+				var response = JSON.parse(e);
+				for (var key in response) {
+					if (response[key] != null)
+						$('.' + key).text(response[key]);
+					else
+						$('.' + key).text('');
+				}
+			}
+		});
 	});
 
     });

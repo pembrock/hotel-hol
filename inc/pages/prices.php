@@ -13,23 +13,28 @@ $hotels = $fpdo->from('hotel')->fetchAll();
 
 if (isset($_POST['getRates']))
 {
-        echo "123";
-        die();
         $rate = intval($_POST['tid']);
         $guests = intval($_POST['guests']);
         $hotels_rates = array();
         foreach ($hotels as $hotel)
         {
-                $query = "SELECT id FROM tarif_tables WHERE tid = " . $rates . " AND hid = " . $hotel['id'] . " AND isACtive = 1 AND start_ts <= NOW()";
+                $query = "SELECT id FROM tarif_tables WHERE tid = " . $rate . " AND hid = " . $hotel['id'] . " AND isACtive = 1 AND start_ts <= NOW()";
                 $res = $pdo->query($query, PDO::FETCH_ASSOC);
                 $ttid = $res->fetchColumn();
 
                 foreach($rooms as $room)
                 {
-                        $query = "SELECT cost FROM rates2room WHERE hid = " . $hotel['id'] . " AND rid = " . $room['id'] . " AND tid = " . $rate . " AND ttid = " . $ttid . " AND guests = " . $guests;
-                        $res = $pdo->query($query, PDO::FETCH_ASSOC);
-                        $cost = $res->fetchColumn();
-                        $hotels_rates[$hotel['id'] . '_' . $room['id']] = $cost;
+                        if(!$ttid)
+                                $hotels_rates[$hotel['id'] . '_' . $room['id']] = null;
+                        else {
+                                $query = "SELECT cost FROM rates2room WHERE hid = " . $hotel['id'] . " AND rid = " . $room['id'] . " AND tid = " . $rate . " AND ttid = " . $ttid . " AND guests = " . $guests;
+                                $res = $pdo->query($query, PDO::FETCH_ASSOC);
+                                $cost = $res->fetchColumn();
+                                if ($cost)
+                                        $hotels_rates[$hotel['id'] . '_' . $room['id']] = $cost;
+                                else
+                                        $hotels_rates[$hotel['id'] . '_' . $room['id']] = null;
+                        }
                 }
         }
 
