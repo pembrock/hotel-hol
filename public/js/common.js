@@ -65,8 +65,9 @@ $(document).ready(function(){
 			data: {getRates: 1, guests: guests, tid: tid},
 			success: function(e){
 				var response = JSON.parse(e);
+				$('.color_4').html(response['description']);
 				for (var key in response) {
-					if (response[key] != null)
+					if (key != 'description' && response[key] != null)
 						$('.' + key).text(response[key]);
 					else
 						$('.' + key).text('');
@@ -85,8 +86,9 @@ $(document).ready(function(){
 			data: {getRates: 1, guests: guests, tid: tid},
 			success: function(e){
 				var response = JSON.parse(e);
+				$('.color_4').html(response['description']);
 				for (var key in response) {
-					if (response[key] != null)
+					if (key != 'description' && response[key] != null)
 						$('.' + key).text(response[key]);
 					else
 						$('.' + key).text('');

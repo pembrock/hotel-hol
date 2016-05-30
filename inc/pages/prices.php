@@ -15,7 +15,9 @@ if (isset($_POST['getRates']))
 {
         $rate = intval($_POST['tid']);
         $guests = intval($_POST['guests']);
+        $r_desc = $fpdo->from('rates')->select(null)->select(array('description'))->where(array('id' => $rate))->fetch();
         $hotels_rates = array();
+        $hotels_rates['description'] = $r_desc['description'];
         foreach ($hotels as $hotel)
         {
                 $query = "SELECT id FROM tarif_tables WHERE tid = " . $rate . " AND hid = " . $hotel['id'] . " AND isACtive = 1 AND start_ts <= NOW()";
