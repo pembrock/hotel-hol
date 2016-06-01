@@ -6,6 +6,7 @@
             <div class="box-header">
                 <ol class="breadcrumb">
                     <li><a href="rates_room.php"><i class="fa fa-money"></i> Тарифы на проживание</a></li>
+                    <li><i class="fa fa-home"></i> Гостиница "{{ hotel_name }}"</li>
                     <li><a href="rates_room.php?list&tid={{ tid }}&hid={{ hid }}"><i class="fa fa-table"></i> Тарифные таблицы для тарифа
                             "{{ rate.title }}"</a></li>
                     <li class="active">{% if ttable is defined %}{{ ttable.title }}{% else %}Новая таблица{% endif %}</li>

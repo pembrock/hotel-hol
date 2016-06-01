@@ -47,6 +47,44 @@ if (isset($_GET['del'])){
 
     header('Location: /admin/rates_room.php');
 }
+
+if (isset($_GET['deltable'], $_GET['hid'], $_GET['tid'], $_GET['ttid']))
+{
+    $ttid = intval($_GET['ttid']);
+    $tid = intval($_GET['tid']);
+    $hid = intval($_GET['hid']);
+
+    $query = $fpdo->deleteFrom('tarif_tables')->where('id', $ttid);
+    $query->execute();
+    $query = $fpdo->deleteFrom('rates2room')->where('ttid', $ttid);
+    $query->execute();
+
+    header('Location: /admin/rates_room.php?list&tid=' . $tid . '&hid=' . $hid);
+}
+
+if (isset($_GET['copy'], $_GET['tid'], $_GET['hid'], $_GET['ttid']))
+{
+    $ttid = intval($_GET['ttid']);
+    $tid = intval($_GET['tid']);
+    $hid = intval($_GET['hid']);
+    $table = $fpdo->from('tarif_tables')->where('id', $ttid)->fetch();
+    $start_ts = new \DateTime($table['start_ts']);
+    $set = array('hid' => $table['hid'], 'tid' => $table['tid'], 'title' => $table['title'] . '-КОПИЯ', 'isActive' => $table['isActive'], 'start_ts' => $start_ts->format('Y-m-d H:i:s'));
+    $query = $fpdo->insertInto('tarif_tables')->values($set);
+    $query->execute();
+    $new_ttid = $pdo->lastInsertId();
+    $rates2room = $fpdo->from('rates2room')->where(array('hid' => $hid, 'tid' => $tid, 'ttid' => $ttid))->fetchAll();
+    foreach($rates2room as $key => $value)
+    {
+        $setRates = array('hid' => $value['hid'], 'rid' => $value['rid'], 'tid' => $value['tid'], 'ttid' => $new_ttid, 'cost' => $value['cost'], 'guests' => $value['guests']);
+
+        $query = $fpdo->insertInto('rates2room')->values($setRates);
+        $query->execute();
+    }
+
+    header('Location: /admin/rates_room.php?tid=' . $tid . '&hid=' . $hid . '&ttid=' . $new_ttid);
+}
+
 if (isset($_GET['tid'], $_GET['hid'], $_GET['ttid']))
 {
     $tid = intval($_GET['tid']);
@@ -54,6 +92,7 @@ if (isset($_GET['tid'], $_GET['hid'], $_GET['ttid']))
     $ttid = intval($_GET['ttid']);
     $rooms = $fpdo->from('rooms')->select(null)->select(array('id', 'title'))->orderBy('orderBy')->fetchAll();
     $rate = $fpdo->from('rates')->where(array('id' => $tid))->fetch();
+    $hotel_name = $fpdo->from('hotel')->select(null)->select(array('title'))->where(array('id' => $hid))->fetchColumn();
     if ($ttid > 0){
         $ttable = $fpdo->from('tarif_tables')->where(array('id' => $ttid))->fetch();
         $costs_array = $fpdo->from('rates2room')->where(array('hid' => $hid, 'tid' => $tid, 'ttid' => $ttid))->fetchAll();
@@ -61,10 +100,10 @@ if (isset($_GET['tid'], $_GET['hid'], $_GET['ttid']))
             $costs[$val['rid']][$val['guests']] = $val['cost'];
         }
 
-        echo $twig->render('/admin/tariff_tableEdit.html.twig', array('rate' => $rate, 'rooms' => $rooms, 'tid' => $tid, 'hid' => $hid, 'ttid' => $ttid, 'ttable' => $ttable, 'costs' =>$costs));
+        echo $twig->render('/admin/tariff_tableEdit.html.twig', array('rate' => $rate, 'rooms' => $rooms, 'tid' => $tid, 'hid' => $hid, 'ttid' => $ttid, 'ttable' => $ttable, 'costs' =>$costs, 'hotel_name' => $hotel_name));
     }
     else {
-        echo $twig->render('/admin/tariff_tableEdit.html.twig', array('rate' => $rate, 'rooms' => $rooms, 'tid' => $tid, 'hid' => $hid));
+        echo $twig->render('/admin/tariff_tableEdit.html.twig', array('rate' => $rate, 'rooms' => $rooms, 'tid' => $tid, 'hid' => $hid, 'hotel_name' => $hotel_name));
     }
     die();
 }

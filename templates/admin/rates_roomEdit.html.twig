@@ -15,15 +15,7 @@
                 {% if error is defined  %}
                     {{ error }}
                 {% endif %}
-                {#{% if rates is defined %}#}
-                {#<div class="form-group">#}
-                    {#<div class="col-sm-4">#}
-                        {#<a href="rates_tables.php?tid={{ rates.id }}" type="button" class="btn btn-block btn-facebook">#}
-                            {#<i class="fa fa-table"> Тарифные таблицы для тарифа "{{ rates.title }}"</i>#}
-                        {#</a>#}
-                    {#</div>#}
-                {#</div>#}
-                {#{% endif %}#}
+
                 <div class="form-group">
                     <label for="isDefault" class="col-sm-2 control-label">По умолчанию</label>
                     <div class="col-sm-6">
@@ -65,17 +57,19 @@
                 </div>
                 {% if rates.id > 0 %}
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Тарифные таблицы гостиницы</label>
-                    <div class="col-sm-6">
-                        <table class="table">
-                            {% for value in hotels %}
-                            <tr>
-                                <td>{{ value.title }}</td>
-                                <td><a href="?tid={{ rates.id}}&hid={{ value.id }}&ttid=0" type="button" class="btn btn-block btn-success">Создать</a></td>
-                                <td><a href="?list&tid={{ rates.id}}&hid={{ value.id }}" type="button" class="btn btn-block btn-primary">Список таблиц</a></td>
-                            </tr>
-                            {% endfor %}
-                        </table>
+                    <label class="col-sm-2 control-label">Тарифные таблицы</label>
+                    <div class="col-sm-3">
+                        {% for value in hotels %}
+                            <a href="?list&tid={{ rates.id}}&hid={{ value.id }}" type="button" class="btn btn-block btn-primary">{{ value.title }}</a>
+                        {% endfor %}
+                        {#<table class="table">#}
+                            {#{% for value in hotels %}#}
+                            {#<tr>#}
+                                {#&#123;&#35;<td><a href="?tid={{ rates.id}}&hid={{ value.id }}&ttid=0" type="button" class="btn btn-block btn-success">Создать</a></td>&#35;&#125;#}
+                                {#<td><a href="?list&tid={{ rates.id}}&hid={{ value.id }}" type="button" class="btn btn-block btn-primary">{{ value.title }}</a></td>#}
+                            {#</tr>#}
+                            {#{% endfor %}#}
+                        {#</table>#}
                     </div>
                 </div>
                 {% endif %}
