@@ -55,9 +55,10 @@ foreach ($hotels as $hotel)
         foreach($rooms as $room)
         {
                 $query = "SELECT cost FROM rates2room WHERE hid = " . $hotel['id'] . " AND rid = " . $room['id'] . " AND tid = " . $default_rate['id'] . " AND ttid = " . $ttid . " AND guests = 1";
-                $res = $pdo->query($query, PDO::FETCH_ASSOC);
-                $cost = $res->fetchColumn();
-                $hotels_rates[$hotel['id']][$room['id']] = $cost;
+                if($res = $pdo->query($query, PDO::FETCH_ASSOC)) {
+                        $cost = $res->fetchColumn();
+                        $hotels_rates[$hotel['id']][$room['id']] = $cost;
+                }
         }
 }
 echo $twig->render('/front/prices.html.twig', array('block' => $block, 'rooms' => $rooms, 'hotels' => $hotels, 'rates' => $rates, 'hotels_rates' => $hotels_rates));

@@ -56,7 +56,17 @@ if(isset($_GET['id'])){
         }
 
     }
-        echo $twig->render('/front/hotel.html.twig', array('hotel' => $hotel, 'block' => $block, 'hotel_room' => $hotel_room, 'info' => $info, 'img' => $img));
+
+    $query = "SELECT id FROM additional_tables WHERE isActive = 1 AND start_ts <= NOW()";
+    $res = $pdo->query($query, PDO::FETCH_ASSOC);
+    $add_ttid = $res->fetchColumn();
+
+    $query = "select adc.cost, ads.title from additional_costs adc
+                inner join additional_service ads ON ads.id = adc.ad_id
+                where adc.ttid = " . $add_ttid . " and adc.hid = " . $id;
+    $res = $pdo->query($query, PDO::FETCH_ASSOC);
+    $additional = $res->fetchAll();
+        echo $twig->render('/front/hotel.html.twig', array('hotel' => $hotel, 'block' => $block, 'hotel_room' => $hotel_room, 'info' => $info, 'img' => $img, 'additional' => $additional));
 }
 else{
         $block = $fpdo->from('blocks')->where(array('system' => 'hotels'))->fetch();

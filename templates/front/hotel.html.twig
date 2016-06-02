@@ -30,6 +30,18 @@
                         {{ block.text|raw }}
                         </p>
                     </div>
+                    {% if additional is not empty %}
+                    <div class="card_2 caption color_2">
+                        <h3>Дополнительные услуги</h3>
+                        <p>
+                        <ul>
+                            {% for value in additional %}
+                            <li><b>{{ value.title }}:</b> {{ value.cost }} р.</li>
+                            {% endfor %}
+                        </ul>
+                        </p>
+                    </div>
+                    {% endif %}
                 </div>
 
                 <div class="col-md-8">
