@@ -7,14 +7,36 @@
  */
 
 require 'inc.php';
-//echo "<pre>";
-//print_r($_SERVER);
-//echo "</pre>";
+
+if(isset($_POST['language']))
+{
+    $array = array("type" => $_POST['lang'], "alt" => $_POST['alt'], "title" => $_POST['title']);
+    $value = serialize($array);
+
+
+    setcookie('lang', $value, time() + 3600 * 7);
+    die();
+}
+if(isset($_COOKIE['lang']))
+    $lang = unserialize($_COOKIE['lang']);
+else
+    $lang = array("type" => 'ru', "alt" => 'Russian', "title" => 'Russian (ru)');
+$lang_array = $fpdo->from('language')->where(array('isActive' => 1))->fetchAll();
+$language = array();
+foreach($lang_array as $key)
+{
+    $language[$key['code']]['alt'] = $key['name'];
+    $language[$key['code']]['title'] = $key['name'] . ' (' . $key['code'] . ')';
+}
+unset($language[$lang['type']]);
+//$lang = $_COOKIE['lang'];
 $settings_array = $fpdo->from('settings')->fetchAll();
 foreach($settings_array as $key => $val){
     //foreach($val as $v)
     $settings[$val['sysname']] = $val['value'];
 }
+$twig->addGlobal('lang', $lang);
+$twig->addGlobal('language', $language);
 $twig->addGlobal('settings', $settings);
 $hotels = $fpdo->from('hotel')->orderBy('orderBy')->fetchAll();
 $promo = $fpdo->from('promo')->where(array('isActive' => 1))->fetchAll();

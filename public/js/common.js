@@ -61,6 +61,22 @@ $(document).ready(function(){
             }
         });//scroll
 
+    $('.lang-change').on('click', function(){
+       var lang = $(this).attr('id');
+        var alt = $(this).parent().find('img').attr('alt');
+        var title = $(this).parent().find('img').attr('title');
+        $.ajax({
+            type: "POST",
+            url: location.href,
+            data: {language: 1, lang: lang, alt: alt, title: title},
+            success: function(e){
+                window.location = location.href;
+            }
+        });
+
+        return false;
+    });
+
 	//страница номера и цены
 	$('select[name=guests]').on('change', function(){
 		var guests = $(this).val();

@@ -15,6 +15,9 @@ foreach($settings_array as $key => $val){
     $settings[$val['sysname']] = $val['value'];
 }
 $twig->addGlobal('settings', $settings);
+
+$lang = $fpdo->from('language')->fetchAll();
+$twig->addGlobal('lang', $lang);
 $user = new Users();
 if (!$user->is_loggedin() && $_SERVER['REQUEST_URI'] != '/admin/login.php')
     header('Location: login.php');

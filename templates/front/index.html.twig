@@ -31,21 +31,19 @@
                         <li><a href="/rules">Правила</a></li>
                         <li><a href="/contacts">Контакты</a></li>
                         <li><a href="/info">Полезная информация</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img class="flag flag-{{ lang.type }}" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="{{ lang.alt }}" title="{{ lang.title }}"><b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                {% for key, langs in language %}
+                                <li><a href="#" class="lang-change" id="{{ key }}"><img class="flag flag-{{ key }}" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="{{ langs.alt }}" title="{{ langs.title }})"> {{ langs.alt }}</a></li>
+                                    {% endfor %}
+                            </ul>
+                        </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         {#<li><a href="{{ settings.vk_link }}" target="_blank"><i class="fa fa-vk fa-lg"></i></a></li>#}
                         {#<li><a href="{{ settings.youtube_link }}" target="_blank"><i class="fa fa-youtube-play fa-lg"></i></a></li>#}
                         {#<li><a href="{{ settings.fb_link }}" target="_blank"><i class="fa fa-facebook-official fa-lg"></i></a></li>#}
-                        <!-- <li class="dropdown">
-                                       <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-language"></i> <b class="caret"></b></a>
-                                       <ul class="dropdown-menu">
-                                           <li><a href="#">Русский</a></li>
-                                           <li><a href="#">Английский</a></li>
-                                           <li><a href="#">Немецкий</a></li>
-                                           <li><a href="#">Китайский</a></li>
-                                           <li><a href="#">Въетнамский</a></li>
-                                       </ul>
-                                   </li>	 -->
                         <li class="tel_nav"><a href="tel: {{ settings.phone_base }}">{{ settings.phone_base }}</a></li>
                     </ul>
                 </div>
