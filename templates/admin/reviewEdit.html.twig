@@ -1,11 +1,11 @@
 {% extends "/admin/index.html.twig" %}
-{% set menu_selected = 'reeview' %}
+{% set menu_selected = 'review' %}
 
 {% block content %}
     <div class="box box-info">
         <div class="box-header with-border">
             <ol class="breadcrumb">
-                <li><a href="promo.php"><i class="fa fa-book"></i> Отзывы</a></li>
+                <li><a href="review.php"><i class="fa fa-book"></i> Отзывы</a></li>
                 <li class="active">{% if review is defined %}{{ review.text|slice(0,15)|striptags}}...{% endif %}</li>
             </ol>
         </div>

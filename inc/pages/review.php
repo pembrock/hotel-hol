@@ -5,7 +5,7 @@
  * Date: 03.06.2016
  * Time: 13:32
  */
-
+require '../../inc/inc.php';
 require_once "../../recaptchalib.php";
 
 // ваш секретный ключ
@@ -27,9 +27,9 @@ if ($_POST["g-recaptcha-response"]) {
 if ($response != null && $response->success) {
 	$name = $_POST['name'];
 	$email = $_POST['email'];
-	$comment = htmlspecialchars($_POST['comment']);
+	$comment = str_replace(PHP_EOL,"<br>",htmlspecialchars($_POST['comment']));
 	$hid = intval($_POST['hid']);
-	$set = array('name' => $name, 'email' => $email, 'comment' => $comment);
+	$set = array('name' => $name, 'email' => $email, 'text' => $comment, 'hid' => $hid);
 	$query = $fpdo->insertInto('review')->values($set);
 	$query->execute();
 	echo json_encode(array("ok" => 1));

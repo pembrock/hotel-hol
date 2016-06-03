@@ -10,8 +10,6 @@ if(isset($_GET['id'])){
         $hotel = $fpdo->from('hotel')->where(array('id' => $id))->fetch();
         $block = $fpdo->from('blocks')->where(array('system' => 'roomshas'))->fetch();
 
-
-
     $activeRates = $fpdo->from('rates')->select(null)->select('id')->where(array('isActive' => 1))->fetch();
     $query = "select tt.id from rates r inner join tarif_tables tt ON tt.tid = r.id where r.isDefault = 1 and tt.hid = " . $id . " and tt.start_ts <= NOW() order by tt.start_ts DESC limit 1";
     $res = $pdo->query($query, PDO::FETCH_ASSOC);
@@ -66,7 +64,10 @@ if(isset($_GET['id'])){
                 where adc.ttid = " . $add_ttid . " and adc.hid = " . $id;
     $res = $pdo->query($query, PDO::FETCH_ASSOC);
     $additional = $res->fetchAll();
-        echo $twig->render('/front/hotel.html.twig', array('hotel' => $hotel, 'block' => $block, 'hotel_room' => $hotel_room, 'info' => $info, 'img' => $img, 'additional' => $additional));
+
+    //comments
+    $comments = $fpdo->from('review')->where(array('isActive' => 1, 'hid' => $id))->orderBy('date DESC')->fetchAll();
+        echo $twig->render('/front/hotel.html.twig', array('hotel' => $hotel, 'block' => $block, 'info' => $info, 'img' => $img, 'additional' => $additional, 'comments' => $comments));
 }
 else{
         $block = $fpdo->from('blocks')->where(array('system' => 'hotels'))->fetch();

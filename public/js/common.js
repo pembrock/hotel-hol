@@ -8,18 +8,23 @@
 
 	//E-mail Ajax Send
 	//Documentation & Example: https://github.com/agragregra/uniMail
-	$("form").submit(function() { //Change
+	$("#myForm").submit(function() { //Change
 		var th = $(this);
 		$.ajax({
 			type: "POST",
 			url: "/inc/pages/review.php", //Change
-			data: th.serialize()
-		}).done(function() {
-			alert("Thank you!");
-			setTimeout(function() {
-				// Done Functions
-				th.trigger("reset");
-			}, 1000);
+			data: th.serialize(),
+			success: function(e){
+				var e = $.parseJSON(e);
+				if (e.ok == 1){
+					$('#info').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>Отзыв успешно отправлен и будет опубликован после рассмотрения!</span></div>');
+					$('#myForm')[0].reset();
+					$('#myForm').hide();
+				}
+				else{
+					$('#info').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>Произошла непредвиденная ошибка!</span></div>');
+				}
+			}
 		});
 		return false;
 	});
@@ -96,5 +101,25 @@ $(document).ready(function(){
 			}
 		});
 	});
+
+	size_li = $(".commentList li").size();
+	x=3;
+	$('.commentList li:lt('+x+')').show();
+	$('#loadMore').click(function () {
+		x= (x+5 <= size_li) ? x+5 : size_li;
+		$('.commentList li:lt('+x+')').show();
+		$('html, body').animate({
+			scrollTop: $("#addReview").offset().top
+		}, 2000);
+	});
+	$('#showLess').click(function () {
+		x=(x-5<0) ? 3 : x-5;
+		$('.commentList li').not(':lt('+x+')').hide();
+	});
+
+    $('.commentTextBlock').shorten({
+        moreText: 'читать полностью',
+        lessText: 'свернуть'
+    });
 
     });
