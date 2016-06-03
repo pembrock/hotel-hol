@@ -68,39 +68,39 @@
                         </div>
                     </div>
                 </div>
-                {#<div class="col-md-12">#}
-                    {#<div class="card caption">#}
-                        {#<div class="form-group">#}
-                            {#<label class="control-label">Цены на дополнительные услуги</label>#}
-                        {#</div>#}
-                        {#<div style="clear: both"></div>#}
-                        {#<div class="table-responsive">#}
-                            {#<table class="table table-hover">#}
-                                {#<thead>#}
-                                {#<tr>#}
-                                    {#<th>Отель</th>#}
-                                    {#{% for room in rooms %}#}
-                                    {#<th>{{ room.title }}</th>#}
-                                    {#{% endfor %}#}
-                                {#</tr>#}
-                                {#</thead>#}
-                                {#<tbody>#}
-                                {#{% for hotel in hotels %}#}
-                                {#<tr>#}
-                                    {#<td><a class="ab1" href="/hotels?id={{ hotel.id }}">«{{ hotel.title }}»</td>#}
+                <div class="col-md-12">
+                    <div class="card caption">
+                        <div class="form-group">
+                            <label class="control-label">Цены на дополнительные услуги</label>
+                        </div>
+                        <div style="clear: both"></div>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Отель</th>
+                                    {% for service in services %}
+                                        <th>{{ service.title }}</th>
+                                    {% endfor %}
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for hotel in hotels %}
+                                <tr>
+                                    <td><a class="ab1" href="/hotels?id={{ hotel.id }}">«{{ hotel.title }}»</td>
 
-                                        {#{% for room in rooms %}#}
-                                    {#<td class="{{ hotel.id }}_{{ room.id }}">{{ hotels_rates[hotel.id][room.id] }}</td>#}
-                                            {#{% endfor %}#}
+                                        {% for service in services %}
+                                    <td>{{ services_rates[hotel.id][service.id] }}</td>
+                                            {% endfor %}
 
 
-                                {#</tr>#}
-                                {#{% endfor %}#}
-                                {#</tbody>#}
-                            {#</table>#}
-                        {#</div>#}
-                    {#</div>#}
-                {#</div>#}
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

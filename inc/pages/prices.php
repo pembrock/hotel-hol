@@ -46,6 +46,32 @@ if (isset($_POST['getRates']))
 
 $default_rate = $fpdo->from('rates')->select(null)->select(array('id'))->where(array('isDefault' => 1, 'isActive' => 1))->fetch();
 $hotels_rates = array();
+
+$query = "SELECT id FROM additional_tables WHERE isActive = 1 AND start_ts <= NOW()";
+$res = $pdo->query($query, PDO::FETCH_ASSOC);
+$add_ttid = $res->fetchColumn();
+
+$add_service = $fpdo->from('additional_service')->where(array('isActive' => 1))->orderBy('orderBy')->fetchAll();
+$services_rates = array();
+foreach($add_service as $add) {
+        $query = "select * from additional_costs where ad_id = " . $add['id'] . " and ttid = " . $add_ttid;
+        $res = $pdo->query($query, PDO::FETCH_ASSOC);
+        $additional = $res->fetchAll();
+        foreach($additional as $a)
+        {
+                $services_rates[$a['hid']][$a['ad_id']] = $a['cost'];
+        }
+}
+
+
+//$table = $fpdo->from('additional_tables')->where(array('isActive' => 1, ''))->fetch();
+//$costs_array = $fpdo->from('additional_costs')->where('ttid', $id)->fetchAll();
+//$costs = array();
+//foreach($costs_array as $val)
+//{
+//        $costs[$val['hid']][$val['ad_id']] = $val['cost'];
+//}
+
 foreach ($hotels as $hotel)
 {
         $query = "SELECT id FROM tarif_tables WHERE tid = " . $default_rate['id'] . " AND hid = " . $hotel['id'] . " AND isACtive = 1 AND start_ts <= NOW()";
@@ -61,4 +87,4 @@ foreach ($hotels as $hotel)
                 }
         }
 }
-echo $twig->render('/front/prices.html.twig', array('block' => $block, 'rooms' => $rooms, 'hotels' => $hotels, 'rates' => $rates, 'hotels_rates' => $hotels_rates));
+echo $twig->render('/front/prices.html.twig', array('block' => $block, 'rooms' => $rooms, 'hotels' => $hotels, 'rates' => $rates, 'hotels_rates' => $hotels_rates, 'services' => $add_service, 'services_rates' => $services_rates));
