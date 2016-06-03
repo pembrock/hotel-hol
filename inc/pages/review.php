@@ -5,8 +5,9 @@
  * Date: 03.06.2016
  * Time: 13:32
  */
-require '../../inc/inc.php';
-require_once "../../recaptchalib.php";
+require './../inc.php';
+
+require_once './../../recaptchalib.php';
 
 // ваш секретный ключ
 $secret = "6LcMqiETAAAAAKZULFDQFO3L4DNVGRXK9d0SsgW8";

@@ -15,14 +15,15 @@
 			url: "/inc/pages/review.php", //Change
 			data: th.serialize(),
 			success: function(e){
+                console.log(e);
 				var e = $.parseJSON(e);
 				if (e.ok == 1){
-					$('#info').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>Отзыв успешно отправлен и будет опубликован после рассмотрения!</span></div>');
+					$('#info').html('<div class="alert alert-success"><span>Отзыв успешно отправлен и будет опубликован после рассмотрения!</span></div>');
 					$('#myForm')[0].reset();
 					$('#myForm').hide();
 				}
 				else{
-					$('#info').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>Произошла непредвиденная ошибка!</span></div>');
+					$('#info').html('<div class="alert alert-danger"><span>Произошла непредвиденная ошибка!</span></div>');
 				}
 			}
 		});

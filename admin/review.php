@@ -47,7 +47,7 @@ if (isset($_GET['edit'])){
 
 }
 else {
-    $review = $fpdo->from('review')->fetchAll();
+    $review = $fpdo->from('review')->orderBy('date DESC')->fetchAll();
     foreach ($review as $key => $value) {
         $review[$key]['hotel'] = $fpdo->from('hotel')->select(null)->select('title')->where('id', $value['hid'])->fetchColumn();
     }

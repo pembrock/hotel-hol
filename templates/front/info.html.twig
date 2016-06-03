@@ -1,0 +1,31 @@
+{% extends '/front/index.html.twig' %}
+{% block content %}
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-header">
+                        <h1>Полезная информация</h1>
+                    </div>
+                </div>
+                {% set mnths = ['','января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'] %}
+
+                {% for value in info %}
+                <div class="col-md-12">
+                    <div class="info-block">
+                        {% if value.logo is not empty %}
+                        <div class="info-image"><a href="?id={{ value.id }}"><img src="../../public/upload/images/logos/{{ value.logo }}" class="img-responsive card_1"></a></div>
+                        {% endif %}
+                        <div class="info-title">{{ value.title }}</div>
+
+                            <p>{{ value.description|raw }}</p>
+                            <a href="?id={{ value.id }}">Читать полностью<a/>
+                            <span class="pull-right">{{ value.date|date("j") }} {{ mnths[value.date|date("n")] }} {{ value.date|date("Y") }}</span>
+
+                        <div style="clear: both;"></div>
+                    </div>
+                </div>
+                {% endfor %}
+        </div>
+    </section>
+{% endblock %}
