@@ -12,7 +12,7 @@
 		var th = $(this);
 		$.ajax({
 			type: "POST",
-			url: "mail.php", //Change
+			url: "/inc/pages/review.php", //Change
 			data: th.serialize()
 		}).done(function() {
 			alert("Thank you!");
