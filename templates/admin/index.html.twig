@@ -111,18 +111,20 @@
                             <i class="fa fa-exclamation-circle"></i> <span>Полезная информация</span>
                         </a>
                     </li>
-                    <li class="treeview {% if menu_selected == 'settings' or menu_selected == 'users' or menu_selected == 'role' or menu_selected == 'groups' or menu_selected == 'blocks' or menu_selected == 'search' %} active{% endif %}">
+                    <li class="treeview {% if menu_selected == 'settings' or menu_selected == 'users' or menu_selected == 'role' or menu_selected == 'groups' or menu_selected == 'blocks' or menu_selected == 'search' or menu_selected == 'menu' or menu_selected == 'language' %} active{% endif %}">
                         <a href="#">
                             <i class="fa fa-cog"></i> <span>Настройки</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
                             <li {% if menu_selected == 'settings' %}class="active"{% endif %}><a href="settings.php"><i class="fa fa-laptop"></i> Основные настройки сайта</a></li>
+                            <li {% if menu_selected == 'menu' %}class="active"{% endif %}><a href="menu.php"><i class="fa fa-list"></i> Меню</a></li>
                             <li {% if menu_selected == 'blocks' %}class="active"{% endif %}><a href="blocks.php"><i class="fa fa-list"></i> Блоки</a></li>
                             <li {% if menu_selected == 'users' %}class="active"{% endif %}><a href="users.php"><i class="fa fa-user-plus"></i> Пользователи</a></li>
                             <li {% if menu_selected == 'role' %}class="active"{% endif %}><a href="role.php"><i class="fa fa-key"></i> Роли</a></li>
                             <li {% if menu_selected == 'groups' %}class="active"{% endif %}><a href="groups.php"><i class="fa fa-users"></i> Группы пользователей</a></li>
                             <li {% if menu_selected == 'search' %}class="active"{% endif %}><a href="search.php"><i class="fa fa-search"></i> Поисковая информация</a></li>
+                            <li {% if menu_selected == 'language' %}class="active"{% endif %}><a href="language.php"><i class="fa fa-language"></i> Языки</a></li>
                         </ul>
                     </li>
                 </ul>

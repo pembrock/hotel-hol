@@ -29,15 +29,21 @@ foreach($lang_array as $key)
     $language[$key['code']]['title'] = $key['name'] . ' (' . $key['code'] . ')';
 }
 unset($language[$lang['type']]);
-//$lang = $_COOKIE['lang'];
+
 $settings_array = $fpdo->from('settings')->fetchAll();
 foreach($settings_array as $key => $val){
     //foreach($val as $v)
     $settings[$val['sysname']] = $val['value'];
 }
+$xxx = 'id, title_' . $lang["type"] . ' AS title, code';
+$query = $fpdo->from('menu')->select(null)->select('menu.id, menu.title_' . $lang["type"] . ' AS title, menu.code')->where(array('isActive' => 1));
+$menu = $query->fetchAll();
 $twig->addGlobal('lang', $lang);
+$twig->addGlobal('menu', $menu);
 $twig->addGlobal('language', $language);
 $twig->addGlobal('settings', $settings);
+
+
 $hotels = $fpdo->from('hotel')->orderBy('orderBy')->fetchAll();
 $promo = $fpdo->from('promo')->where(array('isActive' => 1))->fetchAll();
 if (isset($_SERVER['REDIRECT_URL']) && $_SERVER['REDIRECT_URL'] != '/hotels') {

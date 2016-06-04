@@ -1,0 +1,36 @@
+{% extends "/admin/index.html.twig" %}
+{% set menu_selected = 'language' %}
+
+{% block content %}
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <ol class="breadcrumb">
+                <li><a href="language.php"><i class="fa fa-language"></i> Языки</a></li>
+                <li class="active">{% if language is defined %}{{ language.name }}{% else %} Новый язык {% endif %}</li>
+            </ol>
+        </div>
+        <form class="form-horizontal" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="id" id="id" value="{% if language is defined %}{{ language.id }}{% else %}0{% endif %}">
+            <div class="box-body">
+                {% if error is defined  %}
+                    {{ error }}
+                {% endif %}
+                <div class="form-group">
+                    <label for="isActive" class="col-sm-2 control-label">Активно</label>
+                    <div class="col-sm-6">
+                        <input type="checkbox" class="form-control-static" name="isActive" id="isActive" value="1" {% if language is defined %}{% if language.isActive == 1 %} checked {% endif %}{% endif %} style="width: 25px;">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="title_ru" class="col-sm-2 control-label">Название</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="name" id="name" placeholder="Название" value="{% if language is defined %}{{ language.name }}{% endif %}">
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <button type="submit" class="btn btn-success" name="save" id="save">Сохранить</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

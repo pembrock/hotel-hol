@@ -10,15 +10,13 @@
             </ol>
         </div>
 
-        <ul class="nav nav-tabs">
-            {% for lan in lang %}
-            <li{% if loop.index == 1 %} class="active"{% endif %}><a data-toggle="tab" href="#panel_{{ lan.code }}"><img class="flag flag-{{ lan.code }}" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"> {{ lan.name }}</a></li>
-            {% endfor %}
-        </ul>
+        {#<ul class="nav nav-tabs">#}
+            {#{% for lan in lang %}#}
+            {#<li{% if loop.index == 1 %} class="active"{% endif %}><a data-toggle="tab" href="#panel_{{ lan.code }}"><img class="flag flag-{{ lan.code }}" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"> {{ lan.name }}</a></li>#}
+            {#{% endfor %}#}
+        {#</ul>#}
 
-        <div class="tab-content">
-            <div id="panel_ru" class="tab-pane fade in active">
-                <form class="form-horizontal" method="POST" enctype="multipart/form-data">
+        <form class="form-horizontal" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="id" id="id" value="{% if hotels is defined %}{{ hotels.id }}{% else %}0{% endif %}">
                 <div class="box-body">
                     {% if error is defined  %}
@@ -171,19 +169,5 @@
                     <button type="submit" class="btn btn-success" name="save" id="save">Сохранить</button>
                 </div>
                 </form>
-            </div>
-            <div id="panel_us" class="tab-pane fade">
-                <h3>Панель 2</h3>
-                <p>Содержимое 2 панели...</p>
-            </div>
-            <div id="panel_cn" class="tab-pane fade">
-                <h3>Панель 3</h3>
-                <p>Содержимое 3 панели...</p>
-            </div>
-            <div id="panel4" class="tab-pane fade">
-                <h3>Панель 4</h3>
-                <p>Содержимое 4 панели...</p>
-            </div>
-        </div>
     </div>
 {% endblock %}

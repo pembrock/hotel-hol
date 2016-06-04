@@ -12,9 +12,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
 
     $id = $_POST['id'];
-    $title = $_POST['title'];
-    $description = $_POST['description'];
-    $text = $_POST['text'];
+    $title_ru = $_POST['title_ru'];
+    $title_us = $_POST['title_us'];
+    $title_cn = $_POST['title_cn'];
+    $description_ru = $_POST['description_ru'];
+    $description_us = $_POST['description_us'];
+    $description_ch = $_POST['description_cn'];
+    $text_ru = $_POST['text_ru'];
+    $text_us = $_POST['text_us'];
+    $text_cn = $_POST['text_cn'];
     $isActive = isset($_POST['isActive']) ? $_POST['isActive'] : null;
     if (!empty($_POST['dateRange'])) {
         $date = explode(' - ', $_POST['dateRange']);
@@ -69,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             }
         }
     }
-    $set = array('title' => $title, 'description' => $description, 'text' => $text, 'isActive' => $isActive, 'start_ts' => isset($startTs) ? $startTs->format('Y-m-d H:i:s') : null, 'stop_ts' => isset($stopTs) ? $stopTs->format('Y-m-d H:i:s') : null);
+    $set = array('title_ru' => $title_ru, 'title_us' => $title_us, 'title_cn' => $title_cn, 'description_ru' => $description_ru, 'description_us' => $description_us, 'description_cn' => $description_cn, 'text_ru' => $text_ru, 'text_us' => $text_usu, 'text_cn' => $text_cn, 'isActive' => $isActive, 'start_ts' => isset($startTs) ? $startTs->format('Y-m-d H:i:s') : null, 'stop_ts' => isset($stopTs) ? $stopTs->format('Y-m-d H:i:s') : null);
     if ($image)
         $set['image'] = $image;
     if ($slide_image)

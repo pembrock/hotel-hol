@@ -6,7 +6,7 @@
         <div class="box-header with-border">
             <ol class="breadcrumb">
                 <li><a href="blocks.php"><i class="fa fa-list"></i> Блоки</a></li>
-                <li class="active">{% if blocks is defined %}{{ blocks.title }}{% else %} Новый блок {% endif %}</li>
+                <li class="active">{% if blocks is defined %}{{ blocks.title_ru }}{% else %} Новый блок {% endif %}</li>
             </ol>
         </div>
         <form class="form-horizontal" method="POST" enctype="multipart/form-data">
@@ -22,16 +22,44 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="title" class="col-sm-2 control-label">Название</label>
+                    <label for="title_ru" class="col-sm-2 control-label">Название (ru)</label>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" name="title" id="title" placeholder="Название" value="{% if blocks is defined %}{{ blocks.title }}{% endif %}">
+                        <input type="text" class="form-control" name="title_ru" id="title_ru" placeholder="Название" value="{% if blocks is defined %}{{ blocks.title_ru }}{% endif %}">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="text" class="col-sm-2 control-label">Текст</label>
+                    <label for="title_us" class="col-sm-2 control-label">Название (en)</label>
                     <div class="col-sm-6">
-                        <textarea name="text" id="editor1" rows="10" cols="80">
-                            {% if blocks is defined %}{{ blocks.text}}{% endif %}
+                        <input type="text" class="form-control" name="title_us" id="title_us" placeholder="Название" value="{% if blocks is defined %}{{ blocks.title_us }}{% endif %}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="title_cn" class="col-sm-2 control-label">Название (cn)</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="title_cn" id="title_cn" placeholder="Название" value="{% if blocks is defined %}{{ blocks.title_cn }}{% endif %}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="text" class="col-sm-2 control-label">Текст (ru)</label>
+                    <div class="col-sm-6">
+                        <textarea name="text_ru" id="editor1" rows="10" cols="80">
+                            {% if blocks is defined %}{{ blocks.text_ru}}{% endif %}
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="text" class="col-sm-2 control-label">Текст (en)</label>
+                    <div class="col-sm-6">
+                        <textarea name="text_us" id="editor2" rows="10" cols="80">
+                            {% if blocks is defined %}{{ blocks.text_us}}{% endif %}
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="text" class="col-sm-2 control-label">Текст (ch)</label>
+                    <div class="col-sm-6">
+                        <textarea name="text_cn" id="editor3" rows="10" cols="80">
+                            {% if blocks is defined %}{{ blocks.text_cn}}{% endif %}
                         </textarea>
                     </div>
                 </div>

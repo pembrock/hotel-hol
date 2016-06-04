@@ -15,22 +15,20 @@
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
                     <ul class="nav navbar-nav">
+                        {% for val in menu %}
+                            {% if val.code == 'hotels' %}
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Наши отели <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ val.title }} <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 {% for hotel in hotels %}
                                 <li><a href="/hotels?id={{ hotel.id }}">{{ hotel.title }}</a></li>
                                 {% endfor %}
-                                <li class="divider"></li>
-                                {#<li><a href="/hotels">Все отели</a></li>#}
-                                {#<li><a href="/gallery">Галерея</a></li>#}
                             </ul>
                         </li>
-                        <li><a href="/promo">Акции</a></li>
-                        <li><a href="/prices">Номера и цены</a></li>
-                        <li><a href="/rules">Правила</a></li>
-                        <li><a href="/contacts">Контакты</a></li>
-                        <li><a href="/info">Полезная информация</a></li>
+                                {% else %}
+                        <li><a href="/{{ val.code }}">{{ val.title }}</a></li>
+                                {% endif %}
+                        {% endfor %}
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img class="flag flag-{{ lang.type }}" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="{{ lang.alt }}" title="{{ lang.title }}"><b class="caret"></b></a>
                             <ul class="dropdown-menu">

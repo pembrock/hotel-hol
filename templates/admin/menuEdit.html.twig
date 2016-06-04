@@ -1,0 +1,48 @@
+{% extends "/admin/index.html.twig" %}
+{% set menu_selected = 'menu' %}
+
+{% block content %}
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <ol class="breadcrumb">
+                <li><a href="menu.php"><i class="fa fa-list"></i> Меню</a></li>
+                <li class="active">{% if menu is defined %}{{ menu.title_ru }}{% else %} Новый пункт {% endif %}</li>
+            </ol>
+        </div>
+        <form class="form-horizontal" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="id" id="id" value="{% if menu is defined %}{{ menu.id }}{% else %}0{% endif %}">
+            <div class="box-body">
+                {% if error is defined  %}
+                    {{ error }}
+                {% endif %}
+                <div class="form-group">
+                    <label for="isActive" class="col-sm-2 control-label">Активно</label>
+                    <div class="col-sm-6">
+                        <input type="checkbox" class="form-control-static" name="isActive" id="isActive" value="1" {% if menu is defined %}{% if menu.isActive == 1 %} checked {% endif %}{% endif %} style="width: 25px;">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="title_ru" class="col-sm-2 control-label">Название</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="title_ru" id="title_ru" placeholder="Название" value="{% if menu is defined %}{{ menu.title_ru }}{% endif %}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="title_en" class="col-sm-2 control-label">Название (English)</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="title_en" id="title_en" placeholder="Название" value="{% if menu is defined %}{{ menu.title_en }}{% endif %}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="title_cn" class="col-sm-2 control-label">Название (Chinese)</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="title_cn" id="title_cn" placeholder="Название" value="{% if menu is defined %}{{ menu.title_cn }}{% endif %}">
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <button type="submit" class="btn btn-success" name="save" id="save">Сохранить</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

@@ -6,7 +6,7 @@
  * Time: 15:32
  */
 
-$blocks_array = $fpdo->from('blocks')->where(array('isActive' => 1))->fetchAll();
+$blocks_array = $fpdo->from('blocks')->select('system, title_' . $lang['type'] . ' AS title, text_' . $lang['type'] . ' AS text')->where(array('isActive' => 1))->fetchAll();
 $blocks = array();
 foreach($blocks_array as $block){
     $blocks[$block['system']]['title'] = $block['title'];
