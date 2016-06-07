@@ -6,7 +6,7 @@
  * Time: 22:48
  */
 if(isset($_GET['id'])){
-    $promo = $fpdo->from('promo')->select('id, title_' . $lang['type'] . ' AS title, description_' . $lang['type'] . ' AS description, text_'  . $lang['type'] . ' AS text, start_ts, stop_ts, image, slide_image')->where(array('isActive' => 1, 'id' => intval($_GET['id'])))->fetchAll();
+    $promo = $fpdo->from('promo')->select(null)->select('id, title_' . $lang['type'] . ' AS title, description_' . $lang['type'] . ' AS description, text_'  . $lang['type'] . ' AS text, start_ts, stop_ts, image, slide_image')->where(array('isActive' => 1, 'id' => intval($_GET['id'])))->fetchAll();
     echo $twig->render('/front/promo-item.html.twig', array('promo' => $promo));
 }
 else {

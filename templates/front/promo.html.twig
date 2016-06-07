@@ -5,11 +5,12 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header">
-                        <h1>Акции на номера в мини-гостиницах Hotel-hol</h1>
+                        <h1>{% if lang.type == "ru" %}Акции на номера в мини-гостиницах Hotel-hol{% elseif lang.type == "us" %}Promotions in the rooms at Hotel-hol mini-hotels{% elseif lang.type == "cn" %}促銷客房的酒店 - HOL迷你酒店{% else %}Акции на номера в мини-гостиницах Hotel-hol{% endif %}</h1>
                     </div>
                 </div>
                 {% for value in promo %}
                     {#{% if date(value.start_ts) < date('now') and date(value.stop_ts) > date('now') %}#}
+                    {% if value.description is not empty or value.title != "0" %}
                 <div class="col-md-3">
                     <div class="card color_1">
                         {% if value.image is not empty %}
@@ -21,7 +22,7 @@
                         </div>
                     </div>
                 </div>
-                {#{% endif %}#}
+                {% endif %}
                 {% endfor %}
         </div>
     </section>

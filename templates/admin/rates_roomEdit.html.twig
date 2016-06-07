@@ -6,7 +6,7 @@
         <div class="box-header with-border">
             <ol class="breadcrumb">
                 <li><a href="rates_room.php"><i class="fa fa-money"></i> Тарифы на проживание</a></li>
-                <li class="active">{% if rates is defined %}{{ rates.title }}{% else %}Новый тариф{% endif %}</li>
+                <li class="active">{% if rates is defined %}{{ rates.title_ru }}{% else %}Новый тариф{% endif %}</li>
             </ol>
         </div>
         <form class="form-horizontal" method="POST" enctype="multipart/form-data">
@@ -42,16 +42,44 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="title" class="col-sm-2 control-label">Название</label>
+                    <label for="title_ru" class="col-sm-2 control-label">Название (ru)</label>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" name="title" id="title" placeholder="Название" value="{% if rates is defined %}{{ rates.title }}{% endif %}">
+                        <input type="text" class="form-control" name="title_ru" id="title_ru" placeholder="Название" value="{% if rates is defined %}{{ rates.title_ru }}{% endif %}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="title_us" class="col-sm-2 control-label">Название (en)</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="title_us" id="title_us" placeholder="Название" value="{% if rates is defined %}{{ rates.title_us }}{% endif %}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="title_cn" class="col-sm-2 control-label">Название (cn)</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="title_cn" id="title_cn" placeholder="Название" value="{% if rates is defined %}{{ rates.title_cn }}{% endif %}">
                     </div>
                 </div>
                  <div class="form-group">
-                    <label for="description" class="col-sm-2 control-label">Описание</label>
+                    <label for="description" class="col-sm-2 control-label">Описание (ru)</label>
                     <div class="col-sm-6">
-                        <textarea name="description" id="editor1" rows="10" cols="80">
-                            {% if rates is defined %}{{ rates.description }}{% endif %}
+                        <textarea name="description_ru" id="editor1" rows="10" cols="80">
+                            {% if rates is defined %}{{ rates.description_ru }}{% endif %}
+                        </textarea>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label for="description" class="col-sm-2 control-label">Описание (en)</label>
+                    <div class="col-sm-6">
+                        <textarea name="description_us" id="editor2" rows="10" cols="80">
+                            {% if rates is defined %}{{ rates.description_us }}{% endif %}
+                        </textarea>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label for="description" class="col-sm-2 control-label">Описание (cn)</label>
+                    <div class="col-sm-6">
+                        <textarea name="description_cn" id="editor3" rows="10" cols="80">
+                            {% if rates is defined %}{{ rates.description_cn }}{% endif %}
                         </textarea>
                     </div>
                 </div>

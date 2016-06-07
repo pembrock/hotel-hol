@@ -12,13 +12,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
 
     $id = $_POST['id'];
-    $title = $_POST['title'];
-    $description = $_POST['description'];
+    $title_ru = $_POST['title_ru'];
+    $title_us = $_POST['title_us'];
+    $title_cn = $_POST['title_cn'];
+    $description_ru = $_POST['description_ru'];
+    $description_us = $_POST['description_us'];
+    $description_cn = $_POST['description_cn'];
     $isActive = isset($_POST['isActive']) ? $_POST['isActive'] : null;
     $isDefault = isset($_POST['isDefault']) ? $_POST['isDefault'] : null;
     $type = intval($_POST['type']);
 
-    $set = array('title' => $title, 'description' => $description, 'isDefault' => $isDefault, 'isActive' => $isActive, 'type' => $type);
+    $set = array('title_ru' => $title_ru, 'title_us' => $title_us, 'title_cn' => $title_cn, 'description_ru' => $description_ru,  'description_us' => $description_us,  'description_cn' => $description_cn, 'isDefault' => $isDefault, 'isActive' => $isActive, 'type' => $type);
 
     if($id > 0)
         $query = $fpdo->update('rates')->set($set)->where('id', $id);
@@ -90,7 +94,7 @@ if (isset($_GET['tid'], $_GET['hid'], $_GET['ttid']))
     $tid = intval($_GET['tid']);
     $hid = intval($_GET['hid']);
     $ttid = intval($_GET['ttid']);
-    $rooms = $fpdo->from('rooms')->select(null)->select(array('id', 'title'))->orderBy('orderBy')->fetchAll();
+    $rooms = $fpdo->from('rooms')->select(null)->select(array('id', 'title_ru'))->orderBy('orderBy')->fetchAll();
     $rate = $fpdo->from('rates')->where(array('id' => $tid))->fetch();
     $hotel_name = $fpdo->from('hotel')->select(null)->select(array('title'))->where(array('id' => $hid))->fetchColumn();
     if ($ttid > 0){
@@ -136,6 +140,6 @@ if (isset($_GET['edit'])){
 
 }
 else{
-    $rates = $fpdo->from('rates')->fetchAll();
+    $rates = $fpdo->from('rates')->select('id, title_ru AS title')->fetchAll();
     echo $twig->render('/admin/rates_room.html.twig', array('rates' => $rates));
 }

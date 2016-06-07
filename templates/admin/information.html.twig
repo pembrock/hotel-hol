@@ -23,7 +23,7 @@
                     {% for item in information %}
                     <tr>
                         <td>1.</td>
-                        <td><a href="?edit={{ item.id }}">{{ item.title }}</a></td>
+                        <td><a href="?edit={{ item.id }}">{{ item.title_ru }}</a></td>
                         <td>{{ item.date }}</td>
                         <td><span class="badge bg-{% if item.isActive == 0 %}red{% else %}green{% endif %}">{% if item.isActive == 0 %}Нет{% else %}Да{% endif %}</span></td>
                         <td style="width: 10px">

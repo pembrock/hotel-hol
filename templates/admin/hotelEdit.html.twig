@@ -6,7 +6,7 @@
         <div class="box-header with-border">
             <ol class="breadcrumb">
                 <li><a href="hotels.php"><i class="fa fa-home"></i> Гостиницы</a></li>
-                <li class="active">{% if hotels is defined %}{{ hotels.title }}{% else %}Новый отель{% endif %}</li>
+                <li class="active">{% if hotels is defined %}{{ hotels.title_ru }}{% else %}Новый отель{% endif %}</li>
             </ol>
         </div>
 
@@ -23,9 +23,21 @@
                         {{ error }}
                     {% endif %}
                     <div class="form-group">
-                        <label for="title" class="col-sm-2 control-label">Название</label>
+                        <label for="title_ru" class="col-sm-2 control-label">Название (ru)</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" name="title" id="title" placeholder="Название" value="{% if hotels is defined %}{{ hotels.title }}{% endif %}">
+                            <input type="text" class="form-control" name="title_ru" id="title_ru" placeholder="Название" value="{% if hotels is defined %}{{ hotels.title_ru }}{% endif %}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="title_us" class="col-sm-2 control-label">Название (en)</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="title_us" id="title_us" placeholder="Название" value="{% if hotels is defined %}{{ hotels.title_us }}{% endif %}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="title_cn" class="col-sm-2 control-label">Название (cn)</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="title_cn" id="title_cn" placeholder="Название" value="{% if hotels is defined %}{{ hotels.title_cn }}{% endif %}">
                         </div>
                     </div>
                     <div class="form-group">
@@ -35,10 +47,26 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="description" class="col-sm-2 control-label">Описание</label>
+                        <label for="description_ru" class="col-sm-2 control-label">Описание (ru)</label>
                         <div class="col-sm-6">
-                        <textarea name="description" id="editor1" rows="10" cols="80">
-                            {% if hotels is defined %}{{ hotels.description }}{% endif %}
+                        <textarea name="description_ru" id="editor1" rows="10" cols="80">
+                            {% if hotels is defined %}{{ hotels.description_ru }}{% endif %}
+                        </textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="description_us" class="col-sm-2 control-label">Описание (en)</label>
+                        <div class="col-sm-6">
+                        <textarea name="description_us" id="editor2" rows="10" cols="80">
+                            {% if hotels is defined %}{{ hotels.description_us }}{% endif %}
+                        </textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="description_cn" class="col-sm-2 control-label">Описание (cn)</label>
+                        <div class="col-sm-6">
+                        <textarea name="description_cn" id="editor3" rows="10" cols="80">
+                            {% if hotels is defined %}{{ hotels.description_cn }}{% endif %}
                         </textarea>
                         </div>
                     </div>
@@ -123,15 +151,39 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="address" class="col-sm-2 control-label">Адрес</label>
+                        <label for="address_ru" class="col-sm-2 control-label">Адрес (ru)</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" name="address" id="address" placeholder="Адрес" value="{% if hotels is defined %}{{ hotels.address }}{% endif %}">
+                            <input type="text" class="form-control" name="address_ru" id="address_ru" placeholder="Адрес" value="{% if hotels is defined %}{{ hotels.address_ru }}{% endif %}">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="subway" class="col-sm-2 control-label">Метро</label>
+                        <label for="address_us" class="col-sm-2 control-label">Адрес (en)</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" name="subway" id="subway" placeholder="Ближайшее метро" value="{% if hotels is defined %}{{ hotels.subway }}{% endif %}">
+                            <input type="text" class="form-control" name="address_us" id="address_us" placeholder="Адрес" value="{% if hotels is defined %}{{ hotels.address_us }}{% endif %}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address_cn" class="col-sm-2 control-label">Адрес (cn)</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="address_cn" id="address_cn" placeholder="Адрес" value="{% if hotels is defined %}{{ hotels.address_cn }}{% endif %}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="subway_ru" class="col-sm-2 control-label">Метро (ru)</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="subway_ru" id="subway_ru" placeholder="Ближайшее метро" value="{% if hotels is defined %}{{ hotels.subway_ru }}{% endif %}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="subway_us" class="col-sm-2 control-label">Метро (en)</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="subway_us" id="subway_us" placeholder="Ближайшее метро" value="{% if hotels is defined %}{{ hotels.subway_us }}{% endif %}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="subway_cn" class="col-sm-2 control-label">Метро (cn)</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="subway_cn" id="subway_cn" placeholder="Ближайшее метро" value="{% if hotels is defined %}{{ hotels.subway_cn }}{% endif %}">
                         </div>
                     </div>
                     <div class="form-group">
@@ -141,10 +193,26 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="address_description" class="col-sm-2 control-label">Описание</label>
+                        <label for="address_description_ru" class="col-sm-2 control-label">Описание (ru)</label>
                         <div class="col-sm-6">
-                        <textarea name="address_description" id="editor2" rows="10" cols="80">
-                            {% if hotels is defined %}{{ hotels.address_description }}{% endif %}
+                        <textarea name="address_description_ru" id="editor4" rows="10" cols="80">
+                            {% if hotels is defined %}{{ hotels.address_description_ru }}{% endif %}
+                        </textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address_description_us" class="col-sm-2 control-label">Описание (en)</label>
+                        <div class="col-sm-6">
+                        <textarea name="address_description_us" id="editor5" rows="10" cols="80">
+                            {% if hotels is defined %}{{ hotels.address_description_us }}{% endif %}
+                        </textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address_description_cn" class="col-sm-2 control-label">Описание (cn)</label>
+                        <div class="col-sm-6">
+                        <textarea name="address_description_cn" id="editor6" rows="10" cols="80">
+                            {% if hotels is defined %}{{ hotels.address_description_cn }}{% endif %}
                         </textarea>
                         </div>
                     </div>
@@ -157,7 +225,7 @@
                                 {% for value in rooms %}
                                     <tr>
                                         <td>
-                                            <a href="rooms2hotels.php?hid={{ hotels.id }}&rid={{ value.id }}" class="btn btn-block btn-primary">{{ value.title }}</a>
+                                            <a href="rooms2hotels.php?hid={{ hotels.id }}&rid={{ value.id }}" class="btn btn-block btn-primary">{{ value.title_ru }}</a>
                                         </td>
                                     </tr>
                                 {% endfor %}

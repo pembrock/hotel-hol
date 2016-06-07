@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             }
         }
     }
-    $set = array('title_ru' => $title_ru, 'title_us' => $title_us, 'title_cn' => $title_cn, 'description_ru' => $description_ru, 'description_us' => $description_us, 'description_cn' => $description_cn, 'text_ru' => $text_ru, 'text_us' => $text_usu, 'text_cn' => $text_cn, 'isActive' => $isActive, 'start_ts' => isset($startTs) ? $startTs->format('Y-m-d H:i:s') : null, 'stop_ts' => isset($stopTs) ? $stopTs->format('Y-m-d H:i:s') : null);
+    $set = array('title_ru' => $title_ru, 'title_us' => $title_us, 'title_cn' => $title_cn, 'description_ru' => $description_ru, 'description_us' => $description_us, 'description_cn' => $description_cn, 'text_ru' => $text_ru, 'text_us' => $text_us, 'text_cn' => $text_cn, 'isActive' => $isActive, 'start_ts' => isset($startTs) ? $startTs->format('Y-m-d H:i:s') : null, 'stop_ts' => isset($stopTs) ? $stopTs->format('Y-m-d H:i:s') : null);
     if ($image)
         $set['image'] = $image;
     if ($slide_image)

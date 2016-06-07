@@ -11,8 +11,12 @@ require 'inc/ini.inc.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
     $id = $_POST['id'];
-    $title = $_POST['title'];
-    $description = $_POST['description'];
+    $title_ru = $_POST['title_ru'];
+    $title_us = $_POST['title_us'];
+    $title_cn = $_POST['title_cn'];
+    $description_ru = $_POST['description_ru'];
+    $description_us = $_POST['description_us'];
+    $description_cn = $_POST['description_cn'];
     $isActive = isset($_POST['isActive']) ? $_POST['isActive'] : null;
     //Image upload
     if (!empty($_FILES['logo']['name'])){
@@ -39,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         }
     }
 
-    $set = array('title' => $title, 'description' => $description, 'isActive' => $isActive);
+    $set = array('title_ru' => $title_ru, 'title_us' => $title_us, 'title_cn' => $title_cn, 'description_ru' => $description_ru,  'description_us' => $description_us,  'description_cn' => $description_cn, 'isActive' => $isActive);
     if ($logo)
         $set['logo'] = $logo;
     if($id > 0)

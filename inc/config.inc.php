@@ -8,8 +8,8 @@
 
 $config['db']['host'] = 'localhost';
 $config['db']['user'] = 'root';
-$config['db']['password'] = '320699aFK123';
-$config['db']['db_name'] = 'hotel-serv';
+$config['db']['password'] = '';
+$config['db']['db_name'] = 'hh';
 
 
 $config['path']['classes'] = __DIR__ . '/classes';

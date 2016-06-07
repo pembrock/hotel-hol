@@ -7,8 +7,8 @@
  */
 if(isset($_GET['id'])){
         $id = intval($_GET['id']);
-        $hotel = $fpdo->from('hotel')->where(array('id' => $id))->fetch();
-        $block = $fpdo->from('blocks')->where(array('system' => 'roomshas'))->fetch();
+        $hotel = $fpdo->from('hotel')->select('id, title_' . $lang['type'] . ' AS title, description_' . $lang['type'] . ' AS description, logo, phone, phone2, email, address_' . $lang['type'] . ' AS address, subway_' . $lang['type'] . ' AS subway, maps_link, address_description_' . $lang['type'] . ' AS address_description, online_link, meta_desc, meta_key')->where(array('id' => $id))->fetch();
+        $block = $fpdo->from('blocks')->select('system, title_' . $lang['type'] . ' AS title, text_' . $lang['type'] . ' AS text')->where(array('system' => 'roomshas'))->fetch();
 
     $activeRates = $fpdo->from('rates')->select(null)->select('id')->where(array('isActive' => 1))->fetch();
     $query = "select tt.id from rates r inner join tarif_tables tt ON tt.tid = r.id where r.isDefault = 1 and tt.hid = " . $id . " and tt.start_ts <= NOW() order by tt.start_ts DESC limit 1";
@@ -29,7 +29,7 @@ if(isset($_GET['id'])){
 
 
 
-            $query = "select id, title from rooms where id = " . $val['rid'];
+            $query = "select id, title_" . $lang['type'] ." AS title from rooms where id = " . $val['rid'];
 
             $res2 = $pdo->query($query, PDO::FETCH_ASSOC);
             $room_info = $res2->fetchAll();
@@ -38,7 +38,7 @@ if(isset($_GET['id'])){
                 $info[$val['id']]['id'] = $inf['id'];
 
             }
-            $query = "select description, online_link from rooms2hotels where hid = " . $id . " and rid = " . $val['rid'];
+            $query = "select description_" . $lang['type'] . " AS description, online_link from rooms2hotels where hid = " . $id . " and rid = " . $val['rid'];
             $res2 = $pdo->query($query, PDO::FETCH_ASSOC);
             $room_info = $res2->fetchAll();
             foreach($room_info as $inf){
@@ -59,7 +59,7 @@ if(isset($_GET['id'])){
     $res = $pdo->query($query, PDO::FETCH_ASSOC);
     $add_ttid = $res->fetchColumn();
 
-    $query = "select adc.cost, ads.title from additional_costs adc
+    $query = "select adc.cost, ads.title_" . $lang['type'] . " AS title from additional_costs adc
                 inner join additional_service ads ON ads.id = adc.ad_id
                 where adc.ttid = " . $add_ttid . " and adc.hid = " . $id;
     $res = $pdo->query($query, PDO::FETCH_ASSOC);

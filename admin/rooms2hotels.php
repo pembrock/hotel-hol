@@ -54,10 +54,12 @@ if(isset($_POST['upload'])){
 if (isset($_POST['save'])){
     $hid = intval($_POST['hid']);
     $rid = intval($_POST['rid']);
-    $description = $_POST['description'];
+    $description_ru = $_POST['description_ru'];
+    $description_us = $_POST['description_us'];
+    $description_cn = $_POST['description_cn'];
     $online_link = $_POST['online_link'];
 
-    $set = array('hid' => $hid, 'rid' => $rid, 'description' => $description, 'online_link' => $online_link);
+    $set = array('hid' => $hid, 'rid' => $rid, 'description_ru' => $description_ru,  'description_us' => $description_us,  'description_cn' => $description_cn, 'online_link' => $online_link);
     $query = $fpdo->deleteFrom('rooms2hotels')->where(array('hid' => $hid, 'rid' => $rid));
     $query->execute();
     $query = $fpdo->insertInto('rooms2hotels')->values($set);
@@ -71,7 +73,7 @@ if (isset($_GET['hid']) && isset($_GET['rid'])){
     $hotel = $fpdo->from('hotel')->where(array('id' => $hid))->fetch();
     $room = $fpdo->from('rooms')->where(array('id' => $rid))->fetch();
     $path = '../public/upload/images/hr/' . intval($_GET['hid']) . '/' . intval($_GET['rid']) . '/';
-    $files_list = array_diff(scandir($path), array('..', '.'));
+    $files_list = @array_diff(scandir($path), array('..', '.'));
     $description = $fpdo->from('rooms2hotels')->where(array('hid' => $hid, 'rid' => $rid))->fetch();
     echo $twig->render('/admin/rooms2hotelsEdit.html.twig', array('room' => $room, 'hotel' => $hotel, 'path' => $path, 'images' => $files_list, 'description' => $description));
 }
