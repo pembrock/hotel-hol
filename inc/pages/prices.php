@@ -9,7 +9,7 @@
 $block = $fpdo->from('blocks')->select('system, title_' . $lang['type'] . ' AS title, text_' . $lang['type'] . ' AS text')->where(array('system' => 'prices'))->fetch();
 $rooms = $fpdo->from('rooms')->select(null)->select('id, title_' . $lang['type'] . ' AS title')->orderBy('orderBy')->fetchAll();
 $rates = $fpdo->from('rates')->select('id, title_' . $lang['type'] . ' AS title, description_' . $lang['type'] . ' AS description')->where(array('isActive' => 1))->orderBy('isDefault DESC')->fetchAll();
-$hotels = $fpdo->from('hotel')->fetchAll();
+$hotels = $fpdo->from('hotel')->select('id, title_' . $lang['type'] . ' AS title')->fetchAll();
 
 if (isset($_POST['getRates']))
 {
