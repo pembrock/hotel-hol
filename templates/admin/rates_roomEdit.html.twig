@@ -88,7 +88,7 @@
                     <label class="col-sm-2 control-label">Тарифные таблицы</label>
                     <div class="col-sm-3">
                         {% for value in hotels %}
-                            <a href="?list&tid={{ rates.id}}&hid={{ value.id }}" type="button" class="btn btn-block btn-primary">{{ value.title }}</a>
+                            <a href="?list&tid={{ rates.id}}&hid={{ value.id }}" type="button" class="btn btn-block btn-primary">{{ value.title_ru }}</a>
                         {% endfor %}
                         {#<table class="table">#}
                             {#{% for value in hotels %}#}

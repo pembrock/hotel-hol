@@ -52,7 +52,7 @@
                         </tr>
                         {% for value in hotels %}
                             <tr>
-                                <td>{{ value.title }}</td>
+                                <td>{{ value.title_ru }}</td>
                                 {% for i in service %}
                                     <td><input type="text" name="costs[{{ value.id }}_{{ i.id }}]" {% if costs[value.id][i.id] is defined %}value="{{ costs[value.id][i.id] }}"{% endif %}></td>
                                 {% endfor %}

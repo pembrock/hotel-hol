@@ -96,7 +96,7 @@ if (isset($_GET['tid'], $_GET['hid'], $_GET['ttid']))
     $ttid = intval($_GET['ttid']);
     $rooms = $fpdo->from('rooms')->select(null)->select(array('id', 'title_ru'))->orderBy('orderBy')->fetchAll();
     $rate = $fpdo->from('rates')->where(array('id' => $tid))->fetch();
-    $hotel_name = $fpdo->from('hotel')->select(null)->select(array('title'))->where(array('id' => $hid))->fetchColumn();
+    $hotel_name = $fpdo->from('hotel')->select(null)->select(array('title_ru'))->where(array('id' => $hid))->fetchColumn();
     if ($ttid > 0){
         $ttable = $fpdo->from('tarif_tables')->where(array('id' => $ttid))->fetch();
         $costs_array = $fpdo->from('rates2room')->where(array('hid' => $hid, 'tid' => $tid, 'ttid' => $ttid))->fetchAll();
