@@ -11,13 +11,25 @@ require 'inc/ini.inc.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
     $id = $_POST['id'];
-    $title = $_POST['title'];
+    $title_ru = $_POST['title_ru'];
+    $title_us = $_POST['title_us'];
+    $title_cn = $_POST['title_cn'];
     $isActive = $_POST['isActive'];
-    $description = $_POST['description'];
-    $text = $_POST['text'];
+    $description_ru = $_POST['description_ru'];
+    $description_us = $_POST['description_us'];
+    $description_cn = $_POST['description_cn'];
+    $text_ru = $_POST['text_ru'];
+    $text_us = $_POST['text_us'];
+    $text_cn = $_POST['text_cn'];
+    $meta_desc_ru = $_POST['meta_desc_ru'];
+    $meta_desc_us = $_POST['meta_desc_us'];
+    $meta_desc_cn = $_POST['meta_desc_cn'];
+    $meta_key_ru = $_POST['meta_key_ru'];
+    $meta_key_us = $_POST['meta_key_us'];
+    $meta_key_cn = $_POST['meta_key_cn'];
     $date = new DateTime();
 
-    $set = array('title' => $title, 'description' => $description, 'text' => $text, 'isActive' => $isActive, 'date' => $date->format('Y-m-d H:i:s'));
+    $set = array('title_ru' => $title_ru, 'title_us' => $title_us, 'title_cn' => $title_cn, 'description_ru' => $description_ru,  'description_us' => $description_us,  'description_cn' => $description_cn, 'text_ru' => $text_ru,  'text_us' => $text_us,  'text_cn' => $text_cn, 'isActive' => $isActive, 'date' => $date->format('Y-m-d H:i:s'), 'meta_desc_ru' => $meta_desc_ru, 'meta_desc_us' => $meta_desc_us, 'meta_desc_cn' => $meta_desc_cn, 'meta_key_ru' => $meta_key_ru, 'meta_key_us' => $meta_key_us, 'meta_key_cn' => $meta_key_cn);
 
 //Image upload
     if (!empty($_FILES['logo']['name'])){
@@ -43,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             }
         }
     }
-    $set = array('title' => $title, 'description' => $description, 'text' => $text, 'isActive' => $isActive, 'date' => $date->format('Y-m-d H:i:s'));
+    //$set = array('title' => $title, 'description' => $description, 'text' => $text, 'isActive' => $isActive, 'date' => $date->format('Y-m-d H:i:s'));
     if ($logo)
         $set['logo'] = $logo;
 

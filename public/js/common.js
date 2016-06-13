@@ -138,5 +138,7 @@ $(document).ready(function(){
         moreText: 'читать полностью',
         lessText: 'свернуть'
     });
-
+	$(".spoiler-trigger").click(function() {
+		$(this).parent().next().collapse('toggle');
+	});
     });

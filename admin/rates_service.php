@@ -56,8 +56,8 @@ if (isset($_GET['del']))
     header('Location: /admin/rates_service.php');
 }
 
-$hotels = $fpdo->from('hotel')->select(null)->select(array('id', 'title'))->orderBy('orderBy')->fetchAll();
-$service = $fpdo->from('additional_service')->select(null)->select(array('id', 'title'))->orderBy('orderBy')->fetchAll();
+$hotels = $fpdo->from('hotel')->select(null)->select(array('id', 'title_ru'))->orderBy('orderBy')->fetchAll();
+$service = $fpdo->from('additional_service')->select(null)->select(array('id', 'title_ru'))->orderBy('orderBy')->fetchAll();
 if (isset($_GET['edit']))
 {
     $id = intval($_GET['edit']);

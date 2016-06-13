@@ -6,16 +6,16 @@
  * Time: 22:48
  */
 
-$block = $fpdo->from('blocks')->where(array('system' => 'prices'))->fetch();
-$rooms = $fpdo->from('rooms')->select(null)->select(array('id', 'title'))->orderBy('orderBy')->fetchAll();
-$rates = $fpdo->from('rates')->where(array('isActive' => 1))->orderBy('isDefault DESC')->fetchAll();
-$hotels = $fpdo->from('hotel')->fetchAll();
+$block = $fpdo->from('blocks')->select('system, title_' . $lang['type'] . ' AS title, text_' . $lang['type'] . ' AS text')->where(array('system' => 'prices'))->fetch();
+$rooms = $fpdo->from('rooms')->select(null)->select('id, title_' . $lang['type'] . ' AS title')->orderBy('orderBy')->fetchAll();
+$rates = $fpdo->from('rates')->select('id, title_' . $lang['type'] . ' AS title, description_' . $lang['type'] . ' AS description')->where(array('isActive' => 1))->orderBy('isDefault DESC')->fetchAll();
+$hotels = $fpdo->from('hotel')->select('id, title_' . $lang['type'] . ' AS title')->fetchAll();
 
 if (isset($_POST['getRates']))
 {
         $rate = intval($_POST['tid']);
         $guests = intval($_POST['guests']);
-        $r_desc = $fpdo->from('rates')->select(null)->select(array('description'))->where(array('id' => $rate))->fetch();
+        $r_desc = $fpdo->from('rates')->select(null)->select('description_' . $lang['type'] . ' AS description')->where(array('id' => $rate))->fetch();
         $hotels_rates = array();
         $hotels_rates['description'] = $r_desc['description'];
         foreach ($hotels as $hotel)
@@ -51,7 +51,7 @@ $query = "SELECT id FROM additional_tables WHERE isActive = 1 AND start_ts <= NO
 $res = $pdo->query($query, PDO::FETCH_ASSOC);
 $add_ttid = $res->fetchColumn();
 
-$add_service = $fpdo->from('additional_service')->where(array('isActive' => 1))->orderBy('orderBy')->fetchAll();
+$add_service = $fpdo->from('additional_service')->select('id, title_' . $lang['type'] . ' AS title, description_' . $lang['type'] . ' AS description')->where(array('isActive' => 1))->orderBy('orderBy')->fetchAll();
 $services_rates = array();
 foreach($add_service as $add) {
         $query = "select * from additional_costs where ad_id = " . $add['id'] . " and ttid = " . $add_ttid;
@@ -62,15 +62,6 @@ foreach($add_service as $add) {
                 $services_rates[$a['hid']][$a['ad_id']] = $a['cost'];
         }
 }
-
-
-//$table = $fpdo->from('additional_tables')->where(array('isActive' => 1, ''))->fetch();
-//$costs_array = $fpdo->from('additional_costs')->where('ttid', $id)->fetchAll();
-//$costs = array();
-//foreach($costs_array as $val)
-//{
-//        $costs[$val['hid']][$val['ad_id']] = $val['cost'];
-//}
 
 foreach ($hotels as $hotel)
 {

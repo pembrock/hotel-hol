@@ -68,18 +68,32 @@ if(isset($_POST['upload'])){
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
     $id = $_POST['id'];
-    $title = $_POST['title'];
+    $title_ru = $_POST['title_ru'];
+    $title_us = $_POST['title_us'];
+    $title_cn = $_POST['title_cn'];
     $online_link = $_POST['online_link'];
-    $description = $_POST['description'];
+    $description_ru = $_POST['description_ru'];
+    $description_us = $_POST['description_us'];
+    $description_cn = $_POST['description_cn'];
     $phone = $_POST['phone'];
     $phone2 = $_POST['phone2'];
     $email = $_POST['email'];
-    $address = $_POST['address'];
-    $subway = $_POST['subway'];
+    $address_ru = $_POST['address_ru'];
+    $address_us = $_POST['address_us'];
+    $address_cn = $_POST['address_cn'];
+    $subway_ru = $_POST['subway_ru'];
+    $subway_us = $_POST['subway_us'];
+    $subway_cn = $_POST['subway_cn'];
     $maps_link = $_POST['maps_link'];
-    $address_description = $_POST['address_description'];
-    $meta_desc = $_POST['meta_desc'];
-    $meta_key = $_POST['meta_key'];
+    $address_description_ru = $_POST['address_description_ru'];
+    $address_description_us = $_POST['address_description_us'];
+    $address_description_cn = $_POST['address_description_cn'];
+    $meta_desc_ru = $_POST['meta_desc_ru'];
+    $meta_desc_us = $_POST['meta_desc_us'];
+    $meta_desc_cn = $_POST['meta_desc_cn'];
+    $meta_key_ru = $_POST['meta_key_ru'];
+    $meta_key_us = $_POST['meta_key_us'];
+    $meta_key_cn = $_POST['meta_key_cn'];
     //Image upload
     if (!empty($_FILES['logo']['name'])){
         if ($id > 0){
@@ -105,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         }
     }
 
-    $set = array('title' => $title, 'online_link' => $online_link, 'description' => $description, 'phone' => $phone, 'phone2' => $phone2, 'email' => $email, 'address' => $address, 'subway' => $subway, 'maps_link' => $maps_link, 'address_description' => $address_description, 'meta_desc' => $meta_desc, 'meta_key' => $meta_key);
+    $set = array('title_ru' => $title_ru, 'title_us' => $title_us, 'title_cn' => $title_cn, 'online_link' => $online_link, 'description_ru' => $description_ru,  'description_us' => $description_us,  'description_cn' => $description_cn, 'phone' => $phone, 'phone2' => $phone2, 'email' => $email, 'address_ru' => $address_ru,  'address_us' => $address_us,  'address_cn' => $address_cn, 'subway_ru' => $subway_ru,  'subway_us' => $subway_us,  'subway_cn' => $subway_cn, 'maps_link' => $maps_link, 'address_description_ru' => $address_description_ru,  'address_description_us' => $address_description_us,  'address_description_cn' => $address_description_cn, 'meta_desc_ru' => $meta_desc_ru, 'meta_desc_us' => $meta_desc_us, 'meta_desc_cn' => $meta_desc_cn, 'meta_key_ru' => $meta_key_ru, 'meta_key_us' => $meta_key_us, 'meta_key_cn' => $meta_key_cn);
     if ($logo)
         $set['logo'] = $logo;
     if($id > 0)

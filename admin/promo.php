@@ -21,6 +21,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $text_ru = $_POST['text_ru'];
     $text_us = $_POST['text_us'];
     $text_cn = $_POST['text_cn'];
+    $meta_desc_ru = $_POST['meta_desc_ru'];
+    $meta_desc_us = $_POST['meta_desc_us'];
+    $meta_desc_cn = $_POST['meta_desc_cn'];
+    $meta_key_ru = $_POST['meta_key_ru'];
+    $meta_key_us = $_POST['meta_key_us'];
+    $meta_key_cn = $_POST['meta_key_cn'];
     $isActive = isset($_POST['isActive']) ? $_POST['isActive'] : null;
     if (!empty($_POST['dateRange'])) {
         $date = explode(' - ', $_POST['dateRange']);
@@ -75,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             }
         }
     }
-    $set = array('title_ru' => $title_ru, 'title_us' => $title_us, 'title_cn' => $title_cn, 'description_ru' => $description_ru, 'description_us' => $description_us, 'description_cn' => $description_cn, 'text_ru' => $text_ru, 'text_us' => $text_usu, 'text_cn' => $text_cn, 'isActive' => $isActive, 'start_ts' => isset($startTs) ? $startTs->format('Y-m-d H:i:s') : null, 'stop_ts' => isset($stopTs) ? $stopTs->format('Y-m-d H:i:s') : null);
+    $set = array('title_ru' => $title_ru, 'title_us' => $title_us, 'title_cn' => $title_cn, 'description_ru' => $description_ru, 'description_us' => $description_us, 'description_cn' => $description_cn, 'text_ru' => $text_ru, 'text_us' => $text_us, 'text_cn' => $text_cn, 'isActive' => $isActive, 'start_ts' => isset($startTs) ? $startTs->format('Y-m-d H:i:s') : null, 'stop_ts' => isset($stopTs) ? $stopTs->format('Y-m-d H:i:s') : null, 'meta_desc_ru' => $meta_desc_ru, 'meta_desc_us' => $meta_desc_us, 'meta_desc_cn' => $meta_desc_cn, 'meta_key_ru' => $meta_key_ru, 'meta_key_us' => $meta_key_us, 'meta_key_cn' => $meta_key_cn);
     if ($image)
         $set['image'] = $image;
     if ($slide_image)

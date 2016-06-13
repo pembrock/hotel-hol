@@ -12,11 +12,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
     $id = $_POST['id'];
     $title_ru = $_POST['title_ru'];
-    $title_en = $_POST['title_en'];
+    $title_us = $_POST['title_us'];
     $title_cn = $_POST['title_cn'];
     $isActive = $_POST['isActive'];
 
-    $set = array('title_ru' => $title_ru, 'title_en' => $title_en, 'title_cn' => $title_cn, 'isActive' => $isActive);
+    $set = array('title_ru' => $title_ru, 'title_us' => $title_us, 'title_cn' => $title_cn, 'isActive' => $isActive);
 
     if($id > 0)
         $query = $fpdo->update('menu')->set($set)->where('id', $id);

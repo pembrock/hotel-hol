@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header">
-                        <h1>Гостиница {{ hotel.title }}</h1>
+                        <h1>{% if lang.type == "ru" %}Гостиница{% elseif lang.type == "us" %}Hotel{% elseif lang.type == "cn" %}飯店{% else %}Гостиница{% endif %} {{ hotel.title }}</h1>
                     </div>
                 </div>
 
@@ -32,7 +32,7 @@
                     </div>
                     {% if additional is not empty %}
                     <div class="card_2 caption color_2">
-                        <h3>Дополнительные услуги</h3>
+                        <h3>{% if lang.type == "ru" %}Дополнительные услуги{% elseif lang.type == "us" %}Additional services{% elseif lang.type == "cn" %}附加服務{% else %}Дополнительные услуги{% endif %}</h3>
                         <p>
                         <ul>
                             {% for value in additional %}
@@ -48,7 +48,7 @@
                     <div class="card_2 caption">
                         <div class="row">
                             <div class="col-md-12">
-                                <h2>Гостиница</h2>
+                                <h2>{% if lang.type == "ru" %}Гостиница{% elseif lang.type == "us" %}Hotel{% elseif lang.type == "cn" %}飯店{% else %}Гостиница{% endif %}</h2>
                                 <hr>
                             </div>
                         </div>
@@ -71,7 +71,7 @@
                     <div class="card_2 caption">
                         <div class="row">
                             <div class="col-md-12">
-                                <h2>{{ row.title }}</h2> {% if row.online_link is not empty %}<a href="{{ row.online_link }}" class="btn btn-success">Забронировать</a>{% endif %}
+                                <h2>{{ row.title }}</h2> {% if row.online_link is not empty %}<a href="{{ row.online_link }}" class="btn btn-success">{% if lang.type == "ru" %}Забронировать{% elseif lang.type == "us" %}Reserve{% elseif lang.type == "cn" %}書{% else %}Забронировать{% endif %}</a>{% endif %}
                                 <hr>
                             </div>
                             <div class="col-md-8">

@@ -37,7 +37,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="page-header">
-                    <h2>Наши гостиницы</h2>
+                    <h2>{% if lang.type == "ru" %}Наши гостиницы{% elseif lang.type == "us" %}Our hotels{% elseif lang.type == "cn" %}我們的酒店{% else %}Наши гостиницы{% endif %}</h2>
                 </div>
             </div>
         </div>
@@ -59,8 +59,8 @@
                         <hr>
                         <div class="row">
                             <div class="col-md-12 btn-toolbar">
-                                    <a href="hotels?id={{ hotel.id }}" class="btn btn-primary ripple-effect">Подробней</a>
-                                    {% if hotel.online_link is not empty %}<a href="{{ hotel.online_link }}" class="btn btn-success ripple-effect">Забронировать</a>{% endif %}
+                                    <a href="hotels?id={{ hotel.id }}" class="btn btn-primary ripple-effect">{% if lang.type == "ru" %}Подробней{% elseif lang.type == "us" %}More{% elseif lang.type == "cn" %}更詳細{% else %}Подробней{% endif %}</a>
+                                    {% if hotel.online_link is not empty %}<a href="{{ hotel.online_link }}" class="btn btn-success ripple-effect">{% if lang.type == "ru" %}Забронировать{% elseif lang.type == "us" %}Reserve{% elseif lang.type == "cn" %}書{% else %}Забронировать{% endif %}</a>{% endif %}
                             </div>
                         </div>
                             </div>

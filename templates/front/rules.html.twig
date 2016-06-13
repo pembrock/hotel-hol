@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header">
-                        <h1>Правила заселения в мини-гостиницу Hotel-hol</h1>
+                        <h1>{% if lang.type == "ru" %}Правила заселения в мини-гостиницу Hotel-hol{% elseif lang.type == "us" %}Settlement rules in the mini-hotel Hotel-hol{% elseif lang.type == "cn" %}在迷你酒店Hotel-HOL結算規則{% else %}Правила заселения в мини-гостиницу Hotel-hol{% endif %}</h1>
                     </div>
                     {% if blocks.rules is defined %}
                     <div class="card caption color_1">
