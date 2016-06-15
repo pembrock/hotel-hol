@@ -74,44 +74,45 @@
                             <label class="control-label">{% if lang.type == "ru" %}Цены на дополнительные услуги{% elseif lang.type == "us" %}Prices for additional services{% elseif lang.type == "cn" %}價格附加服務{% else %}Цены на дополнительные услуги{% endif %}</label>
                         </div>
                         <div style="clear: both"></div>
-                        {% for service in services %}
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <button type="button" class="btn btn-success btn-xs spoiler-trigger" data-toggle="collapse">{{ service.title }}</button>
-                            </div>
-                            <div class="panel-collapse collapse out">
-                                <div class="panel-body">
-                                    <div class="card_2 caption color_4">
-                                        {{ service.description|raw }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {% endfor %}
+                        {#{% for service in services %}#}
+                        {#<div class="panel panel-default">#}
+                            {#<div class="panel-heading">#}
+                                {#<button type="button" class="btn btn-success btn-xs spoiler-trigger" data-toggle="collapse">{{ service.title }}</button>#}
+                            {#</div>#}
+                            {#<div class="panel-collapse collapse out">#}
+                                {#<div class="panel-body">#}
+                                    {#<div class="card_2 caption color_4">#}
+                                        {#{{ service.description|raw }}#}
+                                    {#</div>#}
+                                {#</div>#}
+                            {#</div>#}
+                        {#</div>#}
+                        {#{% endfor %}#}
                     {#Цены на дополнительные услуши в табличном виде#}
-                            {#<table class="table table-hover">#}
-                                {#<thead>#}
-                                {#<tr>#}
-                                    {#<th>{% if lang.type == "ru" %}Отель{% elseif lang.type == "us" %}Hotel{% elseif lang.type == "cn" %}飯店{% else %}Отель{% endif %}</th>#}
-                                    {#{% for service in services %}#}
-                                        {#<th>{{ service.title }}</th>#}
-                                    {#{% endfor %}#}
-                                {#</tr>#}
-                                {#</thead>#}
-                                {#<tbody>#}
-                                {#{% for hotel in hotels %}#}
-                                {#<tr>#}
-                                    {#<td><a class="ab1" href="/hotels?id={{ hotel.id }}">«{{ hotel.title }}»</td>#}
+                        <div id="serv-desc" class="card_2 caption color_4 hide"></div>
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>{% if lang.type == "ru" %}Отель{% elseif lang.type == "us" %}Hotel{% elseif lang.type == "cn" %}飯店{% else %}Отель{% endif %}</th>
+                                    {% for service in services %}
+                                        <th><a href="#" class="serv-info" rel="{{ service.id }}">{{ service.title }} <span class="glyphicon glyphicon-info-sign"></span></a></th>
+                                    {% endfor %}
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for hotel in hotels %}
+                                <tr>
+                                    <td><a class="ab1" href="/hotels?id={{ hotel.id }}">«{{ hotel.title }}»</td>
 
-                                        {#{% for service in services %}#}
-                                    {#<td>{{ services_rates[hotel.id][service.id] }}</td>#}
-                                            {#{% endfor %}#}
+                                        {% for service in services %}
+                                    <td>{{ services_rates[hotel.id][service.id] }}</td>
+                                            {% endfor %}
 
 
-                                {#</tr>#}
-                                {#{% endfor %}#}
-                                {#</tbody>#}
-                            {#</table>#}
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
                     {#Цены на дополнительные услуши в табличном виде#}
                         </div>
                     </div>

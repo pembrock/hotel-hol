@@ -141,4 +141,22 @@ $(document).ready(function(){
 	$(".spoiler-trigger").click(function() {
 		$(this).parent().next().collapse('toggle');
 	});
-    });
+
+	$('.serv-info').on('click', function(){
+		var id = $(this).attr('rel');
+		$.ajax({
+			type: "POST",
+			data: {getServDesc: 1, id: id},
+			success: function(e){
+				e = $.parseJSON(e);
+				$('#serv-desc').removeClass('hide').html(e.description);
+			}
+		});
+		return false;
+	});
+
+	$('.show_service').on('click', function () {
+		$(this).closest('li').find('.card_2').toggleClass('hide');
+	});
+
+});

@@ -59,7 +59,7 @@ if(isset($_GET['id'])){
     $res = $pdo->query($query, PDO::FETCH_ASSOC);
     $add_ttid = $res->fetchColumn();
 
-    $query = "select adc.cost, ads.title_" . $lang['type'] . " AS title from additional_costs adc
+    $query = "select adc.cost, ads.title_" . $lang['type'] . " AS title, description_" . $lang['type'] . " AS description from additional_costs adc
                 inner join additional_service ads ON ads.id = adc.ad_id
                 where adc.ttid = " . $add_ttid . " and adc.hid = " . $id;
     $res = $pdo->query($query, PDO::FETCH_ASSOC);

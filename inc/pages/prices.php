@@ -44,6 +44,13 @@ if (isset($_POST['getRates']))
         die();
 }
 
+if (isset($_POST['getServDesc'])){
+        $id = intval($_POST['id']);
+        $desc = $fpdo->from('additional_service')->select(null)->select('description_' . $lang['type'] . ' AS description')->where(array('id' => $id))->fetch();
+
+        echo json_encode($desc);
+        die();
+}
 $default_rate = $fpdo->from('rates')->select(null)->select(array('id'))->where(array('isDefault' => 1, 'isActive' => 1))->fetch();
 $hotels_rates = array();
 
