@@ -106,10 +106,15 @@
                             {#<i class="fa fa-photo"></i> <span>Галерея</span>#}
                         {#</a>#}
                     {#</li>#}
-                    <li {% if menu_selected == 'info' %}class="active"{% endif %}>
-                        <a href="information.php">
+                    <li class="treeview {% if menu_selected == 'info' or menu_selected == 'attraction' %}active{% endif %}">
+                        <a href="#">
                             <i class="fa fa-exclamation-circle"></i> <span>Полезная информация</span>
+                            <i class="fa fa-angle-left pull-right"></i>
                         </a>
+                        <ul class="treeview-menu">
+                            <li {% if menu_selected == 'info' %}class="active"{% endif %}><a href="information.php"><i class="fa fa-circle-o"></i> Полезная информация</a></li>
+                            <li {% if menu_selected == 'attraction' %}class="active"{% endif %}><a href="attraction.php"><i class="fa fa-circle-o"></i> Достопримечательности</a></li>
+                        </ul>
                     </li>
                     <li class="treeview {% if menu_selected == 'settings' or menu_selected == 'users' or menu_selected == 'role' or menu_selected == 'groups' or menu_selected == 'blocks' or menu_selected == 'search' or menu_selected == 'menu' or menu_selected == 'language' %} active{% endif %}">
                         <a href="#">

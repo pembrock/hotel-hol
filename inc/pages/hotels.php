@@ -54,6 +54,11 @@ if(isset($_GET['id'])){
         }
 
     }
+    $query = "select at.id, at.title_" . $lang['type'] . " AS title from attraction at
+                inner join hotel2attraction h2a ON h2a.aid = at.id
+                where at.isActive = 1 and h2a.hid = " . $id;
+    $res = $pdo->query($query, PDO::FETCH_ASSOC);
+    $attraction = $res->fetchAll();
 
     $query = "SELECT id FROM additional_tables WHERE isActive = 1 AND start_ts <= NOW()";
     $res = $pdo->query($query, PDO::FETCH_ASSOC);
@@ -61,13 +66,13 @@ if(isset($_GET['id'])){
 
     $query = "select adc.cost, ads.title_" . $lang['type'] . " AS title, description_" . $lang['type'] . " AS description from additional_costs adc
                 inner join additional_service ads ON ads.id = adc.ad_id
-                where adc.ttid = " . $add_ttid . " and adc.hid = " . $id;
+                where adc.ttid = " . $add_ttid . " and adc.hid = " . $id . " and ads.isActive = 1";
     $res = $pdo->query($query, PDO::FETCH_ASSOC);
     $additional = $res->fetchAll();
 
     //comments
     $comments = $fpdo->from('review')->where(array('isActive' => 1, 'hid' => $id))->orderBy('date DESC')->fetchAll();
-        echo $twig->render('/front/hotel.html.twig', array('hotel' => $hotel, 'block' => $block, 'info' => $info, 'img' => $img, 'additional' => $additional, 'comments' => $comments));
+        echo $twig->render('/front/hotel.html.twig', array('hotel' => $hotel, 'block' => $block, 'info' => $info, 'img' => $img, 'additional' => $additional, 'comments' => $comments, 'attraction' => $attraction));
 }
 else{
         $block = $fpdo->from('blocks')->where(array('system' => 'hotels'))->fetch();

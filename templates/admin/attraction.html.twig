@@ -1,0 +1,38 @@
+{% extends "/admin/index.html.twig" %}
+{% set menu_selected = 'attraction' %}
+{% block content %}
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Достопримечательности</h3>
+                <a href="?edit=0" title="Добавить" class="btn btn-success pull-right">
+                    <i class="fa fa-plus"></i>
+                </a>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+                <table class="table table-striped">
+                    <tbody><tr>
+                        <th style="width: 10px"></th>
+                        <th>Название</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    {% for item in attraction %}
+                    <tr>
+                        <td>{{ loop.index }}.</td>
+                        <td><a href="?edit={{ item.id }}">{{ item.title_ru }}</a></td>
+                        <td style="width: 10px">
+                            <a href="?edit={{ item.id }}" type="button" class="btn btn-block btn-primary">Редактировать</a>
+                        </td>
+                        <td style="width: 10px">
+                            <a href="?del={{ item.id }}" type="button" class="btn btn-block btn-danger">Удалить</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody></table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+{% endblock %}

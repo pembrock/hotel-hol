@@ -106,6 +106,20 @@
                         <script type="text/javascript" charset="utf-8" src="{{ hotel.maps_link }}"></script>
                     </div>
                 </div>
+                {% if attraction is not empty %}
+                <div class="col-md-12">
+                    <div class="card_2 caption color_3">
+                        <h2>Достопримечательности рядом с гостиницей</h2>
+                        <p>
+                       <ul>
+                            {% for attr in attraction %}
+                                <li><a href="attraction?id={{ attr.id }}">{{ attr.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+                {% endif %}
             <div class="col-md-12">
                 <div class="detailBox">
                     <div class="titleBox">
