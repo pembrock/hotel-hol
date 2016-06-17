@@ -91,7 +91,7 @@
                 <script type="text/javascript">
                     (function(w){
                         var q=[
-                            ['setContext', 'TL-INT-hotel-hol.newtheme', 'ru'],
+                            ['setContext', 'TL-INT-hotel-hol.newtheme', '{% if lang.type == 'us' %}en{% else %}{{ lang.type }}{% endif %}'],
                             ['embed', 'search-form', {container: 'tl-search-form'}]
                         ];
                         var t=w.travelline=(w.travelline||{}),ti=t.integration=(t.integration||{});ti.__cq=ti.__cq?ti.__cq.concat(q):q;

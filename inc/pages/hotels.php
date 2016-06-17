@@ -7,7 +7,7 @@
  */
 if(isset($_GET['id'])){
         $id = intval($_GET['id']);
-        $hotel = $fpdo->from('hotel')->select('id, title_' . $lang['type'] . ' AS title, description_' . $lang['type'] . ' AS description, logo, phone, phone2, email, address_' . $lang['type'] . ' AS address, subway_' . $lang['type'] . ' AS subway, maps_link, address_description_' . $lang['type'] . ' AS address_description, online_link, meta_desc, meta_key')->where(array('id' => $id))->fetch();
+        $hotel = $fpdo->from('hotel')->select('id, title_' . $lang['type'] . ' AS title, description_' . $lang['type'] . ' AS description, logo, phone, phone2, email, address_' . $lang['type'] . ' AS address, subway_' . $lang['type'] . ' AS subway, maps_link, address_description_' . $lang['type'] . ' AS address_description, online_link, meta_desc_' . $lang['type'] . ' AS meta_desc, meta_key_' . $lang['type'] . ' AS meta_key')->where(array('id' => $id))->fetch();
         $block = $fpdo->from('blocks')->select('system, title_' . $lang['type'] . ' AS title, text_' . $lang['type'] . ' AS text')->where(array('system' => 'roomshas'))->fetch();
 
     $activeRates = $fpdo->from('rates')->select(null)->select('id')->where(array('isActive' => 1))->fetch();
@@ -54,20 +54,25 @@ if(isset($_GET['id'])){
         }
 
     }
+    $query = "select at.id, at.title_" . $lang['type'] . " AS title from attraction at
+                inner join hotel2attraction h2a ON h2a.aid = at.id
+                where at.isActive = 1 and h2a.hid = " . $id;
+    $res = $pdo->query($query, PDO::FETCH_ASSOC);
+    $attraction = $res->fetchAll();
 
     $query = "SELECT id FROM additional_tables WHERE isActive = 1 AND start_ts <= NOW()";
     $res = $pdo->query($query, PDO::FETCH_ASSOC);
     $add_ttid = $res->fetchColumn();
 
-    $query = "select adc.cost, ads.title_" . $lang['type'] . " AS title from additional_costs adc
+    $query = "select adc.cost, ads.title_" . $lang['type'] . " AS title, description_" . $lang['type'] . " AS description from additional_costs adc
                 inner join additional_service ads ON ads.id = adc.ad_id
-                where adc.ttid = " . $add_ttid . " and adc.hid = " . $id;
+                where adc.ttid = " . $add_ttid . " and adc.hid = " . $id . " and ads.isActive = 1";
     $res = $pdo->query($query, PDO::FETCH_ASSOC);
     $additional = $res->fetchAll();
 
     //comments
     $comments = $fpdo->from('review')->where(array('isActive' => 1, 'hid' => $id))->orderBy('date DESC')->fetchAll();
-        echo $twig->render('/front/hotel.html.twig', array('hotel' => $hotel, 'block' => $block, 'info' => $info, 'img' => $img, 'additional' => $additional, 'comments' => $comments));
+        echo $twig->render('/front/hotel.html.twig', array('hotel' => $hotel, 'block' => $block, 'info' => $info, 'img' => $img, 'additional' => $additional, 'comments' => $comments, 'attraction' => $attraction));
 }
 else{
         $block = $fpdo->from('blocks')->where(array('system' => 'hotels'))->fetch();

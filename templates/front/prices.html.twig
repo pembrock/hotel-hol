@@ -74,13 +74,28 @@
                             <label class="control-label">{% if lang.type == "ru" %}Цены на дополнительные услуги{% elseif lang.type == "us" %}Prices for additional services{% elseif lang.type == "cn" %}價格附加服務{% else %}Цены на дополнительные услуги{% endif %}</label>
                         </div>
                         <div style="clear: both"></div>
-                        <div class="table-responsive">
+                        {#{% for service in services %}#}
+                        {#<div class="panel panel-default">#}
+                            {#<div class="panel-heading">#}
+                                {#<button type="button" class="btn btn-success btn-xs spoiler-trigger" data-toggle="collapse">{{ service.title }}</button>#}
+                            {#</div>#}
+                            {#<div class="panel-collapse collapse out">#}
+                                {#<div class="panel-body">#}
+                                    {#<div class="card_2 caption color_4">#}
+                                        {#{{ service.description|raw }}#}
+                                    {#</div>#}
+                                {#</div>#}
+                            {#</div>#}
+                        {#</div>#}
+                        {#{% endfor %}#}
+                    {#Цены на дополнительные услуши в табличном виде#}
+                        <div id="serv-desc" class="card_2 caption color_4 hide"></div>
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
                                     <th>{% if lang.type == "ru" %}Отель{% elseif lang.type == "us" %}Hotel{% elseif lang.type == "cn" %}飯店{% else %}Отель{% endif %}</th>
                                     {% for service in services %}
-                                        <th>{{ service.title }}</th>
+                                        <th><a href="#" class="serv-info" rel="{{ service.id }}">{{ service.title }} <span class="glyphicon glyphicon-info-sign"></span></a></th>
                                     {% endfor %}
                                 </tr>
                                 </thead>
@@ -98,6 +113,7 @@
                                 {% endfor %}
                                 </tbody>
                             </table>
+                    {#Цены на дополнительные услуши в табличном виде#}
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,72 @@
+{% extends "/admin/index.html.twig" %}
+{% set menu_selected = 'attraction' %}
+
+{% block content %}
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <ol class="breadcrumb">
+                <li><a href="attraction.php"><i class="fa fa-exclamation-circle"></i> Достопримечательности</a></li>
+                <li class="active">{% if attraction is defined %}{{ attraction.title_ru }}{% else %}Новая достопримечательность{% endif %}</li>
+            </ol>
+        </div>
+        <form class="form-horizontal" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="id" id="id" value="{% if attraction is defined %}{{ attraction.id }}{% else %}0{% endif %}">
+            <div class="box-body">
+                {% if error is defined  %}
+                    {{ error }}
+                {% endif %}
+                <div class="form-group">
+                    <label for="isActive" class="col-sm-2 control-label">Опубликовано</label>
+                    <div class="col-sm-6">
+                        <input type="checkbox" class="form-control-static" name="isActive" id="isActive" value="1" {% if attraction is defined %}{% if attraction.isActive == 1 %} checked {% endif %}{% endif %} style="width: 25px;">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="title_ru" class="col-sm-2 control-label">Название (ru)</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="title_ru" id="title_ru" placeholder="Название" value="{% if attraction is defined %}{{ attraction.title_ru }}{% endif %}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="title_us" class="col-sm-2 control-label">Название (en)</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="title_us" id="title_us" placeholder="Название" value="{% if attraction is defined %}{{ attraction.title_us }}{% endif %}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="title_cn" class="col-sm-2 control-label">Название (cn)</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="title_cn" id="title_cn" placeholder="Название" value="{% if attraction is defined %}{{ attraction.title_cn }}{% endif %}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="text_ru" class="col-sm-2 control-label">Полное описание (ru)</label>
+                    <div class="col-sm-6">
+                        <textarea name="text_ru" id="editor4" rows="10" cols="80">
+                            {% if attraction is defined %}{{ attraction.text_ru }}{% endif %}
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="text_us" class="col-sm-2 control-label">Полное описание (en)</label>
+                    <div class="col-sm-6">
+                        <textarea name="text_us" id="editor5" rows="10" cols="80">
+                            {% if attraction is defined %}{{ attraction.text_us }}{% endif %}
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="text_cn" class="col-sm-2 control-label">Полное описание (cn)</label>
+                    <div class="col-sm-6">
+                        <textarea name="text_cn" id="editor6" rows="10" cols="80">
+                            {% if attraction is defined %}{{ attraction.text_cn }}{% endif %}
+                        </textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <button type="submit" class="btn btn-success" name="save" id="save">Сохранить</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

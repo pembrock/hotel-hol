@@ -44,6 +44,13 @@ if (isset($_POST['getRates']))
         die();
 }
 
+if (isset($_POST['getServDesc'])){
+        $id = intval($_POST['id']);
+        $desc = $fpdo->from('additional_service')->select(null)->select('description_' . $lang['type'] . ' AS description')->where(array('id' => $id))->fetch();
+
+        echo json_encode($desc);
+        die();
+}
 $default_rate = $fpdo->from('rates')->select(null)->select(array('id'))->where(array('isDefault' => 1, 'isActive' => 1))->fetch();
 $hotels_rates = array();
 
@@ -51,7 +58,7 @@ $query = "SELECT id FROM additional_tables WHERE isActive = 1 AND start_ts <= NO
 $res = $pdo->query($query, PDO::FETCH_ASSOC);
 $add_ttid = $res->fetchColumn();
 
-$add_service = $fpdo->from('additional_service')->select('id, title_' . $lang['type'] . ' AS title')->where(array('isActive' => 1))->orderBy('orderBy')->fetchAll();
+$add_service = $fpdo->from('additional_service')->select('id, title_' . $lang['type'] . ' AS title, description_' . $lang['type'] . ' AS description')->where(array('isActive' => 1))->orderBy('orderBy')->fetchAll();
 $services_rates = array();
 foreach($add_service as $add) {
         $query = "select * from additional_costs where ad_id = " . $add['id'] . " and ttid = " . $add_ttid;
