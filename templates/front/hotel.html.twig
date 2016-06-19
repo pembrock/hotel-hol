@@ -80,6 +80,9 @@
                             </div>
                             <div class="col-md-4">
                                 <span class="price">от {{ row.cost }} руб./сутки</span><br>
+                                {% if row.cost_hour is defined %}
+                                <span class="price">от {{ row.cost_hour }} руб./час</span><br>
+                                {% endif %}
                             </div>
                         </div>
                         <div class="row">
