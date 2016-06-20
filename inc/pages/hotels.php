@@ -23,8 +23,6 @@ if(isset($_GET['id'])){
     $rates_day = implode(', ', $rates_day);
     $rates_hour = implode(', ', $rates_hour);
 
-    /*$query = "select tt.id from rates r inner join tarif_tables tt ON tt.tid = r.id where r.isDefault = 1 and tt.hid = " . $id . " and tt.start_ts <= NOW() order by tt.start_ts DESC limit 1";*/
-
     /*Выбираем тарифные таблицы суточные и часовые*/
     $query = "select * from tarif_tables where hid = " . $id . " and tid in (" . $rates_day . ") and isACtive = 1 and start_ts <= NOW()";
     $res = $pdo->query($query, PDO::FETCH_ASSOC);
@@ -48,14 +46,18 @@ if(isset($_GET['id'])){
         foreach ($rooms as $room) {
             $query = "select * from rates2room
                 where
-                cost = (select MIN(cost) from rates2room where hid = " . $id . " and rid = " . $room['id'] . " and tid IN (" . $rates_day . ") and ttid IN (" . $tt_day . ") and cost is not null)
+                cost = (select MIN(cost) from rates2room where hid = " . $id . " and rid = " . $room['id'] . " and tid IN (" . $rates_day . ") and ttid IN (" . $tt_day . ") and cost is not null) and rid = " . $room['id'] . "
                 limit 1";
+            //echo $query . "<br>";
             $res = $pdo->query($query, PDO::FETCH_ASSOC);
             $rows = $res->fetchAll();
             if ($rows)
                 $hotels_room[] = $rows;
         }
     }
+//    echo "<pre>";
+//    print_r($hotels_room);
+//    echo "</pre>";
     $path_overall = __DIR__ . '/../../public/upload/images/hotel/' . intval($id) . '/overall/';
     $overall_list = array_diff(scandir($path_overall), array('..', '.'));
     $img['path_overall'] = '../../public/upload/images/hotel/' . intval($id) . '/overall/';
@@ -64,8 +66,6 @@ if(isset($_GET['id'])){
         foreach ($hr as $val) {
             $path = __DIR__ . '/../../public/upload/images/hr/' . intval($id) . '/' . intval($val['rid']);
             $files_list = array_diff(scandir($path), array('..', '.'));
-
-
 
             $query = "select id, title_" . $lang['type'] ." AS title from rooms where id = " . $val['rid'];
 
