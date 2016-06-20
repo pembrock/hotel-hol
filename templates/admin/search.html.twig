@@ -14,9 +14,9 @@
                     {% for value in search %}
                         <tr>
                             <td style="width: 10px">{{ loop.index }}.</td>
-                            <td><a href="{% if value.page == "hotels" %}hotels.php{% else if value.page == "promo" %}promo.php{% else %}?edit={{ value.id }}{% endif %}">{{ value.title }}</a></td>
+                            <td><a href="{% if value.page == "hotels" %}hotels.php{% elseif value.page == "promo" %}promo.php{% else %}?edit={{ value.id }}{% endif %}">{{ value.title }}</a></td>
                             <td style="width: 10px">
-                                <a href="{% if value.page == "hotels" %}hotels.php{% else if value.page == "promo" %}promo.php{% else %}?edit={{ value.id }}{% endif %}" type="button" class="btn btn-block btn-primary">Редактировать</a>
+                                <a href="{% if value.page == "hotels" %}hotels.php{% elseif value.page == "promo" %}promo.php{% else %}?edit={{ value.id }}{% endif %}" type="button" class="btn btn-block btn-primary">Редактировать</a>
                             </td>
                         </tr>
                     {% endfor %}

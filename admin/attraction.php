@@ -28,7 +28,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     }
     $query->execute();
     $insert_id = $id > 0 ? $id : $pdo->lastInsertId();
-
+    $query = $fpdo->deleteFrom('hotel2attraction')->where('aid', $insert_id);
+    $query->execute();
+    foreach ($_POST['hotels'] as $key => $value)
+    {
+        $set = array('hid' => $value, 'aid' => $insert_id);
+        $query = $fpdo->insertInto('hotel2attraction')->values($set);
+        $query->execute();
+    }
     header('Location: /admin/attraction.php?edit=' . $insert_id);
 }
 
@@ -41,20 +48,25 @@ if (isset($_GET['del'])){
 }
 if (isset($_GET['edit'])){
     $id = intval($_GET['edit']);
+    $hotels = $fpdo->from('hotel')->select(null)->select(array('id', 'title_ru'))->fetchAll();
     if($id > 0){
         $attraction = $fpdo->from('attraction')->where(array('id' => $id ))->fetch();
+        $h2a = $fpdo->from('hotel2attraction')->select(null)->select(array('hid'))->where(array('aid' => $id))->fetchAll();
+        foreach($h2a as $h)
+        {
+            $ha[$h['hid']] = $h['hid'];
+        }
         if ($attraction) {
-            echo $twig->render('/admin/attractionEdit.html.twig', array('attraction' => $attraction));
+            echo $twig->render('/admin/attractionEdit.html.twig', array('attraction' => $attraction, 'hotels' => $hotels, 'ha' => $ha));
         }
         else
-            echo $twig->render('/admin/attractionEdit.html.twig');
+            echo $twig->render('/admin/attractionEdit.html.twig', array('hotels' => $hotels));
     }
     else
-        echo $twig->render('/admin/attractionEdit.html.twig');
+        echo $twig->render('/admin/attractionEdit.html.twig', array('hotels' => $hotels));
 
 }
 else{
     $attraction = $fpdo->from('attraction')->fetchAll();
-
     echo $twig->render('/admin/attraction.html.twig', array('attraction' => $attraction));
 }
