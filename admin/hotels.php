@@ -94,6 +94,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $meta_key_ru = $_POST['meta_key_ru'];
     $meta_key_us = $_POST['meta_key_us'];
     $meta_key_cn = $_POST['meta_key_cn'];
+    if (empty($title_ru))
+        $error[] = "Введите название гостиницы";
+    if (empty($description_ru))
+        $error[] = "Введите описание гостиницы";
+    if (empty($phone))
+        $error[] = "Введите номер телефона гостиницы";
+    if (empty($email))
+        $error[] = "Введите e-mail гостиницы";
+    if (empty($subway_ru))
+        $error[] = "Введите ближайшую станцию метро";
+
     //Image upload
     if (!empty($_FILES['logo']['name'])){
         if ($id > 0){
@@ -120,21 +131,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     }
 
     $set = array('title_ru' => $title_ru, 'title_us' => $title_us, 'title_cn' => $title_cn, 'online_link' => $online_link, 'description_ru' => $description_ru,  'description_us' => $description_us,  'description_cn' => $description_cn, 'phone' => $phone, 'phone2' => $phone2, 'email' => $email, 'address_ru' => $address_ru,  'address_us' => $address_us,  'address_cn' => $address_cn, 'subway_ru' => $subway_ru,  'subway_us' => $subway_us,  'subway_cn' => $subway_cn, 'maps_link' => $maps_link, 'address_description_ru' => $address_description_ru,  'address_description_us' => $address_description_us,  'address_description_cn' => $address_description_cn, 'meta_desc_ru' => $meta_desc_ru, 'meta_desc_us' => $meta_desc_us, 'meta_desc_cn' => $meta_desc_cn, 'meta_key_ru' => $meta_key_ru, 'meta_key_us' => $meta_key_us, 'meta_key_cn' => $meta_key_cn);
-    if ($logo)
-        $set['logo'] = $logo;
-    if($id > 0)
-        $query = $fpdo->update('hotel')->set($set)->where('id', $id);
-    else {
-        $query = $fpdo->insertInto('hotel')->values($set);
-    }
-    $query->execute();
-    $insert_id = $id > 0 ? $id : $pdo->lastInsertId();
-    if($id == 0){
-        $orderBy = $fpdo->from('hotel')->select(null)->select('orderBy')->orderBy('orderBy DESC')->limit(1)->fetch();
-        $query = $fpdo->update('hotel')->set(array('orderBy' => $orderBy['orderBy'] + 1))->where('id', $insert_id);
+        if ($logo) {
+            $set['logo'] = $logo;
+        }
+    if (!$error) {
+        if ($id > 0) {
+            $query = $fpdo->update('hotel')->set($set)->where('id', $id);
+        } else {
+            $query = $fpdo->insertInto('hotel')->values($set);
+        }
         $query->execute();
+        $insert_id = $id > 0 ? $id : $pdo->lastInsertId();
+        if ($id == 0) {
+            $orderBy = $fpdo->from('hotel')->select(null)->select('orderBy')->orderBy('orderBy DESC')->limit(1)->fetch();
+            $query = $fpdo->update('hotel')->set(array('orderBy' => $orderBy['orderBy'] + 1))->where('id', $insert_id);
+            $query->execute();
+        }
+        header('Location: /admin/hotels.php?edit=' . $insert_id);
     }
-    header('Location: /admin/hotels.php?edit=' . $insert_id);
+    else {
+        echo $twig->render('/admin/hotelEdit.html.twig', array('error' => $error, 'hotels' => $set));
+        die();
+    }
 }
 
 if (isset($_GET['del'])){
@@ -159,7 +177,7 @@ if (isset($_GET['edit'])){
             else
                 $hotels['logo'] = NULL;
             $path = '../public/upload/images/hotel/' . intval($id) . '/overall/';
-            $files_list = array_diff(scandir($path), array('..', '.'));
+            $files_list = @array_diff(scandir($path), array('..', '.'));
             $rooms = $fpdo->from('rooms')->orderBy('orderBy')->fetchAll();
             echo $twig->render('/admin/hotelEdit.html.twig', array('hotels' => $hotels, 'path' => $path, 'images' => $files_list, 'rooms' => $rooms));
         }

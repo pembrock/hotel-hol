@@ -31,6 +31,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $description_cn = $_POST['description_cn'];
     $seats_count = $_POST['seats_count'];
     $isActive = isset($_POST['isActive']) ? 1 : 0;
+    
+    if (empty($title_ru))
+        $error[] = "Введите название номера";
+    if (empty($description_ru))
+        $error[] = "Введите описание номера";
 
     //Image upload
     if (!empty($_FILES['image']['name'])){
@@ -62,20 +67,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         $set['image'] = $image;
 //    $qq = $fpdo->update('rooms')->set(array('title' => $title))->where('id', $id);
 //    $qq->execute();
-
-    if($id > 0)
-        $query = $fpdo->update('rooms')->set($set)->where('id', $id);
-    else {
-        $query = $fpdo->insertInto('rooms')->values($set);
-    }
-    $query->execute();
-    $insert_id = $id > 0 ? $id : $pdo->lastInsertId();
-    if($id == 0){
-        $orderBy = $fpdo->from('rooms')->select(null)->select('orderBy')->orderBy('orderBy DESC')->limit(1)->fetch();
-        $query = $fpdo->update('rooms')->set(array('orderBy' => $orderBy['orderBy'] + 1))->where('id', $insert_id);
+    if (!$error) {
+        if ($id > 0) {
+            $query = $fpdo->update('rooms')->set($set)->where('id', $id);
+        } else {
+            $query = $fpdo->insertInto('rooms')->values($set);
+        }
         $query->execute();
+        $insert_id = $id > 0 ? $id : $pdo->lastInsertId();
+        if ($id == 0) {
+            $orderBy = $fpdo->from('rooms')->select(null)->select('orderBy')->orderBy('orderBy DESC')->limit(1)->fetch();
+            $query = $fpdo->update('rooms')->set(array('orderBy' => $orderBy['orderBy'] + 1))->where('id', $insert_id);
+            $query->execute();
+        }
+        header('Location: /admin/rooms.php?edit=' . $insert_id);
     }
-    header('Location: /admin/rooms.php?edit=' . $insert_id);
+    else {
+        echo $twig->render('/admin/roomEdit.html.twig', array('error' => $error, 'rooms' => $set));
+        die();
+    }
 }
 if (isset($_GET['del'])){
     $id = intval($_GET['del']);

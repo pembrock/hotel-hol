@@ -18,6 +18,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $description_us = $_POST['description_us'];
     $description_cn = $_POST['description_cn'];
     $isActive = isset($_POST['isActive']) ? $_POST['isActive'] : null;
+
+
+    if (empty($title_ru))
+        $error[] = "Введите название";
+    if (empty($description_ru))
+        $error[] = "Введите описание";
+
     //Image upload
     if (!empty($_FILES['logo']['name'])){
         if ($id > 0){
@@ -46,19 +53,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $set = array('title_ru' => $title_ru, 'title_us' => $title_us, 'title_cn' => $title_cn, 'description_ru' => $description_ru,  'description_us' => $description_us,  'description_cn' => $description_cn, 'isActive' => $isActive);
     if ($logo)
         $set['logo'] = $logo;
-    if($id > 0)
-        $query = $fpdo->update('additional_service')->set($set)->where('id', $id);
-    else {
-        $query = $fpdo->insertInto('additional_service')->values($set);
-    }
-    $query->execute();
-    $insert_id = $id > 0 ? $id : $pdo->lastInsertId();
-    if($id == 0){
-        $orderBy = $fpdo->from('additional_service')->select(null)->select('orderBy')->orderBy('orderBy DESC')->limit(1)->fetch();
-        $query = $fpdo->update('additional_service')->set(array('orderBy' => $orderBy['orderBy'] + 1))->where('id', $insert_id);
+    if (!$error) {
+        if ($id > 0) {
+            $query = $fpdo->update('additional_service')->set($set)->where('id', $id);
+        } else {
+            $query = $fpdo->insertInto('additional_service')->values($set);
+        }
         $query->execute();
+        $insert_id = $id > 0 ? $id : $pdo->lastInsertId();
+        if ($id == 0) {
+            $orderBy = $fpdo->from('additional_service')->select(null)->select('orderBy')->orderBy('orderBy DESC')->limit(1)->fetch();
+            $query = $fpdo->update('additional_service')->set(array('orderBy' => $orderBy['orderBy'] + 1))->where('id',
+                $insert_id);
+            $query->execute();
+        }
+        header('Location: /admin/additional.php?edit=' . $insert_id);
     }
-    header('Location: /admin/additional.php?edit=' . $insert_id);
+    else {
+        echo $twig->render('/admin/additionalEdit.html.twig', array('error' => $error, 'service' => $set));
+        die();
+    }
 }
 
 if (isset($_GET['del'])){
