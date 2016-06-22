@@ -13,7 +13,13 @@
             <input type="hidden" name="id" id="id" value="{% if rates is defined %}{{ rates.id }}{% else %}0{% endif %}">
             <div class="box-body">
                 {% if error is defined  %}
-                    {{ error }}
+                    <div class="alert alert-warning alert-dismissible">
+                        <ul>
+                            {% for e in error %}
+                                <li>{{ e }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 {% endif %}
 
                 <div class="form-group">

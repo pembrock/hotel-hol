@@ -17,32 +17,52 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $isActive = $data['isActive'];
     $costs = $data['costs'];
 
+    if (empty($title))
+        $error[] = "Введите название";
+    if (empty($start_ts))
+        $error[] = "Введите дату начала тарифа";
+
     $set = array('title' => $title, 'isActive' => $isActive, 'start_ts' => $start_ts->format('Y-m-d H:i:s'));
 
-    if($ttid > 0)
-        $query = $fpdo->update('additional_tables')->set($set)->where('id', $ttid);
+    if (!$error) {
+        if ($ttid > 0) {
+            $query = $fpdo->update('additional_tables')->set($set)->where('id', $ttid);
+        } else {
+            $query = $fpdo->insertInto('additional_tables')->values($set);
+        }
+        $query->execute();
+        $ttid = $ttid > 0 ? $ttid : $pdo->lastInsertId();
+
+        foreach ($costs as $key => $value) {
+            $values = explode('_', $key);
+            $hid = $values[0];
+            $ad_id = $values[1];
+            $cost = $value;
+
+            $query = $fpdo->deleteFrom('additional_costs')->where(array(
+                'ad_id' => $ad_id,
+                'ttid' => $ttid,
+                'hid' => $hid
+            ));
+            $query->execute();
+
+            $insertData = array(
+                'ad_id' => $ad_id,
+                'ttid' => $ttid,
+                'hid' => $hid,
+                'cost' => intval($cost) == 0 ? null : intval($cost)
+            );
+            $query = $fpdo->insertInto('additional_costs', $insertData);
+            $query->execute();
+        }
+
+        header('location: rates_service.php?edit=' . $ttid);
+        die();
+    }
     else {
-        $query = $fpdo->insertInto('additional_tables')->values($set);
+        echo $twig->render('/admin/service_tablesEdit.html.twig', array('error' => $error, 'table' => $set));
+        die();
     }
-    $query->execute();
-    $ttid = $ttid > 0 ? $ttid : $pdo->lastInsertId();
-
-    foreach($costs as $key => $value){
-        $values = explode('_', $key);
-        $hid = $values[0];
-        $ad_id = $values[1];
-        $cost = $value;
-
-        $query = $fpdo->deleteFrom('additional_costs')->where(array('ad_id' => $ad_id, 'ttid' => $ttid, 'hid' => $hid));
-        $query->execute();
-
-        $insertData = array('ad_id' => $ad_id, 'ttid' => $ttid, 'hid' => $hid, 'cost' => intval($cost) == 0 ? NULL : intval($cost));
-        $query = $fpdo->insertInto('additional_costs', $insertData);
-        $query->execute();
-    }
-
-    header('location: rates_service.php?edit=' . $ttid);
-    die();
 }
 
 if (isset($_GET['del']))

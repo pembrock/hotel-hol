@@ -33,6 +33,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         $startTs = new \DateTime($date[0] . ' 00:00:00');
         $stopTs = new \DateTime($date[1] . ' 23:59:59');
     }
+
+    if (empty($title_ru))
+        $error[] = "Введите название акции";
+    if (empty($description_ru))
+        $error[] = "Введите описание акции";
+
     //Image upload
     if (!empty($_FILES['image']['name'])){
         if ($id > 0){
@@ -86,29 +92,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         $set['image'] = $image;
     if ($slide_image)
         $set['slide_image'] = $slide_image;
-    if($id > 0)
-        $query = $fpdo->update('promo')->set($set)->where('id', $id);
-    else {
-        $query = $fpdo->insertInto('promo')->values($set);
-    }
-    $query->execute();
-    $insert_id = $id > 0 ? $id : $pdo->lastInsertId();
-    if($id == 0){
-        $orderBy = $fpdo->from('promo')->select(null)->select('orderBy')->orderBy('orderBy DESC')->limit(1)->fetch();
-        $query = $fpdo->update('promo')->set(array('orderBy' => $orderBy['orderBy'] + 1))->where('id', $insert_id);
+    if (!$error) {
+        if ($id > 0) {
+            $query = $fpdo->update('promo')->set($set)->where('id', $id);
+        } else {
+            $query = $fpdo->insertInto('promo')->values($set);
+        }
         $query->execute();
+        $insert_id = $id > 0 ? $id : $pdo->lastInsertId();
+        if ($id == 0) {
+            $orderBy = $fpdo->from('promo')->select(null)->select('orderBy')->orderBy('orderBy DESC')->limit(1)->fetch();
+            $query = $fpdo->update('promo')->set(array('orderBy' => $orderBy['orderBy'] + 1))->where('id', $insert_id);
+            $query->execute();
+        }
+        header('Location: /admin/promo.php?edit=' . $insert_id);
     }
-    header('Location: /admin/promo.php?edit=' . $insert_id);
+    else {
+        echo $twig->render('/admin/promoEdit.html.twig', array('error' => $error, 'promo' => $set));
+        die();
+    }
 }
 
 if (isset($_GET['del'])){
     $id = intval($_GET['del']);
     $query = $fpdo->from('promo')->select(null)->select('image')->where('id', $id)->fetch(); //Check 'logo' field in DB
     if(!is_null($query['image'])) //if not NULL
-        unlink('../public/upload/images/promo/' . $query['image']); //delete old logo file
+        @unlink('../public/upload/images/promo/' . $query['image']); //delete old logo file
     $query = $fpdo->from('promo')->select(null)->select('slide_image')->where('id', $id)->fetch(); //Check 'logo' field in DB
     if(!is_null($query['slide_image'])) //if not NULL
-        unlink('../public/upload/images/promo/' . $query['slide_image']); //delete old logo file
+        @unlink('../public/upload/images/promo/' . $query['slide_image']); //delete old logo file
     $query = $fpdo->deleteFrom('promo')->where('id', $id);
     $query->execute();
 

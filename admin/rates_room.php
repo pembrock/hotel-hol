@@ -22,21 +22,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $isDefault = isset($_POST['isDefault']) ? $_POST['isDefault'] : null;
     $type = intval($_POST['type']);
 
+
+    if (empty($title_ru))
+        $error[] = "Введите название";
+    if (empty($description_ru))
+        $error[] = "Введите описание";
+
     $set = array('title_ru' => $title_ru, 'title_us' => $title_us, 'title_cn' => $title_cn, 'description_ru' => $description_ru,  'description_us' => $description_us,  'description_cn' => $description_cn, 'isDefault' => $isDefault, 'isActive' => $isActive, 'type' => $type);
 
-    if($id > 0)
-        $query = $fpdo->update('rates')->set($set)->where('id', $id);
-    else {
-        $query = $fpdo->insertInto('rates')->values($set);
-    }
-    $query->execute();
-    $insert_id = $id > 0 ? $id : $pdo->lastInsertId();
-    if($id == 0){
-        $orderBy = $fpdo->from('rates')->select(null)->select('orderBy')->orderBy('orderBy DESC')->limit(1)->fetch();
-        $query = $fpdo->update('rates')->set(array('orderBy' => $orderBy['orderBy'] + 1))->where('id', $insert_id);
+    if (!$error) {
+        if ($id > 0) {
+            $query = $fpdo->update('rates')->set($set)->where('id', $id);
+        } else {
+            $query = $fpdo->insertInto('rates')->values($set);
+        }
         $query->execute();
+        $insert_id = $id > 0 ? $id : $pdo->lastInsertId();
+        if ($id == 0) {
+            $orderBy = $fpdo->from('rates')->select(null)->select('orderBy')->orderBy('orderBy DESC')->limit(1)->fetch();
+            $query = $fpdo->update('rates')->set(array('orderBy' => $orderBy['orderBy'] + 1))->where('id', $insert_id);
+            $query->execute();
+        }
+        header('Location: /admin/rates_room.php?edit=' . $insert_id);
     }
-    header('Location: /admin/rates_room.php?edit=' . $insert_id);
+    else {
+        echo $twig->render('/admin/rates_roomEdit.html.twig', array('error' => $error, 'rates' => $set));
+        die();
+    }
 }
 
 if (isset($_GET['del'])){
