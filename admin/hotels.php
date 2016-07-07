@@ -71,29 +71,68 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $title_ru = $_POST['title_ru'];
     $title_us = $_POST['title_us'];
     $title_cn = $_POST['title_cn'];
+    $title_fr = $_POST['title_fr'];
+    $title_es = $_POST['title_es'];
+    $title_vn = $_POST['title_vn'];
+    $title_tr = $_POST['title_tr'];
     $online_link = $_POST['online_link'];
     $description_ru = $_POST['description_ru'];
     $description_us = $_POST['description_us'];
     $description_cn = $_POST['description_cn'];
+    $description_fr = $_POST['description_fr'];
+    $description_es = $_POST['description_es'];
+    $description_vn = $_POST['description_vn'];
+    $description_tr = $_POST['description_tr'];
     $phone = $_POST['phone'];
     $phone2 = $_POST['phone2'];
     $email = $_POST['email'];
     $address_ru = $_POST['address_ru'];
     $address_us = $_POST['address_us'];
     $address_cn = $_POST['address_cn'];
+    $address_fr = $_POST['address_fr'];
+    $address_es = $_POST['address_es'];
+    $address_vn = $_POST['address_vn'];
+    $address_tr = $_POST['address_tr'];
     $subway_ru = $_POST['subway_ru'];
     $subway_us = $_POST['subway_us'];
     $subway_cn = $_POST['subway_cn'];
+    $subway_fr = $_POST['subway_fr'];
+    $subway_es = $_POST['subway_es'];
+    $subway_vn = $_POST['subway_vn'];
+    $subway_tr = $_POST['subway_tr'];
     $maps_link = $_POST['maps_link'];
     $address_description_ru = $_POST['address_description_ru'];
     $address_description_us = $_POST['address_description_us'];
     $address_description_cn = $_POST['address_description_cn'];
+    $address_description_fr = $_POST['address_description_fr'];
+    $address_description_es = $_POST['address_description_es'];
+    $address_description_vn = $_POST['address_description_vn'];
+    $address_description_tr = $_POST['address_description_tr'];
     $meta_desc_ru = $_POST['meta_desc_ru'];
     $meta_desc_us = $_POST['meta_desc_us'];
     $meta_desc_cn = $_POST['meta_desc_cn'];
+    $meta_desc_fr = $_POST['meta_desc_fr'];
+    $meta_desc_es = $_POST['meta_desc_es'];
+    $meta_desc_vn = $_POST['meta_desc_vn'];
+    $meta_desc_tr = $_POST['meta_desc_tr'];
     $meta_key_ru = $_POST['meta_key_ru'];
     $meta_key_us = $_POST['meta_key_us'];
     $meta_key_cn = $_POST['meta_key_cn'];
+    $meta_key_fr = $_POST['meta_key_fr'];
+    $meta_key_es = $_POST['meta_key_es'];
+    $meta_key_vn = $_POST['meta_key_vn'];
+    $meta_key_tr = $_POST['meta_key_tr'];
+    if (empty($title_ru))
+        $error[] = "Введите название гостиницы";
+    if (empty($description_ru))
+        $error[] = "Введите описание гостиницы";
+    if (empty($phone))
+        $error[] = "Введите номер телефона гостиницы";
+    if (empty($email))
+        $error[] = "Введите e-mail гостиницы";
+    if (empty($subway_ru))
+        $error[] = "Введите ближайшую станцию метро";
+
     //Image upload
     if (!empty($_FILES['logo']['name'])){
         if ($id > 0){
@@ -119,22 +158,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         }
     }
 
-    $set = array('title_ru' => $title_ru, 'title_us' => $title_us, 'title_cn' => $title_cn, 'online_link' => $online_link, 'description_ru' => $description_ru,  'description_us' => $description_us,  'description_cn' => $description_cn, 'phone' => $phone, 'phone2' => $phone2, 'email' => $email, 'address_ru' => $address_ru,  'address_us' => $address_us,  'address_cn' => $address_cn, 'subway_ru' => $subway_ru,  'subway_us' => $subway_us,  'subway_cn' => $subway_cn, 'maps_link' => $maps_link, 'address_description_ru' => $address_description_ru,  'address_description_us' => $address_description_us,  'address_description_cn' => $address_description_cn, 'meta_desc_ru' => $meta_desc_ru, 'meta_desc_us' => $meta_desc_us, 'meta_desc_cn' => $meta_desc_cn, 'meta_key_ru' => $meta_key_ru, 'meta_key_us' => $meta_key_us, 'meta_key_cn' => $meta_key_cn);
-    if ($logo)
-        $set['logo'] = $logo;
-    if($id > 0)
-        $query = $fpdo->update('hotel')->set($set)->where('id', $id);
-    else {
-        $query = $fpdo->insertInto('hotel')->values($set);
-    }
-    $query->execute();
-    $insert_id = $id > 0 ? $id : $pdo->lastInsertId();
-    if($id == 0){
-        $orderBy = $fpdo->from('hotel')->select(null)->select('orderBy')->orderBy('orderBy DESC')->limit(1)->fetch();
-        $query = $fpdo->update('hotel')->set(array('orderBy' => $orderBy['orderBy'] + 1))->where('id', $insert_id);
+    $set = array('title_ru' => $title_ru, 'title_us' => $title_us, 'title_cn' => $title_cn, 'title_fr' => $title_fr, 'title_es' => $title_es, 'title_vn' => $title_vn, 'title_tr' => $title_tr, 'online_link' => $online_link, 'description_ru' => $description_ru,  'description_us' => $description_us, 'description_cn' => $description_cn, 'description_fr' => $description_fr, 'description_es' => $description_es, 'description_vn' => $description_vn, 'description_tr' => $description_tr, 'phone' => $phone, 'phone2' => $phone2, 'email' => $email, 'address_ru' => $address_ru,  'address_us' => $address_us, 'address_cn' => $address_cn, 'address_fr' => $address_fr, 'address_es' => $address_es, 'address_vn' => $address_vn, 'address_tr' => $address_tr, 'subway_ru' => $subway_ru, 'subway_us' => $subway_us, 'subway_cn' => $subway_cn, 'subway_fr' => $subway_fr, 'subway_es' => $subway_es, 'subway_vn' => $subway_vn, 'subway_tr' => $subway_tr, 'maps_link' => $maps_link, 'address_description_ru' => $address_description_ru,  'address_description_us' => $address_description_us, 'address_description_cn' => $address_description_cn, 'address_description_fr' => $address_description_fr, 'address_description_es' => $address_description_es, 'address_description_vn' => $address_description_vn, 'address_description_tr' => $address_description_tr, 'meta_desc_ru' => $meta_desc_ru, 'meta_desc_us' => $meta_desc_us, 'meta_desc_cn' => $meta_desc_cn, 'meta_desc_fr' => $meta_desc_fr, 'meta_desc_es' => $meta_desc_es, 'meta_desc_vn' => $meta_desc_vn, 'meta_desc_tr' => $meta_desc_tr, 'meta_key_ru' => $meta_key_ru, 'meta_key_us' => $meta_key_us, 'meta_key_cn' => $meta_key_cn, 'meta_key_fr' => $meta_key_fr, 'meta_key_es' => $meta_key_es, 'meta_key_vn' => $meta_key_vn, 'meta_key_tr' => $meta_key_tr);
+        if ($logo) {
+            $set['logo'] = $logo;
+        }
+    if (!$error) {
+        if ($id > 0) {
+            $query = $fpdo->update('hotel')->set($set)->where('id', $id);
+        } else {
+            $query = $fpdo->insertInto('hotel')->values($set);
+        }
         $query->execute();
+        $insert_id = $id > 0 ? $id : $pdo->lastInsertId();
+        if ($id == 0) {
+            $orderBy = $fpdo->from('hotel')->select(null)->select('orderBy')->orderBy('orderBy DESC')->limit(1)->fetch();
+            $query = $fpdo->update('hotel')->set(array('orderBy' => $orderBy['orderBy'] + 1))->where('id', $insert_id);
+            $query->execute();
+        }
+        header('Location: /admin/hotels.php?edit=' . $insert_id);
     }
-    header('Location: /admin/hotels.php?edit=' . $insert_id);
+    else {
+        echo $twig->render('/admin/hotelEdit.html.twig', array('error' => $error, 'hotels' => $set));
+        die();
+    }
 }
 
 if (isset($_GET['del'])){
@@ -159,7 +205,7 @@ if (isset($_GET['edit'])){
             else
                 $hotels['logo'] = NULL;
             $path = '../public/upload/images/hotel/' . intval($id) . '/overall/';
-            $files_list = array_diff(scandir($path), array('..', '.'));
+            $files_list = @array_diff(scandir($path), array('..', '.'));
             $rooms = $fpdo->from('rooms')->orderBy('orderBy')->fetchAll();
             echo $twig->render('/admin/hotelEdit.html.twig', array('hotels' => $hotels, 'path' => $path, 'images' => $files_list, 'rooms' => $rooms));
         }

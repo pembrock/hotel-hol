@@ -45,6 +45,7 @@
                     </div>
                     {% endif %}
                 </div>
+                {% if img.images_overall is not null %}
                 <div class="col-md-8">
                     <div class="card_2 caption">
                         <div class="row">
@@ -54,7 +55,6 @@
                             </div>
                         </div>
                         <div class="row">
-                            {% if img.images_overall is not null %}
                                 {% for value in img.images_overall %}
                             <div class="col-md-3 col-sm-6 col-xs-12 thumb">
                                 <a class="fancyimage" rel="group#_ovr" href="{{ img.path_overall }}/{{ value }}">
@@ -62,11 +62,10 @@
                                 </a>
                             </div>
                                     {% endfor %}
-                            {% endif %}
                         </div>
                     </div>
-
                 </div>
+                {% endif %}
                 <div class="col-md-8">
                     {% for row in info %}
                     <div class="card_2 caption">

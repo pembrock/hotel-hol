@@ -92,10 +92,12 @@
         if (document.getElementById("editor1")) {
             CKEDITOR.replace('editor1', {
                 allowedContent: true,
-                extraAllowedContent: 'i'
+                extraAllowedContent: 'i',
+                filebrowserBrowseUrl: '/browser/browse.php',
+                filebrowserUploadUrl: '/uploader/upload.php'
             });
-            CKEDITOR.config.extraPlugins = 'spoiler';
-        CKEDITOR.dtd.$removeEmpty['i'] = false
+            //CKEDITOR.config.extraPlugins = 'spoiler,filebrowser,uploadwidget';
+            CKEDITOR.dtd.$removeEmpty['i'] = false
         }
         if (document.getElementById("editor2")) {
             CKEDITOR.replace('editor2');
@@ -111,6 +113,30 @@
         }
         if (document.getElementById("editor6")) {
             CKEDITOR.replace('editor6');
+        }
+        if (document.getElementById("editor7")) {
+            CKEDITOR.replace('editor7');
+        }
+        if (document.getElementById("editor8")) {
+            CKEDITOR.replace('editor8');
+        }
+        if (document.getElementById("editor9")) {
+            CKEDITOR.replace('editor9');
+        }
+        if (document.getElementById("editor10")) {
+            CKEDITOR.replace('editor10');
+        }
+        if (document.getElementById("editor11")) {
+            CKEDITOR.replace('editor11');
+        }
+        if (document.getElementById("editor12")) {
+            CKEDITOR.replace('editor12');
+        }
+        if (document.getElementById("editor13")) {
+            CKEDITOR.replace('editor13');
+        }
+        if (document.getElementById("editor14")) {
+            CKEDITOR.replace('editor14');
         }
     });
 </script>

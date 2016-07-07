@@ -14,29 +14,49 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $title_ru = $_POST['title_ru'];
     $title_us = $_POST['title_us'];
     $title_cn = $_POST['title_cn'];
+    $title_fr = $_POST['title_fr'];
+    $title_es = $_POST['title_es'];
+    $title_vn = $_POST['title_vn'];
+    $title_tr = $_POST['title_tr'];
     $isActive = $_POST['isActive'];
     $text_ru = $_POST['text_ru'];
     $text_us = $_POST['text_us'];
     $text_cn = $_POST['text_cn'];
+    $text_fr = $_POST['text_fr'];
+    $text_es = $_POST['text_es'];
+    $text_vn = $_POST['text_vn'];
+    $text_tr = $_POST['text_tr'];
 
-    $set = array('title_ru' => $title_ru, 'title_us' => $title_us, 'title_cn' => $title_cn, 'text_ru' => $text_ru,  'text_us' => $text_us,  'text_cn' => $text_cn, 'isActive' => $isActive);
 
-    if($id > 0)
-        $query = $fpdo->update('attraction')->set($set)->where('id', $id);
-    else {
-        $query = $fpdo->insertInto('attraction')->values($set);
-    }
-    $query->execute();
-    $insert_id = $id > 0 ? $id : $pdo->lastInsertId();
-    $query = $fpdo->deleteFrom('hotel2attraction')->where('aid', $insert_id);
-    $query->execute();
-    foreach ($_POST['hotels'] as $key => $value)
-    {
-        $set = array('hid' => $value, 'aid' => $insert_id);
-        $query = $fpdo->insertInto('hotel2attraction')->values($set);
+    if (empty($title_ru))
+        $error[] = "Введите название";
+    if (empty($text_ru))
+        $error[] = "Введите текст";
+
+    $set = array('title_ru' => $title_ru, 'title_us' => $title_us, 'title_cn' => $title_cn, 'title_fr' => $title_fr, 'title_es' => $title_es, 'title_vn' => $title_vn, 'title_tr' => $title_tr, 'text_ru' => $text_ru, 'text_us' => $text_us, 'text_cn' => $text_cn, 'text_fr' => $text_fr, 'text_es' => $text_es, 'text_vn' => $text_vn, 'text_tr' => $text_tr, 'isActive' => $isActive);
+
+    if (!$error) {
+        if ($id > 0) {
+            $query = $fpdo->update('attraction')->set($set)->where('id', $id);
+        } else {
+            $query = $fpdo->insertInto('attraction')->values($set);
+        }
         $query->execute();
+        $insert_id = $id > 0 ? $id : $pdo->lastInsertId();
+        $query = $fpdo->deleteFrom('hotel2attraction')->where('aid', $insert_id);
+        $query->execute();
+        foreach ($_POST['hotels'] as $key => $value) {
+            $set = array('hid' => $value, 'aid' => $insert_id);
+            $query = $fpdo->insertInto('hotel2attraction')->values($set);
+            $query->execute();
+        }
+        header('Location: /admin/attraction.php?edit=' . $insert_id);
     }
-    header('Location: /admin/attraction.php?edit=' . $insert_id);
+    else {
+        $hotels = $fpdo->from('hotel')->select(null)->select(array('id', 'title_ru'))->fetchAll();
+        echo $twig->render('/admin/attractionEdit.html.twig', array('error' => $error, 'attraction' => $set, 'hotels' => $hotels));
+        die();
+    }
 }
 
 if (isset($_GET['del'])){

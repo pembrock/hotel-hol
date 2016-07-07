@@ -9,58 +9,138 @@
                 <li class="active">{% if blocks is defined %}{{ blocks.title_ru }}{% else %} Новый блок {% endif %}</li>
             </ol>
         </div>
+
+        <ul class="nav nav-tabs">
+            {% for lan in lang %}
+                <li{% if loop.index == 1 %} class="active"{% endif %}><a data-toggle="tab" href="#panel_{{ lan.code }}"><img class="flag flag-{{ lan.code }}" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"> {{ lan.name }}</a></li>
+            {% endfor %}
+        </ul>
+
         <form class="form-horizontal" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="id" id="id" value="{% if blocks is defined %}{{ blocks.id }}{% else %}0{% endif %}">
             <div class="box-body">
                 {% if error is defined  %}
                     {{ error }}
                 {% endif %}
+
+                <div class="tab-content">
+                    <div id="panel_ru" class="tab-pane fade in active">
+                        <div class="form-group">
+                            <label for="title_ru" class="col-sm-2 control-label">Название (ru)</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="title_ru" id="title_ru" placeholder="Название" value="{% if blocks is defined %}{{ blocks.title_ru }}{% endif %}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="text" class="col-sm-2 control-label">Текст (ru)</label>
+                            <div class="col-sm-6">
+                        <textarea name="text_ru" id="editor1" rows="10" cols="80">
+                            {% if blocks is defined %}{{ blocks.text_ru}}{% endif %}
+                        </textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="panel_us" class="tab-pane fade">
+                        <div class="form-group">
+                            <label for="title_us" class="col-sm-2 control-label">Название (us)</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="title_us" id="title_us" placeholder="Название" value="{% if blocks is defined %}{{ blocks.title_us }}{% endif %}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="text" class="col-sm-2 control-label">Текст (us)</label>
+                            <div class="col-sm-6">
+                        <textarea name="text_us" id="editor2" rows="10" cols="80">
+                            {% if blocks is defined %}{{ blocks.text_us}}{% endif %}
+                        </textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="panel_cn" class="tab-pane fade">
+                        <div class="form-group">
+                            <label for="title_cn" class="col-sm-2 control-label">Название (cn)</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="title_cn" id="title_cn" placeholder="Название" value="{% if blocks is defined %}{{ blocks.title_cn }}{% endif %}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="text" class="col-sm-2 control-label">Текст (cn)</label>
+                            <div class="col-sm-6">
+                        <textarea name="text_cn" id="editor3" rows="10" cols="80">
+                            {% if blocks is defined %}{{ blocks.text_cn}}{% endif %}
+                        </textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="panel_fr" class="tab-pane fade">
+                        <div class="form-group">
+                            <label for="title_fr" class="col-sm-2 control-label">Название (fr)</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="title_fr" id="title_fr" placeholder="Название" value="{% if blocks is defined %}{{ blocks.title_fr }}{% endif %}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="text" class="col-sm-2 control-label">Текст (fr)</label>
+                            <div class="col-sm-6">
+                        <textarea name="text_fr" id="editor4" rows="10" cols="80">
+                            {% if blocks is defined %}{{ blocks.text_fr}}{% endif %}
+                        </textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="panel_es" class="tab-pane fade">
+                        <div class="form-group">
+                            <label for="title_es" class="col-sm-2 control-label">Название (es)</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="title_es" id="title_es" placeholder="Название" value="{% if blocks is defined %}{{ blocks.title_es }}{% endif %}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="text" class="col-sm-2 control-label">Текст (es)</label>
+                            <div class="col-sm-6">
+                        <textarea name="text_es" id="editor5" rows="10" cols="80">
+                            {% if blocks is defined %}{{ blocks.text_es}}{% endif %}
+                        </textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="panel_vn" class="tab-pane fade">
+                        <div class="form-group">
+                            <label for="title_vn" class="col-sm-2 control-label">Название (vn)</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="title_vn" id="title_vn" placeholder="Название" value="{% if blocks is defined %}{{ blocks.title_vn }}{% endif %}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="text" class="col-sm-2 control-label">Текст (vn)</label>
+                            <div class="col-sm-6">
+                        <textarea name="text_vn" id="editor6" rows="10" cols="80">
+                            {% if blocks is defined %}{{ blocks.text_vn}}{% endif %}
+                        </textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="panel_tr" class="tab-pane fade">
+                        <div class="form-group">
+                            <label for="title_tr" class="col-sm-2 control-label">Название (tr)</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="title_tr" id="title_tr" placeholder="Название" value="{% if blocks is defined %}{{ blocks.title_tr }}{% endif %}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="text" class="col-sm-2 control-label">Текст (tr)</label>
+                            <div class="col-sm-6">
+                        <textarea name="text_tr" id="editor7" rows="10" cols="80">
+                            {% if blocks is defined %}{{ blocks.text_tr}}{% endif %}
+                        </textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="isActive" class="col-sm-2 control-label">Активно</label>
                     <div class="col-sm-6">
                         <input type="checkbox" class="form-control-static" name="isActive" id="isActive" value="1" {% if blocks is defined %}{% if blocks.isActive == 1 %} checked {% endif %}{% endif %} style="width: 25px;">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="title_ru" class="col-sm-2 control-label">Название (ru)</label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control" name="title_ru" id="title_ru" placeholder="Название" value="{% if blocks is defined %}{{ blocks.title_ru }}{% endif %}">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="title_us" class="col-sm-2 control-label">Название (en)</label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control" name="title_us" id="title_us" placeholder="Название" value="{% if blocks is defined %}{{ blocks.title_us }}{% endif %}">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="title_cn" class="col-sm-2 control-label">Название (cn)</label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control" name="title_cn" id="title_cn" placeholder="Название" value="{% if blocks is defined %}{{ blocks.title_cn }}{% endif %}">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="text" class="col-sm-2 control-label">Текст (ru)</label>
-                    <div class="col-sm-6">
-                        <textarea name="text_ru" id="editor1" rows="10" cols="80">
-                            {% if blocks is defined %}{{ blocks.text_ru}}{% endif %}
-                        </textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="text" class="col-sm-2 control-label">Текст (en)</label>
-                    <div class="col-sm-6">
-                        <textarea name="text_us" id="editor2" rows="10" cols="80">
-                            {% if blocks is defined %}{{ blocks.text_us}}{% endif %}
-                        </textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="text" class="col-sm-2 control-label">Текст (ch)</label>
-                    <div class="col-sm-6">
-                        <textarea name="text_cn" id="editor3" rows="10" cols="80">
-                            {% if blocks is defined %}{{ blocks.text_cn}}{% endif %}
-                        </textarea>
                     </div>
                 </div>
                 <div class="form-group">

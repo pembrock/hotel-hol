@@ -8,15 +8,15 @@
 
 include __DIR__ . '/../../inc/inc.php';
 
-session_set_cookie_params(10800);
+ini_set('session.gc_maxlifetime', 3600*24*30);
+ini_set('session.cookie_lifetime', 3600*24*30);
 session_start();
 $settings_array = $fpdo->from('settings')->fetchAll();
 foreach($settings_array as $key => $val){
     $settings[$val['sysname']] = $val['value'];
 }
-$twig->addGlobal('settings', $settings);
-
 $lang = $fpdo->from('language')->fetchAll();
+$twig->addGlobal('settings', $settings);
 $twig->addGlobal('lang', $lang);
 $user = new Users();
 if (!$user->is_loggedin() && $_SERVER['REQUEST_URI'] != '/admin/login.php')

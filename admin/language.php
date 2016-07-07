@@ -12,9 +12,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
     $id = $_POST['id'];
     $name = $_POST['name'];
+    $currency = $_POST['currency'];
     $isActive = $_POST['isActive'];
 
-    $set = array('name' => $name, 'isActive' => $isActive);
+    $set = array('name' => $name, 'currency' => $currency, 'isActive' => $isActive);
 
     if($id > 0)
         $query = $fpdo->update('language')->set($set)->where('id', $id);

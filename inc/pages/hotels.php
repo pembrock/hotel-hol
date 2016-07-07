@@ -8,6 +8,8 @@
 if(isset($_GET['id'])){
         $id = intval($_GET['id']);
         $hotel = $fpdo->from('hotel')->select('id, title_' . $lang['type'] . ' AS title, description_' . $lang['type'] . ' AS description, logo, phone, phone2, email, address_' . $lang['type'] . ' AS address, subway_' . $lang['type'] . ' AS subway, maps_link, address_description_' . $lang['type'] . ' AS address_description, online_link, meta_desc_' . $lang['type'] . ' AS meta_desc, meta_key_' . $lang['type'] . ' AS meta_key')->where(array('id' => $id))->fetch();
+    if ($lang['type'] != 'ru')
+    $hotel['maps_link'] = str_replace('ru_RU', 'en_US', $hotel['maps_link']);
         $block = $fpdo->from('blocks')->select('system, title_' . $lang['type'] . ' AS title, text_' . $lang['type'] . ' AS text')->where(array('system' => 'roomshas'))->fetch();
 
     /**
@@ -39,7 +41,7 @@ if(isset($_GET['id'])){
             $tt_hour[] = $t['id'];
         $tt_hour = implode(', ', $tt_hour);
     }
-    /*$query = "select * from rates2room where hid = " . $id . " and tid = " . $activeRates['id'] . " and ttid = " . $tt . " and guests = 1 and cost IS NOT NULL";*/
+
     $rooms = $fpdo->from('rooms')->select(null)->select('id')->where(array('isActive' => 1))->fetchAll();
     /*Выбираем минимальную цену*/
     if(isset($tt_day)) {

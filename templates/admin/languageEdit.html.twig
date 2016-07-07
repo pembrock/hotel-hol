@@ -27,6 +27,12 @@
                         <input type="text" class="form-control" name="name" id="name" placeholder="Название" value="{% if language is defined %}{{ language.name }}{% endif %}">
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="currency" class="col-sm-2 control-label">Валюта</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="currency" id="currency" placeholder="Валюта" value="{% if language is defined %}{{ language.currency }}{% endif %}">
+                    </div>
+                </div>
             </div>
             <div class="box-footer">
                 <button type="submit" class="btn btn-success" name="save" id="save">Сохранить</button>

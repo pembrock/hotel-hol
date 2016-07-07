@@ -10,39 +10,94 @@
             </ol>
         </div>
         <!-- /.box-header -->
+
+        <ul class="nav nav-tabs">
+            {% for lan in lang %}
+                <li{% if loop.index == 1 %} class="active"{% endif %}><a data-toggle="tab" href="#panel_{{ lan.code }}"><img class="flag flag-{{ lan.code }}" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"> {{ lan.name }}</a></li>
+            {% endfor %}
+        </ul>
+
         <!-- form start -->
         <form class="form-horizontal" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="hid" id="hid" value="{% if hotel is defined %}{{ hotel.id }}{% endif %}">
             <input type="hidden" name="rid" id="rid" value="{% if room is defined %}{{ room.id }}{% endif %}">
             <div class="box-body">
+                <div class="tab-content">
+                    <div id="panel_ru" class="tab-pane fade in active">
+                        <div class="form-group">
+                            <label for="description_ru" class="col-sm-2 control-label">Описание (ru)</label>
+                            <div class="col-sm-6">
+                        <textarea name="description_ru" id="editor1" rows="10" cols="80">
+                            {% if description is defined %}{{ description.description_ru }}{% endif %}
+                        </textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="panel_us" class="tab-pane fade">
+                        <div class="form-group">
+                            <label for="description_us" class="col-sm-2 control-label">Описание (us)</label>
+                            <div class="col-sm-6">
+                        <textarea name="description_us" id="editor2" rows="10" cols="80">
+                            {% if description is defined %}{{ description.description_us }}{% endif %}
+                        </textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="panel_cn" class="tab-pane fade">
+                        <div class="form-group">
+                            <label for="description_cn" class="col-sm-2 control-label">Описание (cn)</label>
+                            <div class="col-sm-6">
+                        <textarea name="description_cn" id="editor3" rows="10" cols="80">
+                            {% if description is defined %}{{ description.description_cn }}{% endif %}
+                        </textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="panel_fr" class="tab-pane fade">
+                        <div class="form-group">
+                            <label for="description_fr" class="col-sm-2 control-label">Описание (fr)</label>
+                            <div class="col-sm-6">
+                        <textarea name="description_fr" id="editor4" rows="10" cols="80">
+                            {% if description is defined %}{{ description.description_fr }}{% endif %}
+                        </textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="panel_es" class="tab-pane fade">
+                        <div class="form-group">
+                            <label for="description_es" class="col-sm-2 control-label">Описание (es)</label>
+                            <div class="col-sm-6">
+                        <textarea name="description_es" id="editor5" rows="10" cols="80">
+                            {% if description is defined %}{{ description.description_es }}{% endif %}
+                        </textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="panel_vn" class="tab-pane fade">
+                        <div class="form-group">
+                            <label for="description_vn" class="col-sm-2 control-label">Описание (vn)</label>
+                            <div class="col-sm-6">
+                        <textarea name="description_vn" id="editor6" rows="10" cols="80">
+                            {% if description is defined %}{{ description.description_vn }}{% endif %}
+                        </textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="panel_tr" class="tab-pane fade">
+                        <div class="form-group">
+                            <label for="description_tr" class="col-sm-2 control-label">Описание (tr)</label>
+                            <div class="col-sm-6">
+                        <textarea name="description_tr" id="editor7" rows="10" cols="80">
+                            {% if description is defined %}{{ description.description_tr }}{% endif %}
+                        </textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="online_link" class="col-sm-2 control-label">Online бронирование</label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" name="online_link" id="online_link" placeholder="Ссылка на online бронирование" value="{% if description is defined %}{{ description.online_link }}{% endif %}">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="description_ru" class="col-sm-2 control-label">Описание (ru)</label>
-                    <div class="col-sm-6">
-                        <textarea name="description_ru" id="editor1" rows="10" cols="80">
-                            {% if description is defined %}{{ description.description_ru }}{% endif %}
-                        </textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="description_us" class="col-sm-2 control-label">Описание (en)</label>
-                    <div class="col-sm-6">
-                        <textarea name="description_us" id="editor2" rows="10" cols="80">
-                            {% if description is defined %}{{ description.description_us }}{% endif %}
-                        </textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="description_cn" class="col-sm-2 control-label">Описание (cn)</label>
-                    <div class="col-sm-6">
-                        <textarea name="description_cn" id="editor3" rows="10" cols="80">
-                            {% if description is defined %}{{ description.description_cn }}{% endif %}
-                        </textarea>
                     </div>
                 </div>
                 <div class="form-group">

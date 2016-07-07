@@ -57,9 +57,13 @@ if (isset($_POST['save'])){
     $description_ru = $_POST['description_ru'];
     $description_us = $_POST['description_us'];
     $description_cn = $_POST['description_cn'];
+    $description_fr = $_POST['description_fr'];
+    $description_es = $_POST['description_es'];
+    $description_vn = $_POST['description_vn'];
+    $description_tr = $_POST['description_tr'];
     $online_link = $_POST['online_link'];
 
-    $set = array('hid' => $hid, 'rid' => $rid, 'description_ru' => $description_ru,  'description_us' => $description_us,  'description_cn' => $description_cn, 'online_link' => $online_link);
+    $set = array('hid' => $hid, 'rid' => $rid, 'description_ru' => $description_ru,  'description_us' => $description_us, 'description_cn' => $description_cn, 'description_fr' => $description_fr, 'description_es' => $description_es, 'description_vn' => $description_vn, 'description_tr' => $description_tr, 'online_link' => $online_link);
     $query = $fpdo->deleteFrom('rooms2hotels')->where(array('hid' => $hid, 'rid' => $rid));
     $query->execute();
     $query = $fpdo->insertInto('rooms2hotels')->values($set);
