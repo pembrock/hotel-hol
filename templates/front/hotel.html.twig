@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header">
-                        <h1>{% if lang.type == "ru" %}Гостиница{% elseif lang.type == "us" %}Hotel{% elseif lang.type == "cn" %}飯店{% else %}Гостиница{% endif %} {{ hotel.title }}</h1>
+                        <h1>{{ titles.hotel }} {{ hotel.title }}</h1>
                     </div>
                 </div>
 
@@ -32,7 +32,7 @@
                     </div>
                     {% if additional is not empty %}
                     <div class="card_2 caption color_2">
-                        <h3>{% if lang.type == "ru" %}Дополнительные услуги{% elseif lang.type == "us" %}Additional services{% elseif lang.type == "cn" %}附加服務{% else %}Дополнительные услуги{% endif %}</h3>
+                        <h3>{{ titles.additional_services }}</h3>
                         <p>
                         <ul>
                             {% for value in additional %}
@@ -50,7 +50,7 @@
                     <div class="card_2 caption">
                         <div class="row">
                             <div class="col-md-12">
-                                <h2>{% if lang.type == "ru" %}Гостиница{% elseif lang.type == "us" %}Hotel{% elseif lang.type == "cn" %}飯店{% else %}Гостиница{% endif %}</h2>
+                                <h2>{{ titles.hotel }}</h2>
                                 <hr>
                             </div>
                         </div>
@@ -71,16 +71,16 @@
                     <div class="card_2 caption">
                         <div class="row">
                             <div class="col-md-12">
-                                <h2>{{ row.title }}</h2> {% if row.online_link is not empty %}<a href="{{ row.online_link }}" class="btn btn-success">{% if lang.type == "ru" %}Забронировать{% elseif lang.type == "us" %}Reserve{% elseif lang.type == "cn" %}書{% else %}Забронировать{% endif %}</a>{% endif %}
+                                <h2>{{ row.title }}</h2> {% if row.online_link is not empty %}<a href="{{ row.online_link }}" class="btn btn-success">{{ titles.reserve }}</a>{% endif %}
                                 <hr>
                             </div>
                             <div class="col-md-8">
                                 {{ row.description|raw }}
                             </div>
                             <div class="col-md-4">
-                                <span class="price">{% if lang.type == "ru" %}от {{ row.cost }} {{ lang.currency|raw }}/сутки{% else %}from {{ row.cost}} {{ lang.currency|raw }}/day{% endif %}</span><br>
+                                <span class="price">{{ titles.from }} {{ row.cost }} {{ lang.currency|raw }}/{{ titles.day }}</span><br>
                                 {% if row.cost_hour is defined %}
-                                <span class="price">{% if lang.type == "ru" %}от {{ row.cost_hour }} {{ lang.currency|raw }}/час{% else %}from {{ row.cost_hour}} {{ lang.currency|raw }}/hour{% endif %}</span><br>
+                                <span class="price">{{ titles.from }} {{ row.cost_hour }} {{ lang.currency|raw }}/{{ titles.hour }}</span><br>
                                 {% endif %}
                             </div>
                         </div>
@@ -101,7 +101,7 @@
 
                 <div class="col-md-12">
                     <div class="card_2 caption color_1">
-                        <h2>{% if lang.type == "ru" %}Как добраться?{% else %}How to get?{% endif %}</h2>
+                        <h2>{{ titles.how_get }}</h2>
                         <p>
                        {{ hotel.address_description|raw }}
                         </p>
@@ -111,7 +111,7 @@
                 {% if attraction is not empty %}
                 <div class="col-md-12">
                     <div class="card_2 caption color_3">
-                        <h2>{% if lang.type == "ru" %}Достопримечательности рядом с гостиницей{% else %}Attractions near the hotel{% endif %}</h2>
+                        <h2>{{ titles.attraction_near }}</h2>
                         <p>
                        <ul>
                             {% for attr in attraction %}
@@ -125,7 +125,7 @@
             <div class="col-md-12">
                 <div class="detailBox">
                     <div class="titleBox">
-                        <label>{% if lang.type == "ru" %}Отзывы{% else %}Comments{% endif %} <span class="label label-info">{{ comments|length }}</span></label>
+                        <label>{{ titles.comments }} <span class="label label-info">{{ comments|length }}</span></label>
                     </div>
                     <div class="actionBox">
                         {% if comments is not empty %}
@@ -143,16 +143,16 @@
                             <div class="clear"></div>
                             {% if comments|length > 3 %}
                             <div class="form-group">
-                                <button type="button" id="loadMore" class="btn btn-info">{% if lang.type == "ru" %}Загрузить еще{% else %}Load more{% endif %}</button>
+                                <button type="button" id="loadMore" class="btn btn-info">{{ titles.load_more }}</button>
                             </div>
                             {% endif %}
                             {% else %}
-                            <p>{% if lang.type == "ru" %}Отзывов пока что нет{% else %}No comments{% endif %}</p>
+                            <p>{{ titles.nocomments }}</p>
                             {% endif %}
                     </div>
                 </div>
                 <div class="form-group">
-                    <button type="button" id="addReview" class="btn btn-success" data-toggle="modal" data-target="#myModal">{% if lang.type == "ru" %}Оставить отзыв{% else %}Add comment{% endif %}</button>
+                    <button type="button" id="addReview" class="btn btn-success" data-toggle="modal" data-target="#myModal">{{ titles.add_comment }}</button>
                 </div>
             </div>
         </div>
@@ -165,28 +165,28 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                     </button>
-                    <h1 class="modal-title" id="myModalLabel">{% if lang.type == "ru" %}Оставить отзыв{% else %}Add comment{% endif %}</h1>
+                    <h1 class="modal-title" id="myModalLabel">{{ titles.add_comment }}</h1>
                 </div>
                 <div class="modal-body">
                     <div id="info"></div>
                     <form action="/inc/pages/review.php" method="post" id="myForm">
                         <input type="hidden" name="hid" value="{{ hotel.id }}">
                         <div class="form-group">
-                            <label for="name">{% if lang.type == "ru" %}Имя{% else %}Name{% endif %}:</label>
-                            <input type="text" name="name" id="name" class="form-control" placeholder="{% if lang.type == "ru" %}Введите ваше имя{% else %}Type your name{% endif %}" value="" required/>
+                            <label for="name">{{ titles.name }}:</label>
+                            <input type="text" name="name" id="name" class="form-control" placeholder="{{ titles.type_name }}" value="" required/>
                         </div>
                         <div class="form-group">
                             <label for="email">E-mail:</label>
-                            <input type="email" name="email" id="email" class="form-control" placeholder="{% if lang.type == "ru" %}Введите ваш{% else %}Type your{% endif %} Email" value="" required/>
+                            <input type="email" name="email" id="email" class="form-control" placeholder="{{ titles.type_email }}" value="" required/>
                         </div>
                         <div class="form-group">
-                            <label for="comment">{% if lang.type == "ru" %}Отзыв{% else %}Comment{% endif %}:</label>
+                            <label for="comment">{{ title.comment }}:</label>
                             <textarea class="form-control" id="comment" name="comment" required></textarea>
                         </div>
                         <div class="form-group">
                             <div class="g-recaptcha" data-sitekey="6LcMqiETAAAAAFnY9te6WYJB9N2bzT9qsdVvfn7Q"></div>
                         </div>
-                        <input type="submit" name="submit" class="btn btn-success" value="{% if lang.type == "ru" %}Отправить{% else %}Send{% endif %}">
+                        <input type="submit" name="submit" class="btn btn-success" value="{{ titles.send }}">
                     </form>
                 </div>
             </div>

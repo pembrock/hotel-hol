@@ -1,0 +1,47 @@
+{% extends "/admin/index.html.twig" %}
+{% set menu_selected = 'titles' %}
+{% block content %}
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Заголовки</h3>
+                <a href="?edit=0" title="Добавить" class="btn btn-success pull-right">
+                    <i class="fa fa-plus"></i>
+                </a>
+            </div>
+            <div class="box-body no-padding">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        {% for lan in lang %}
+                            <th><img class="flag flag-{{ lan.code }}" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></th>
+                        {% endfor %}
+                        {#<th></th>#}
+                        {#<th></th>#}
+                        {#<th></th>#}
+                        {#<th></th>#}
+                        {#<th></th>#}
+                        <th></th>
+                    </tr>
+                    </thead>
+                    {% for value in titles %}
+                        <tr>
+                            <td style="width: 10px">{{ loop.index }}.</td>
+                            <td><a href="?edit={{ value.id }}">{{ value.ru }}</a></td>
+                            <td>{{ value.us }}</td>
+                            <td>{{ value.cn }}</td>
+                            <td>{{ value.fr }}</td>
+                            <td>{{ value.es }}</td>
+                            <td>{{ value.vn }}</td>
+                            <td>{{ value.tr }}</td>
+                            <td style="width: 10px">
+                                <a href="?edit={{ value.id }}" type="button" class="btn btn-block btn-primary">Редактировать</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -21,6 +21,13 @@ if(isset($_COOKIE['lang']))
     $lang = unserialize($_COOKIE['lang']);
 else
     $lang = array("type" => 'ru', "alt" => 'Russian', "title" => 'Russian (ru)');
+
+$titles_arr = $fpdo->from('titles')->select(null)->select($lang['type'] . ' AS value, system')->fetchAll();
+$titles = array();
+foreach ($titles_arr as $t){
+    $titles[$t['system']] = $t['value'];
+}
+
 $lang['currency'] = "&#8381;";
 $lang_array = $fpdo->from('language')->where(array('isActive' => 1))->fetchAll();
 $language = array();
@@ -44,6 +51,7 @@ $twig->addGlobal('lang', $lang);
 $twig->addGlobal('menu', $menu);
 $twig->addGlobal('language', $language);
 $twig->addGlobal('settings', $settings);
+$twig->addGlobal('titles', $titles);
 
 
 $hotels = $fpdo->from('hotel')->select('id, title_' . $lang['type'] . ' AS title, description_' . $lang['type'] . ' AS description, logo, phone, phone2, email, address_' . $lang['type'] . ' AS address, subway_' . $lang['type'] . ' AS subway, maps_link, address_description_' . $lang['type'] . ' AS address_description, online_link, meta_desc_' . $lang['type'] . ' AS meta_desc, meta_key_' . $lang['type'] . ' AS meta_key')->orderBy('orderBy')->fetchAll();

@@ -67,7 +67,7 @@
                     <div class="carousel-caption">
                         <p class="price">{{ value.title }}</p>
                         {{ value.description|raw }}
-                        <a class="btn btn-success btn-raised ripple-effect btn-lg" href="/promo?id={{ value.id }}" role="button">{% if lang.type == "ru" %}Подробней{% elseif lang.type == "us" %}More{% elseif lang.type == "cn" %}更多{% else %}Подробней{% endif %}</a>
+                        <a class="btn btn-success btn-raised ripple-effect btn-lg" href="/promo?id={{ value.id }}" role="button">{{ titles.more }}</a>
                     </div>
                 </div>
                         {% endif %}

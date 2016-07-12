@@ -1,0 +1,39 @@
+{% extends "/admin/index.html.twig" %}
+{% set menu_selected = 'titles' %}
+
+{% block content %}
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <ol class="breadcrumb">
+                <li><a href="titles.php"><i class="fa fa-header"></i> Заголовки</a></li>
+                <li class="active">{% if titles is defined %}{{ titles.ru }}{% else %}Новый заголовок{% endif %}</li>
+            </ol>
+        </div>
+        <form class="form-horizontal" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="id" id="id" value="{% if titles is defined %}{{ titles.id }}{% else %}0{% endif %}">
+            <div class="box-body">
+                {% if error is defined  %}
+                    {{ error }}
+                {% endif %}
+                {% for lan in lang %}
+                <div class="form-group">
+                    <label for="{{ lan.code }}" class="col-sm-2 control-label"><img class="flag flag-{{ lan.code }}" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="{{ lan.code }}" id="{{ lan.code }}" placeholder="Название" value="{% if titles is defined %}{{ titles[lan.code] }}{% endif %}">
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="form-group">
+                    <label for="system" class="col-sm-2 control-label">Системное имя (не изменять!)</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="system" id="system" placeholder="Системное имя" value="{% if titles is defined %}{{ titles.system }}{% endif %}">
+                    </div>
+                </div>
+                
+            </div>
+            <div class="box-footer">
+                <button type="submit" class="btn btn-success" name="save" id="save">Сохранить</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
