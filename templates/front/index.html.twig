@@ -107,13 +107,14 @@
       <div class="container">
         <div class="row">
           <div class="col-md-4 center-block">
-            <iframe frameborder="no" scrolling="no" style="text-align:center; width:auto;height:150px;" src="https://yandex.ru/time/widget/?geoid=213&lang=ru&layout=horiz&type=analog&face=digits"></iframe>
+            <iframe frameborder="no" scrolling="no" style="text-align:center; width:auto;height:150px;" src="https://yandex.ru/time/widget/?geoid=213&lang={% if lang.type == "ru" %}ru{% else %}en{% endif %}&layout=horiz&type=analog&face=digits"></iframe>
             <!-- <iframe frameborder="no" scrolling="no" style="width:280px;height:150px;" src="https://yandex.ru/time/widget/?geoid=213&lang=ru&layout=horiz&type=digital&face=serif"></iframe> -->
           </div>
           <div class="col-md-4 center-block">
             <iframe src="http://moscow.exdex.ru/ya_widget_freeset/?inc_cbrf=1&css=th,td{border:none}&hlg=1&bid=154" frameborder="0" width="230" height="130" style="overflow:hidden;"></iframe>
           </div>
           <div class="col-md-4 center-block">
+              {% if lang.type == "ru" %}
             <link rel="stylesheet" type="text/css" href="https://bst1.gismeteo.ru/assets/flat-ui/legacy/css/informer.min.css">
             <div id="gsInformerID-u7v7v6y8J2r27Q" class="gsInformer" style="width:290px;height:122px">
               <div class="gsIContent">
@@ -140,6 +141,34 @@
               </div>
             </div>
             <script async src="https://www.gismeteo.ru/api/informer/getinformer/?hash=u7v7v6y8J2r27Q" type="text/javascript"></script>
+                  {% else %}
+              <link rel="stylesheet" type="text/css" href="https://s1.gismeteo.ua/static/css/informer2/gs_informerClient.min.css">
+                  <div id="gsInformerID-WgPh18F85oFDbJ" class="gsInformer" style="width:290px;height:108px">
+                      <div class="gsIContent">
+                          <div id="cityLink">
+                              <a href="https://www.gismeteo.com/weather-moscow-4368/" target="_blank">Weather in Moscow</a>
+                          </div>
+                          <div class="gsLinks">
+                              <table>
+                                  <tr>
+                                      <td>
+                                          <div class="leftCol">
+                                              <a href="https://www.gismeteo.com" target="_blank">
+                                                  <img alt="Gismeteo" title="Gismeteo" src="https://s1.gismeteo.ua/static/images/informer2/logo-mini2.png" align="absmiddle" border="0" />
+                                                  <span>Gismeteo</span>
+                                              </a>
+                                          </div>
+                                          <div class="rightCol">
+                                              <a href="https://www.gismeteo.com/weather-moscow-4368/14-days/" target="_blank">2-weeks forecast</a>
+                                          </div>
+                                      </td>
+                                  </tr>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+                  <script src="https://www.gismeteo.ua/ajax/getInformer/?hash=WgPh18F85oFDbJ" type="text/javascript"></script>
+                  {% endif %}
             <!-- Gismeteo informer END -->
           </div>
         </div>

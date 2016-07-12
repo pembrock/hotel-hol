@@ -14,16 +14,16 @@
                     <div class="card caption">
                         <div class="row">
                             <div class="col-md-6">
-                                <h2>Мини-отель «{{ hotel.title }}»</h2>
-                                <p>Контактный телефон: <a href="tel: {{ hotel.phone }}">{{ hotel.phone }}</a><br>
+                                <h2><a href="hotels?id={{ hotel.id }}">{% if lang.type == "ru" %}Мини-отель{% else %}Hotel{% endif %} «{{ hotel.title }}»</a></h2>
+                                <p>{% if lang.type == "ru" %}Контактный телефон{% else %}Phone{% endif %}: <a href="tel: {{ hotel.phone }}">{{ hotel.phone }}</a><br>
                                     E-mail: <a href="mailto: {{ hotel.email }}"> {{ hotel.email }}</a><br>
-                                    Адрес: {{ hotel.address }}<br>
-                                    Метро: {{ hotel.subway }}
+                        {% if lang.type == "ru" %}Адрес{% else %}Address{% endif %}: {{ hotel.address }}<br>
+                        {% if lang.type == "ru" %}Метро{% else %}Subway{% endif %}: {{ hotel.subway }}
                                 </p>
                                 {{ hotel.address_description|raw }}
                             </div>
                             <div class="col-md-6">
-                                <script type="text/javascript" charset="utf-8" src="{{ hotel.maps_link }}"></script>
+                                <script type="text/javascript" charset="utf-8" src="{% if lang.type == "ru" %}{{ hotel.maps_link }}{% else %}{{ hotel.maps_link|replace({'ru_RU': 'en_US'}) }}{% endif %}"></script>
                             </div>
                         </div>
                     </div>

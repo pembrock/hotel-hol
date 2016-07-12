@@ -21,14 +21,17 @@ if(isset($_COOKIE['lang']))
     $lang = unserialize($_COOKIE['lang']);
 else
     $lang = array("type" => 'ru', "alt" => 'Russian', "title" => 'Russian (ru)');
+$lang['currency'] = "&#8381;";
 $lang_array = $fpdo->from('language')->where(array('isActive' => 1))->fetchAll();
 $language = array();
 foreach($lang_array as $key)
 {
     $language[$key['code']]['alt'] = $key['name'];
     $language[$key['code']]['title'] = $key['name'] . ' (' . $key['code'] . ')';
+
 }
-unset($language[$lang['type']]);
+
+//unset($language[$lang['type']]);
 
 $settings_array = $fpdo->from('settings')->fetchAll();
 foreach($settings_array as $key => $val){
