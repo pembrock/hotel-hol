@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header">
-                        <h1>{% if lang.type == "ru" %}Акции на номера в мини-гостиницах Hotel-hol{% elseif lang.type == "us" %}Promotions in the rooms at Hotel-hol mini-hotels{% elseif lang.type == "cn" %}促銷客房的酒店 - HOL迷你酒店{% else %}Акции на номера в мини-гостиницах Hotel-hol{% endif %}</h1>
+                        <h1>{{ titles.promo_in_hotel }}</h1>
                     </div>
                 </div>
                 {% for value in promo %}

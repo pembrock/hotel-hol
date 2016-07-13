@@ -18,7 +18,7 @@
                 <div class="col-md-12">
                     <div class="card caption">
                         <div class="form-group">
-                            <label class="col-sm-4 control-label">{% if lang.type == "ru" %}Выберите количество гостей в номере{% elseif lang.type == "us" %}Guests{% elseif lang.type == "cn" %}賓客{% else %}выберите количество гостей в номере{% endif %}</label>
+                            <label class="col-sm-4 control-label">{{ titles.guests }}</label>
                             <div class="col-sm-8">
                                 <select name="guests" class="form-control input-sm">
                                     {% for i in 1..settings.guests_count %}
@@ -28,7 +28,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-4 control-label">{% if lang.type == "ru" %}Выберите тариф{% elseif lang.type == "us" %}Tariff{% elseif lang.type == "cn" %}關稅{% else %}выберите тариф{% endif %}</label>
+                            <label class="col-sm-4 control-label">{{ titles.tariff }}</label>
                             <div class="col-sm-8">
                                 <select name="tariff" class="form-control input-sm">
                                     {% for t in rates %}
@@ -45,7 +45,7 @@
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
-                                    <th>{% if lang.type == "ru" %}Отель{% elseif lang.type == "us" %}Hotel{% elseif lang.type == "cn" %}飯店{% else %}Отель{% endif %}</th>
+                                    <th>{{ titles.hotel }}</th>
                                     {% for room in rooms %}
                                     <th>{{ room.title }}</th>
                                     {% endfor %}
@@ -71,7 +71,7 @@
                 <div class="col-md-12">
                     <div class="card caption">
                         <div class="form-group">
-                            <label class="control-label">{% if lang.type == "ru" %}Цены на дополнительные услуги{% elseif lang.type == "us" %}Prices for additional services{% elseif lang.type == "cn" %}價格附加服務{% else %}Цены на дополнительные услуги{% endif %}</label>
+                            <label class="control-label">{{ titles.prices_for_additional }}</label>
                         </div>
                         <div style="clear: both"></div>
                         {#{% for service in services %}#}
@@ -93,7 +93,7 @@
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
-                                    <th>{% if lang.type == "ru" %}Отель{% elseif lang.type == "us" %}Hotel{% elseif lang.type == "cn" %}飯店{% else %}Отель{% endif %}</th>
+                                    <th>{{ titles.hotel }}</th>
                                     {% for service in services %}
                                         <th><a href="#" class="serv-info" rel="{{ service.id }}">{{ service.title }} <span class="glyphicon glyphicon-info-sign"></span></a></th>
                                     {% endfor %}

@@ -57,6 +57,6 @@ if (isset($_GET['edit'])){
 
 }
 else{
-    $titles = $fpdo->from('titles')->fetchAll();
+    $titles = $fpdo->from('titles')->orderBy('ru')->fetchAll();
     echo $twig->render('/admin/titles.html.twig', array('titles' => $titles));
 }

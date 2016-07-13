@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header">
-                        <h1>{% if lang.type == "ru" %}Достопримечательности{% elseif lang.type == "us" %}Info{% elseif lang.type == "cn" %}有用的信息{% else %}Достопримечательности{% endif %}</h1>
+                        <h1>{{ titles.attraction }}</h1>
                     </div>
                 </div>
                 {% for value in attraction %}

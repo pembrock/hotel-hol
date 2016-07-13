@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header">
-                        <h1>{% if lang.type == "ru" %}Полезная информация{% elseif lang.type == "us" %}Info{% elseif lang.type == "cn" %}有用的信息{% else %}Полезная информация{% endif %}</h1>
+                        <h1>{{ titles.info }}</h1>
                     </div>
                 </div>
                 {% set mnths = ['','января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'] %}
@@ -19,7 +19,7 @@
                         <div class="info-title">{{ value.title }}</div>
 
                             <p>{{ value.description|raw }}</p>
-                            <a href="?id={{ value.id }}">{% if lang.type == "ru" %}Читать полностью{% elseif lang.type == "us" %}Read more{% elseif lang.type == "cn" %}閱讀更多{% else %}Читать полностью{% endif %}<a/>
+                            <a href="?id={{ value.id }}">{{ titles.read_more }}<a/>
                             <span class="pull-right">{% if lang.type == "ru" %}{{ value.date|date("j") }} {{ mnths[value.date|date("n")] }} {{ value.date|date("Y") }}{% else %}{{ value.date|date("d-m-Y") }}{% endif %}</span>
 
                         <div style="clear: both;"></div>
