@@ -31,7 +31,7 @@
                                 <a href="?edit={{ value.id }}" type="button" class="btn btn-block btn-primary">Редактировать</a>
                             </td>
                             <td style="width: 10px">
-                                <a href="?del={{ value.id }}" type="button" class="btn btn-block btn-danger">Удалить</a>
+                                {% if value.id != 99 %}<a href="?del={{ value.id }}" type="button" class="btn btn-block btn-danger">Удалить</a>{% endif %}
                             </td>
                         </tr>
                     {% endfor %}

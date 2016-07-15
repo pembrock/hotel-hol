@@ -11,10 +11,19 @@
             </div>
             <div class="box-body no-padding">
                 <table class="table">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Название</th>
+                        <th>Активный</th>
+                        <th></th>
+                    </tr>
+                    </thead>
                     {% for value in language %}
                         <tr>
                             <td style="width: 10px">{{ loop.index }}.</td>
                             <td><a href="?edit={{ value.id }}">{{ value.name }}</a></td>
+                            <td>{% if value.isActive == 1 %}<span class="label label-success">Да</span>{% else %}<span class="label label-danger">Нет</span>{% endif %}</td>
                             <td style="width: 10px">
                                 <a href="?edit={{ value.id }}" type="button" class="btn btn-block btn-primary">Редактировать</a>
                             </td>

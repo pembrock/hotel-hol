@@ -54,7 +54,7 @@ $twig->addGlobal('settings', $settings);
 $twig->addGlobal('titles', $titles);
 
 
-$hotels = $fpdo->from('hotel')->select('id, title_' . $lang['type'] . ' AS title, description_' . $lang['type'] . ' AS description, logo, phone, phone2, email, address_' . $lang['type'] . ' AS address, subway_' . $lang['type'] . ' AS subway, maps_link, address_description_' . $lang['type'] . ' AS address_description, online_link, meta_desc_' . $lang['type'] . ' AS meta_desc, meta_key_' . $lang['type'] . ' AS meta_key')->orderBy('orderBy')->fetchAll();
+$hotels = $fpdo->from('hotel')->select('id, title_' . $lang['type'] . ' AS title, description_' . $lang['type'] . ' AS description, logo, phone, phone2, email, address_' . $lang['type'] . ' AS address, subway_' . $lang['type'] . ' AS subway, maps_link, address_description_' . $lang['type'] . ' AS address_description, online_link, meta_desc_' . $lang['type'] . ' AS meta_desc, meta_key_' . $lang['type'] . ' AS meta_key')->where('id != 99')->orderBy('orderBy')->fetchAll();
 $promo = $fpdo->from('promo')->select('id, title_' . $lang['type'] . ' AS title, description_' . $lang['type'] . ' AS description')->where(array('isActive' => 1))->fetchAll();
 if (isset($_SERVER['REDIRECT_URL']) && $_SERVER['REDIRECT_URL'] != '/hotels') {
     $meta = $fpdo->from('search')->where(array('page' => str_replace('/', '', $_SERVER['REDIRECT_URL'])))->fetchAll();
