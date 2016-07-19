@@ -378,6 +378,56 @@
                                 </div>
                             </div>
                         </div>
+                        <div id="panel_de" class="tab-pane fade">
+                            <div class="form-group">
+                                <label for="title_de" class="col-sm-2 control-label">Название (de)</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="title_de" id="title_de" placeholder="Название" value="{% if hotels is defined %}{{ hotels.title_de }}{% endif %}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="description_de" class="col-sm-2 control-label">Описание (de)</label>
+                                <div class="col-sm-6">
+                        <textarea name="description_de" id="editor15" rows="10" cols="80">
+                            {% if hotels is defined %}{{ hotels.description_de }}{% endif %}
+                        </textarea>
+                                </div>
+                            </div>
+                            <div class="box-header h3">Поисковые сервисы</div>
+                            <div class="form-group">
+                                <label for="meta_desc_de" class="col-sm-2 control-label">Описание (de)</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="meta_desc_de" id="meta_desc_de" placeholder="Описание для поисковых сервисов" value="{% if hotels is defined %}{{ hotels.meta_desc_de }}{% endif %}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="meta_key_de" class="col-sm-2 control-label">Ключевые слова (de)</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="meta_key_de" id="meta_key_de" placeholder="Ключевые слова для поисковых сервисов" value="{% if hotels is defined %}{{ hotels.meta_key_de }}{% endif %}">
+                                </div>
+                            </div>
+                            <div class="box-header h3">Контактная информация</div>
+                            <div class="form-group">
+                                <label for="address_vn" class="col-sm-2 control-label">Адрес (de)</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="address_de" id="address_de" placeholder="Адрес" value="{% if hotels is defined %}{{ hotels.address_de }}{% endif %}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="subway_de" class="col-sm-2 control-label">Метро (de)</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="subway_de" id="subway_de" placeholder="Ближайшее метро" value="{% if hotels is defined %}{{ hotels.subway_de }}{% endif %}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="address_description_de" class="col-sm-2 control-label">Описание (de)</label>
+                                <div class="col-sm-6">
+                        <textarea name="address_description_de" id="editor16" rows="10" cols="80">
+                            {% if hotels is defined %}{{ hotels.address_description_de }}{% endif %}
+                        </textarea>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <hr>
                     <div class="box-header h3">Контент общий для всех языковых версий</div>

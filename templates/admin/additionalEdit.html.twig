@@ -141,6 +141,22 @@
                             </div>
                         </div>
                     </div>
+                    <div id="panel_de" class="tab-pane fade">
+                        <div class="form-group">
+                            <label for="title_de" class="col-sm-2 control-label">Название (de)</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="title_de" id="title_de" placeholder="Название" value="{% if service is defined %}{{ service.title_de }}{% endif %}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="description_de" class="col-sm-2 control-label">Описание (de)</label>
+                            <div class="col-sm-6">
+                        <textarea name="description_de" id="editor8" rows="10" cols="80">
+                            {% if service is defined %}{{ service.description_de }}{% endif %}
+                        </textarea>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="isActive" class="col-sm-2 control-label">Активно</label>

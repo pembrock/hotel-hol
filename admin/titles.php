@@ -19,9 +19,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $es = $_POST['es'];
     $vn = $_POST['vn'];
     $tr = $_POST['tr'];
+    $de = $_POST['de'];
     $system = $_POST['system'];
 
-    $set = array('ru' => $ru, 'us' => $us, 'cn' => $cn, 'fr' => $fr, 'es' => $es, 'vn' => $vn, 'tr' => $tr, 'system' => $system);
+    $set = array('ru' => $ru, 'us' => $us, 'cn' => $cn, 'fr' => $fr, 'es' => $es, 'vn' => $vn, 'tr' => $tr, 'de' => $de, 'system' => $system);
 
     if($id > 0)
         $query = $fpdo->update('titles')->set($set)->where('id', $id);

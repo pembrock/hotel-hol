@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $title_es = $_POST['title_es'];
     $title_vn = $_POST['title_vn'];
     $title_tr = $_POST['title_tr'];
+    $title_de = $_POST['title_de'];
     $isActive = $_POST['isActive'];
     $text_ru = $_POST['text_ru'];
     $text_us = $_POST['text_us'];
@@ -26,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $text_es = $_POST['text_es'];
     $text_vn = $_POST['text_vn'];
     $text_tr = $_POST['text_tr'];
+    $text_de = $_POST['text_de'];
 
 
     if (empty($title_ru))
@@ -33,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     if (empty($text_ru))
         $error[] = "Введите текст";
 
-    $set = array('title_ru' => $title_ru, 'title_us' => $title_us, 'title_cn' => $title_cn, 'title_fr' => $title_fr, 'title_es' => $title_es, 'title_vn' => $title_vn, 'title_tr' => $title_tr, 'text_ru' => $text_ru, 'text_us' => $text_us, 'text_cn' => $text_cn, 'text_fr' => $text_fr, 'text_es' => $text_es, 'text_vn' => $text_vn, 'text_tr' => $text_tr, 'isActive' => $isActive);
+    $set = array('title_ru' => $title_ru, 'title_us' => $title_us, 'title_cn' => $title_cn, 'title_fr' => $title_fr, 'title_es' => $title_es, 'title_vn' => $title_vn, 'title_tr' => $title_tr, 'title_de' => $title_de, 'text_ru' => $text_ru, 'text_us' => $text_us, 'text_cn' => $text_cn, 'text_fr' => $text_fr, 'text_es' => $text_es, 'text_vn' => $text_vn, 'text_tr' => $text_tr, 'text_de' => $text_de, 'isActive' => $isActive);
 
     if (!$error) {
         if ($id > 0) {

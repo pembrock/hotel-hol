@@ -19,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $title_es = $_POST['title_es'];
     $title_vn = $_POST['title_vn'];
     $title_tr = $_POST['title_tr'];
+    $title_de = $_POST['title_de'];
     $description_ru = $_POST['description_ru'];
     $description_us = $_POST['description_us'];
     $description_cn = $_POST['description_cn'];
@@ -26,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $description_es = $_POST['description_es'];
     $description_vn = $_POST['description_vn'];
     $description_tr = $_POST['description_tr'];
+    $description_de = $_POST['description_de'];
     $isActive = isset($_POST['isActive']) ? $_POST['isActive'] : null;
     $isDefault = isset($_POST['isDefault']) ? $_POST['isDefault'] : null;
     $type = intval($_POST['type']);
@@ -36,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     if (empty($description_ru))
         $error[] = "Введите описание";
 
-    $set = array('title_ru' => $title_ru, 'title_us' => $title_us, 'title_cn' => $title_cn, 'title_fr' => $title_fr, 'title_es' => $title_es, 'title_vn' => $title_vn, 'title_tr' => $title_tr, 'description_ru' => $description_ru,  'description_us' => $description_us, 'description_cn' => $description_cn, 'description_fr' => $description_fr, 'description_es' => $description_es, 'description_vn' => $description_vn, 'description_tr' => $description_tr, 'isDefault' => $isDefault, 'isActive' => $isActive, 'type' => $type);
+    $set = array('title_ru' => $title_ru, 'title_us' => $title_us, 'title_cn' => $title_cn, 'title_fr' => $title_fr, 'title_es' => $title_es, 'title_vn' => $title_vn, 'title_tr' => $title_tr, 'title_de' => $title_de, 'description_ru' => $description_ru,  'description_us' => $description_us, 'description_cn' => $description_cn, 'description_fr' => $description_fr, 'description_es' => $description_es, 'description_vn' => $description_vn, 'description_tr' => $description_tr, 'description_de' => $description_de, 'isDefault' => $isDefault, 'isActive' => $isActive, 'type' => $type);
 
     if (!$error) {
         if ($id > 0) {
