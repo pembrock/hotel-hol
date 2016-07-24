@@ -19,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $title_es = $_POST['title_es'];
     $title_vn = $_POST['title_vn'];
     $title_tr = $_POST['title_tr'];
+    $title_de = $_POST['title_de'];
     $description_ru = $_POST['description_ru'];
     $description_us = $_POST['description_us'];
     $description_cn = $_POST['description_cn'];
@@ -26,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $description_es = $_POST['description_es'];
     $description_vn = $_POST['description_vn'];
     $description_tr = $_POST['description_tr'];
+    $description_de = $_POST['description_de'];
     $text_ru = $_POST['text_ru'];
     $text_us = $_POST['text_us'];
     $text_cn = $_POST['text_cn'];
@@ -33,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $text_es = $_POST['text_es'];
     $text_vn = $_POST['text_vn'];
     $text_tr = $_POST['text_tr'];
+    $text_de = $_POST['text_de'];
     $meta_desc_ru = $_POST['meta_desc_ru'];
     $meta_desc_us = $_POST['meta_desc_us'];
     $meta_desc_cn = $_POST['meta_desc_cn'];
@@ -40,6 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $meta_desc_es = $_POST['meta_desc_es'];
     $meta_desc_vn = $_POST['meta_desc_vn'];
     $meta_desc_tr = $_POST['meta_desc_tr'];
+    $meta_desc_de = $_POST['meta_desc_de'];
     $meta_key_ru = $_POST['meta_key_ru'];
     $meta_key_us = $_POST['meta_key_us'];
     $meta_key_cn = $_POST['meta_key_cn'];
@@ -47,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $meta_key_es = $_POST['meta_key_es'];
     $meta_key_vn = $_POST['meta_key_vn'];
     $meta_key_tr = $_POST['meta_key_tr'];
+    $meta_key_de = $_POST['meta_key_de'];
     $isActive = isset($_POST['isActive']) ? $_POST['isActive'] : null;
     if (!empty($_POST['dateRange'])) {
         $date = explode(' - ', $_POST['dateRange']);
@@ -107,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             }
         }
     }
-    $set = array('title_ru' => $title_ru, 'title_us' => $title_us, 'title_cn' => $title_cn, 'title_fr' => $title_fr, 'title_es' => $title_es, 'title_vn' => $title_vn, 'title_tr' => $title_tr, 'description_ru' => $description_ru, 'description_us' => $description_us, 'description_cn' => $description_cn, 'description_fr' => $description_fr, 'description_es' => $description_es, 'description_vn' => $description_vn, 'description_tr' => $description_tr, 'text_ru' => $text_ru, 'text_us' => $text_us, 'text_cn' => $text_cn, 'text_fr' => $text_fr, 'text_es' => $text_es, 'text_vn' => $text_vn, 'text_tr' => $text_tr, 'isActive' => $isActive, 'start_ts' => isset($startTs) ? $startTs->format('Y-m-d H:i:s') : null, 'stop_ts' => isset($stopTs) ? $stopTs->format('Y-m-d H:i:s') : null, 'meta_desc_ru' => $meta_desc_ru, 'meta_desc_us' => $meta_desc_us, 'meta_desc_cn' => $meta_desc_cn, 'meta_desc_fr' => $meta_desc_fr, 'meta_desc_es' => $meta_desc_es, 'meta_desc_vn' => $meta_desc_vn, 'meta_desc_tr' => $meta_desc_tr, 'meta_key_ru' => $meta_key_ru, 'meta_key_us' => $meta_key_us, 'meta_key_cn' => $meta_key_cn, 'meta_key_fr' => $meta_key_fr, 'meta_key_es' => $meta_key_es, 'meta_key_vn' => $meta_key_vn, 'meta_key_tr' => $meta_key_tr);
+    $set = array('title_ru' => $title_ru, 'title_us' => $title_us, 'title_cn' => $title_cn, 'title_fr' => $title_fr, 'title_es' => $title_es, 'title_vn' => $title_vn, 'title_tr' => $title_tr, 'title_de' => $title_de, 'description_ru' => $description_ru, 'description_us' => $description_us, 'description_cn' => $description_cn, 'description_fr' => $description_fr, 'description_es' => $description_es, 'description_vn' => $description_vn, 'description_tr' => $description_tr, 'description_de' => $description_de, 'text_ru' => $text_ru, 'text_us' => $text_us, 'text_cn' => $text_cn, 'text_fr' => $text_fr, 'text_es' => $text_es, 'text_vn' => $text_vn, 'text_tr' => $text_tr, 'text_de' => $text_de, 'isActive' => $isActive, 'start_ts' => isset($startTs) ? $startTs->format('Y-m-d H:i:s') : null, 'stop_ts' => isset($stopTs) ? $stopTs->format('Y-m-d H:i:s') : null, 'meta_desc_ru' => $meta_desc_ru, 'meta_desc_us' => $meta_desc_us, 'meta_desc_cn' => $meta_desc_cn, 'meta_desc_fr' => $meta_desc_fr, 'meta_desc_es' => $meta_desc_es, 'meta_desc_vn' => $meta_desc_vn, 'meta_desc_tr' => $meta_desc_tr, 'meta_desc_de' => $meta_desc_de, 'meta_key_ru' => $meta_key_ru, 'meta_key_us' => $meta_key_us, 'meta_key_cn' => $meta_key_cn, 'meta_key_fr' => $meta_key_fr, 'meta_key_es' => $meta_key_es, 'meta_key_vn' => $meta_key_vn, 'meta_key_tr' => $meta_key_tr, 'meta_key_de' => $meta_key_de);
     if ($image)
         $set['image'] = $image;
     if ($slide_image)

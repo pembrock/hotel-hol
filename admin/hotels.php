@@ -67,6 +67,11 @@ if(isset($_POST['upload'])){
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
+//    echo "<pre>";
+//    print_r($_POST);
+//    echo "</pre>";
+//    die();
+
     $id = $_POST['id'];
     $title_ru = $_POST['title_ru'];
     $title_us = $_POST['title_us'];
@@ -75,6 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $title_es = $_POST['title_es'];
     $title_vn = $_POST['title_vn'];
     $title_tr = $_POST['title_tr'];
+    $title_de = $_POST['title_de'];
     $online_link = $_POST['online_link'];
     $description_ru = $_POST['description_ru'];
     $description_us = $_POST['description_us'];
@@ -83,6 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $description_es = $_POST['description_es'];
     $description_vn = $_POST['description_vn'];
     $description_tr = $_POST['description_tr'];
+    $description_de = $_POST['description_de'];
     $phone = $_POST['phone'];
     $phone2 = $_POST['phone2'];
     $email = $_POST['email'];
@@ -93,6 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $address_es = $_POST['address_es'];
     $address_vn = $_POST['address_vn'];
     $address_tr = $_POST['address_tr'];
+    $address_de = $_POST['address_de'];
     $subway_ru = $_POST['subway_ru'];
     $subway_us = $_POST['subway_us'];
     $subway_cn = $_POST['subway_cn'];
@@ -100,6 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $subway_es = $_POST['subway_es'];
     $subway_vn = $_POST['subway_vn'];
     $subway_tr = $_POST['subway_tr'];
+    $subway_de = $_POST['subway_de'];
     $maps_link = $_POST['maps_link'];
     $address_description_ru = $_POST['address_description_ru'];
     $address_description_us = $_POST['address_description_us'];
@@ -108,6 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $address_description_es = $_POST['address_description_es'];
     $address_description_vn = $_POST['address_description_vn'];
     $address_description_tr = $_POST['address_description_tr'];
+    $address_description_de = $_POST['address_description_de'];
     $meta_desc_ru = $_POST['meta_desc_ru'];
     $meta_desc_us = $_POST['meta_desc_us'];
     $meta_desc_cn = $_POST['meta_desc_cn'];
@@ -115,6 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $meta_desc_es = $_POST['meta_desc_es'];
     $meta_desc_vn = $_POST['meta_desc_vn'];
     $meta_desc_tr = $_POST['meta_desc_tr'];
+    $meta_desc_de = $_POST['meta_desc_de'];
     $meta_key_ru = $_POST['meta_key_ru'];
     $meta_key_us = $_POST['meta_key_us'];
     $meta_key_cn = $_POST['meta_key_cn'];
@@ -122,6 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $meta_key_es = $_POST['meta_key_es'];
     $meta_key_vn = $_POST['meta_key_vn'];
     $meta_key_tr = $_POST['meta_key_tr'];
+    $meta_key_de = $_POST['meta_key_de'];
     if (empty($title_ru))
         $error[] = "Введите название гостиницы";
     if (empty($description_ru))
@@ -158,17 +170,104 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         }
     }
 
-    $set = array('title_ru' => $title_ru, 'title_us' => $title_us, 'title_cn' => $title_cn, 'title_fr' => $title_fr, 'title_es' => $title_es, 'title_vn' => $title_vn, 'title_tr' => $title_tr, 'online_link' => $online_link, 'description_ru' => $description_ru,  'description_us' => $description_us, 'description_cn' => $description_cn, 'description_fr' => $description_fr, 'description_es' => $description_es, 'description_vn' => $description_vn, 'description_tr' => $description_tr, 'phone' => $phone, 'phone2' => $phone2, 'email' => $email, 'address_ru' => $address_ru,  'address_us' => $address_us, 'address_cn' => $address_cn, 'address_fr' => $address_fr, 'address_es' => $address_es, 'address_vn' => $address_vn, 'address_tr' => $address_tr, 'subway_ru' => $subway_ru, 'subway_us' => $subway_us, 'subway_cn' => $subway_cn, 'subway_fr' => $subway_fr, 'subway_es' => $subway_es, 'subway_vn' => $subway_vn, 'subway_tr' => $subway_tr, 'maps_link' => $maps_link, 'address_description_ru' => $address_description_ru,  'address_description_us' => $address_description_us, 'address_description_cn' => $address_description_cn, 'address_description_fr' => $address_description_fr, 'address_description_es' => $address_description_es, 'address_description_vn' => $address_description_vn, 'address_description_tr' => $address_description_tr, 'meta_desc_ru' => $meta_desc_ru, 'meta_desc_us' => $meta_desc_us, 'meta_desc_cn' => $meta_desc_cn, 'meta_desc_fr' => $meta_desc_fr, 'meta_desc_es' => $meta_desc_es, 'meta_desc_vn' => $meta_desc_vn, 'meta_desc_tr' => $meta_desc_tr, 'meta_key_ru' => $meta_key_ru, 'meta_key_us' => $meta_key_us, 'meta_key_cn' => $meta_key_cn, 'meta_key_fr' => $meta_key_fr, 'meta_key_es' => $meta_key_es, 'meta_key_vn' => $meta_key_vn, 'meta_key_tr' => $meta_key_tr);
+//    $set = array('title_ru' => $title_ru, 'title_us' => $title_us, 'title_cn' => $title_cn, 'title_fr' => $title_fr, 'title_es' => $title_es, 'title_vn' => $title_vn, 'title_tr' => $title_tr, 'online_link' => $online_link, 'description_ru' => $description_ru,  'description_us' => $description_us, 'description_cn' => $description_cn, 'description_fr' => $description_fr, 'description_es' => $description_es, 'description_vn' => $description_vn, 'description_tr' => $description_tr, 'phone' => $phone, 'phone2' => $phone2, 'email' => $email, 'address_ru' => $address_ru,  'address_us' => $address_us, 'address_cn' => $address_cn, 'address_fr' => $address_fr, 'address_es' => $address_es, 'address_vn' => $address_vn, 'address_tr' => $address_tr, 'subway_ru' => $subway_ru, 'subway_us' => $subway_us, 'subway_cn' => $subway_cn, 'subway_fr' => $subway_fr, 'subway_es' => $subway_es, 'subway_vn' => $subway_vn, 'subway_tr' => $subway_tr, 'maps_link' => $maps_link, 'address_description_ru' => $address_description_ru,  'address_description_us' => $address_description_us, 'address_description_cn' => $address_description_cn, 'address_description_fr' => $address_description_fr, 'address_description_es' => $address_description_es, 'address_description_vn' => $address_description_vn, 'address_description_tr' => $address_description_tr, 'meta_desc_ru' => $meta_desc_ru, 'meta_desc_us' => $meta_desc_us, 'meta_desc_cn' => $meta_desc_cn, 'meta_desc_fr' => $meta_desc_fr, 'meta_desc_es' => $meta_desc_es, 'meta_desc_vn' => $meta_desc_vn, 'meta_desc_tr' => $meta_desc_tr, 'meta_key_ru' => $meta_key_ru, 'meta_key_us' => $meta_key_us, 'meta_key_cn' => $meta_key_cn, 'meta_key_fr' => $meta_key_fr, 'meta_key_es' => $meta_key_es, 'meta_key_vn' => $meta_key_vn, 'meta_key_tr' => $meta_key_tr);
+    $set = array('title_ru = :title_ru', 'title_us = :title_us', 'title_cn = :title_cn', 'title_fr = :title_fr', 'title_es = :title_es', 'title_vn = :title_vn', 'title_tr = :title_tr', 'title_de = :title_de', 'online_link = :online_link', 'description_ru = :description_ru', 'description_us = :description_us', 'description_cn = :description_cn', 'description_fr = :description_fr', 'description_es = :description_es', 'description_vn = :description_vn', 'description_tr = :description_tr', 'description_de = :description_de', 'phone = :phone', 'phone2 = :phone2', 'email = :email', 'address_ru = :address_ru', 'address_us = :address_us', 'address_cn = :address_cn', 'address_fr = :address_fr', 'address_es = :address_es', 'address_vn = :address_vn', 'address_tr = :address_tr', 'address_de = :address_de', 'subway_ru = :subway_ru', 'subway_us = :subway_us', 'subway_cn = :subway_cn', 'subway_fr = :subway_fr', 'subway_es = :subway_es', 'subway_vn = :subway_vn', 'subway_tr = :subway_tr', 'subway_de = :subway_de', 'maps_link = :maps_link', 'address_description_ru = :address_description_ru', 'address_description_us = :address_description_us', 'address_description_cn = :address_description_cn', 'address_description_fr = :address_description_fr', 'address_description_es = :address_description_es', 'address_description_vn = :address_description_vn', 'address_description_tr = :address_description_tr', 'address_description_de = :address_description_de', 'meta_desc_ru = :meta_desc_ru', 'meta_desc_us = :meta_desc_us', 'meta_desc_cn = :meta_desc_cn', 'meta_desc_fr = :meta_desc_fr', 'meta_desc_es = :meta_desc_es', 'meta_desc_vn = :meta_desc_vn', 'meta_desc_tr = :meta_desc_tr', 'meta_desc_de = :meta_desc_de', 'meta_key_ru = :meta_key_ru', 'meta_key_us = :meta_key_us', 'meta_key_cn = :meta_key_cn', 'meta_key_fr = :meta_key_fr', 'meta_key_es = :meta_key_es', 'meta_key_vn = :meta_key_vn', 'meta_key_tr = :meta_key_tr', 'meta_key_de = :meta_key_de');
         if ($logo) {
-            $set['logo'] = $logo;
+            #$set['logo'] = $logo;
+            $set[] = 'logo = :logo';
         }
+
+//    echo "<pre>";
+//    print_r($set);
+//    echo "</pre>";
+//    die();
     if (!$error) {
         if ($id > 0) {
-            $query = $fpdo->update('hotel')->set($set)->where('id', $id);
-        } else {
-            $query = $fpdo->insertInto('hotel')->values($set);
+            $stmt = $pdo->prepare("UPDATE hotel set " . implode(', ', $set) . " where id=:id");
         }
-        $query->execute();
+        else {
+            $stmt = $pdo->prepare("INSERT INTO hotel (title_ru, title_us, title_cn, title_fr, title_es, title_vn, title_tr, title_de, online_link, description_ru, description_us, description_cn, description_fr, description_es, description_vn, description_tr, description_de, phone, phone2, email, address_ru, address_us, address_cn, address_fr, address_es, address_vn, address_tr, address_de, subway_ru, subway_us, subway_cn, subway_fr, subway_es, subway_vn, subway_tr, subway_de, maps_link, address_description_ru, address_description_us, address_description_cn, address_description_fr, address_description_es, address_description_vn, address_description_tr, address_description_de, meta_desc_ru, meta_desc_us, meta_desc_cn, meta_desc_fr, meta_desc_es, meta_desc_vn, meta_desc_tr, meta_desc_de, meta_key_ru, meta_key_us, meta_key_cn, meta_key_fr, meta_key_es, meta_key_vn, meta_key_tr, meta_key_de) VALUES (
+            :title_ru, :title_us, :title_cn, :title_fr, :title_es, :title_vn, :title_tr, :title_de, :online_link, :description_ru, :description_us, :description_cn, :description_fr, :description_es, :description_vn, :description_tr, :description_de, :phone, :phone2, :email, :address_ru, :address_us, :address_cn, :address_fr, :address_es, :address_vn, :address_tr, :address_de, :subway_ru, :subway_us, :subway_cn, :subway_fr, :subway_es, :subway_vn, :subway_tr, :subway_de, :maps_link, :address_description_ru, :address_description_us, :address_description_cn, :address_description_fr, :address_description_es, :address_description_vn, :address_description_tr, :address_description_de, :meta_desc_ru, :meta_desc_us, :meta_desc_cn, :meta_desc_fr, :meta_desc_es, :meta_desc_vn, :meta_desc_tr, :meta_desc_de, :meta_key_ru, :meta_key_us, :meta_key_cn, :meta_key_fr, :meta_key_es, :meta_key_vn, :meta_key_tr, :meta_key_de)");
+            $stmt = $pdo->prepare("INSERT INTO hotel set " . implode(', ', $set));
+        }
+
+        if($id > 0)
+            $stmt->bindParam(':id', $id);
+
+            $stmt->bindParam(':title_ru', $title_ru);
+            $stmt->bindParam(':title_us', $title_us);
+            $stmt->bindParam(':title_cn', $title_cn);
+            $stmt->bindParam(':title_fr', $title_fr);
+            $stmt->bindParam(':title_es', $title_es);
+            $stmt->bindParam(':title_vn', $title_vn);
+            $stmt->bindParam(':title_tr', $title_tr);
+            $stmt->bindParam(':title_de', $title_de);
+            $stmt->bindParam(':online_link', $online_link);
+            $stmt->bindParam(':description_ru', $description_ru);
+            $stmt->bindParam(':description_us', $description_us);
+            $stmt->bindParam(':description_cn', $description_cn);
+            $stmt->bindParam(':description_fr', $description_fr);
+            $stmt->bindParam(':description_es', $description_es);
+            $stmt->bindParam(':description_vn', $description_vn);
+            $stmt->bindParam(':description_tr', $description_tr);
+            $stmt->bindParam(':description_de', $description_de);
+            $stmt->bindParam(':phone', $phone);
+            $stmt->bindParam(':phone2', $phone2);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':address_ru', $address_ru);
+            $stmt->bindParam(':address_us', $address_us);
+            $stmt->bindParam(':address_cn', $address_cn);
+            $stmt->bindParam(':address_fr', $address_fr);
+            $stmt->bindParam(':address_es', $address_es);
+            $stmt->bindParam(':address_vn', $address_vn);
+            $stmt->bindParam(':address_tr', $address_tr);
+            $stmt->bindParam(':address_de', $address_de);
+            $stmt->bindParam(':subway_ru', $subway_ru);
+            $stmt->bindParam(':subway_us', $subway_us);
+            $stmt->bindParam(':subway_cn', $subway_cn);
+            $stmt->bindParam(':subway_fr', $subway_fr);
+            $stmt->bindParam(':subway_es', $subway_es);
+            $stmt->bindParam(':subway_vn', $subway_vn);
+            $stmt->bindParam(':subway_tr', $subway_tr);
+            $stmt->bindParam(':subway_de', $subway_de);
+            $stmt->bindParam(':maps_link', $maps_link);
+            $stmt->bindParam(':address_description_ru', $address_description_ru);
+            $stmt->bindParam(':address_description_us', $address_description_us);
+            $stmt->bindParam(':address_description_cn', $address_description_cn);
+            $stmt->bindParam(':address_description_fr', $address_description_fr);
+            $stmt->bindParam(':address_description_es', $address_description_es);
+            $stmt->bindParam(':address_description_vn', $address_description_vn);
+            $stmt->bindParam(':address_description_tr', $address_description_tr);
+            $stmt->bindParam(':address_description_de', $address_description_de);
+            $stmt->bindParam(':meta_desc_ru', $meta_desc_ru);
+            $stmt->bindParam(':meta_desc_us', $meta_desc_us);
+            $stmt->bindParam(':meta_desc_cn', $meta_desc_cn);
+            $stmt->bindParam(':meta_desc_fr', $meta_desc_fr);
+            $stmt->bindParam(':meta_desc_es', $meta_desc_es);
+            $stmt->bindParam(':meta_desc_vn', $meta_desc_vn);
+            $stmt->bindParam(':meta_desc_tr', $meta_desc_tr);
+            $stmt->bindParam(':meta_desc_de', $meta_desc_de);
+            $stmt->bindParam(':meta_key_ru', $meta_key_ru);
+            $stmt->bindParam(':meta_key_us', $meta_key_us);
+            $stmt->bindParam(':meta_key_cn', $meta_key_cn);
+            $stmt->bindParam(':meta_key_fr', $meta_key_fr);
+            $stmt->bindParam(':meta_key_es', $meta_key_es);
+            $stmt->bindParam(':meta_key_vn', $meta_key_vn);
+            $stmt->bindParam(':meta_key_tr', $meta_key_tr);
+            $stmt->bindParam(':meta_key_de', $meta_key_de);
+            if ($logo) {
+                $stmt->bindParam(':logo', $logo);
+            }
+
+//            echo '<pre>';
+//            print_r($stmt->queryString);
+//            die();
+            $stmt->execute();
+            //$query = $fpdo->update('hotel')->set($set)->where('id', $id);
+//        } else {
+//            $query = $fpdo->insertInto('hotel')->values($set);
+//            $query->execute();
+//        }
         $insert_id = $id > 0 ? $id : $pdo->lastInsertId();
         if ($id == 0) {
             $orderBy = $fpdo->from('hotel')->select(null)->select('orderBy')->orderBy('orderBy DESC')->limit(1)->fetch();

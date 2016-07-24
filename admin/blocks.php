@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $title_es = $_POST['title_es'];
     $title_vn = $_POST['title_vn'];
     $title_tr = $_POST['title_tr'];
+    $title_de = $_POST['title_de'];
     $text_ru = $_POST['text_ru'];
     $text_us = $_POST['text_us'];
     $text_cn = $_POST['text_cn'];
@@ -25,10 +26,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $text_es = $_POST['text_es'];
     $text_vn = $_POST['text_vn'];
     $text_tr = $_POST['text_tr'];
+    $text_de = $_POST['text_de'];
     $isActive = $_POST['isActive'];
     $system = $_POST['system'];
 
-    $set = array('title_ru' => $title_ru, 'title_us' => $title_us, 'title_cn' => $title_cn, 'title_fr' => $title_fr, 'title_es' => $title_es, 'title_vn' => $title_vn, 'title_tr' => $title_tr, 'text_ru' => $text_ru, 'text_us' => $text_us, 'text_cn' => $text_cn, 'text_fr' => $text_fr, 'text_es' => $text_es, 'text_vn' => $text_vn, 'text_tr' => $text_tr, 'isActive' => $isActive, 'system' => $system);
+    $set = array('title_ru' => $title_ru, 'title_us' => $title_us, 'title_cn' => $title_cn, 'title_fr' => $title_fr, 'title_es' => $title_es, 'title_vn' => $title_vn, 'title_tr' => $title_tr, 'title_de' => $title_de, 'text_ru' => $text_ru, 'text_us' => $text_us, 'text_cn' => $text_cn, 'text_fr' => $text_fr, 'text_es' => $text_es, 'text_vn' => $text_vn, 'text_tr' => $text_tr, 'text_de' => $text_de, 'isActive' => $isActive, 'system' => $system);
 
     if($id > 0)
         $query = $fpdo->update('blocks')->set($set)->where('id', $id);

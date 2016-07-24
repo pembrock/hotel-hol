@@ -286,6 +286,43 @@
                             </div>
                         </div>
                     </div>
+                    <div id="panel_de" class="tab-pane fade">
+                        <div class="form-group">
+                            <label for="title_de" class="col-sm-2 control-label">Название (de)</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="title_de" id="title_de" placeholder="Название" value="{% if promo is defined %}{{ promo.title_de }}{% endif %}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="description_de" class="col-sm-2 control-label">Коротое описание (de)</label>
+                            <div class="col-sm-6">
+                        <textarea name="description_de" id="editor15" rows="10" cols="80">
+                            {% if promo is defined %}{{ promo.description_de }}{% endif %}
+                        </textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="text_de" class="col-sm-2 control-label">Полное описание (de)</label>
+                            <div class="col-sm-6">
+                        <textarea name="text_de" id="editor16" rows="10" cols="80">
+                            {% if promo is defined %}{{ promo.text_de }}{% endif %}
+                        </textarea>
+                            </div>
+                        </div>
+                        <div class="box-header h3">Поисковые сервисы</div>
+                        <div class="form-group">
+                            <label for="meta_desc_de" class="col-sm-2 control-label">Описание (de)</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="meta_desc_de" id="meta_desc_de" placeholder="Описание для поисковых сервисов" value="{% if promo is defined %}{{ promo.meta_desc_de }}{% endif %}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="meta_key_de" class="col-sm-2 control-label">Ключевые слова (de)</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="meta_key_de" id="meta_key_de" placeholder="Ключевые слова для поисковых сервисов" value="{% if promo is defined %}{{ promo.meta_key_de }}{% endif %}">
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="isActive" class="col-sm-2 control-label">Активно</label>
