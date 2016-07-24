@@ -1,0 +1,148 @@
+{% extends '/admin/base.html.twig' %}
+{% block bodystyle %}class="hold-transition skin-blue sidebar-mini"{% endblock %}
+{% block body %}
+    <div class="wrapper">
+
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="/admin/" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>H</b>otel</span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>Hotel</b>HOL</span>
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+
+                        <!-- User Account: style can be found in dropdown.less -->
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="../../public/admin/img/admin.png" class="user-image" alt="User Image">
+                                <span class="hidden-xs">{{ options.Username }}</span>
+                            </a>
+                            <ul class="dropdown-menu">
+
+                                <!-- Menu Body -->
+                                <li class="user-body">
+                                    <div class="col-xs-4 text-center">
+                                        <a href="#">Аккаунт</a>
+                                    </div>
+                                    <div class="col-xs-4 text-center">
+                                    </div>
+                                    <div class="col-xs-4 text-center">
+                                        <a href="logout.php">Выход</a>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar user panel -->
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src="../../public/admin/img/admin.png" class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                        <p>{{ options.Username }}</p>
+                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    </div>
+                </div>
+
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu">
+
+                    <li {% if menu_selected|default('home') == 'home' %}class="active"{% endif %}>
+                        <a href="hotels.php">
+                            <i class="fa fa-home"></i> <span>Гостиницы</span>
+                        </a>
+                    </li>
+                    <li {% if menu_selected == 'rooms' %}class="active"{% endif %}>
+                        <a href="rooms.php">
+                            <i class="fa fa-bed"></i> <span>Категории номеров</span>
+                        </a>
+                    </li>
+                    <li {% if menu_selected == 'additional' %}class="active"{% endif %}>
+                        <a href="additional.php">
+                            <i class="fa fa-wrench"></i> <span>Дополнительные услуги</span>
+                        </a>
+                    </li>
+                    <li>
+                    <li class="treeview {% if menu_selected == 'rates_room' or menu_selected == 'rates_service' %} active{% endif %}">
+                        <a href="#">
+                            <i class="fa fa-money"></i>
+                            <span>Тарифы</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li {% if menu_selected == 'rates_room' %}class="active"{% endif %}><a href="rates_room.php"><i class="fa fa-circle-o"></i> Проживание</a></li>
+                            <li {% if menu_selected == 'rates_service' %}class="active"{% endif %}><a href="rates_service.php"><i class="fa fa-circle-o"></i> Дополнительные услуги</a></li>
+                        </ul>
+                    </li>
+                    <li {% if menu_selected == 'promo' %}class="active"{% endif %}>
+                        <a href="promo.php">
+                            <i class="fa fa-thumbs-o-up"></i> <span>Специальные предложения</span>
+                        </a>
+                    </li>
+                    <li {% if menu_selected == 'review' %}class="active"{% endif %}>
+                        <a href="review.php">
+                            <i class="fa fa-book"></i> <span>Отзывы</span>
+                        </a>
+                    </li>
+                    {#<li {% if menu_selected == 'gallery' %}class="active"{% endif %}>#}
+                        {#<a href="gallery.php">#}
+                            {#<i class="fa fa-photo"></i> <span>Галерея</span>#}
+                        {#</a>#}
+                    {#</li>#}
+                    <li {% if menu_selected == 'info' %}class="active"{% endif %}>
+                        <a href="information.php">
+                            <i class="fa fa-exclamation-circle"></i> <span>Полезная информация</span>
+                        </a>
+                    </li>
+                    <li class="treeview {% if menu_selected == 'settings' or menu_selected == 'users' or menu_selected == 'role' or menu_selected == 'groups' or menu_selected == 'blocks' %} active{% endif %}">
+                        <a href="#">
+                            <i class="fa fa-cog"></i> <span>Настройки</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li {% if menu_selected == 'settings' %}class="active"{% endif %}><a href="settings.php"><i class="fa fa-laptop"></i> Основные настройки сайта</a></li>
+                            <li {% if menu_selected == 'blocks' %}class="active"{% endif %}><a href="blocks.php"><i class="fa fa-list"></i> Блоки</a></li>
+                            <li {% if menu_selected == 'users' %}class="active"{% endif %}><a href="users.php"><i class="fa fa-user-plus"></i> Пользователи</a></li>
+                            <li {% if menu_selected == 'role' %}class="active"{% endif %}><a href="role.php"><i class="fa fa-key"></i> Роли</a></li>
+                            <li {% if menu_selected == 'groups' %}class="active"{% endif %}><a href="groups.php"><i class="fa fa-users"></i> Группы пользователей</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <section class="content">
+                {% block content %}
+                {% endblock %}
+            </section>
+        </div><!-- /.content-wrapper -->
+
+        {#    <footer class="main-footer">
+                <div class="pull-right hidden-xs">
+                    <b>Version</b> 2.3.0
+                </div>
+                <strong>Copyright &copy; 2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
+            </footer>#}
+    </div><!-- ./wrapper -->
+
+{% endblock %}

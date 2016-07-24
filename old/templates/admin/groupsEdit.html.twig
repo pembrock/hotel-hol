@@ -1,0 +1,50 @@
+{% extends "/admin/index.html.twig" %}
+{% set menu_selected = 'groups' %}
+
+{% block content %}
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <ol class="breadcrumb">
+                <li><a href="groups.php"><i class="fa fa-users"></i> Группы для пользователей</a></li>
+                <li class="active">{% if groups is defined %}{{ groups.name }}{% else %}Новая группа{% endif %}</li>
+            </ol>
+        </div>
+        <form class="form-horizontal" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="id" id="id" value="{% if groups is defined %}{{ groups.id }}{% else %}0{% endif %}">
+            <div class="box-body">
+                {% if error is defined  %}
+                    {{ error }}
+                {% endif %}
+                <div class="form-group">
+                    <label for="isActive" class="col-sm-2 control-label">Активно</label>
+                    <div class="col-sm-6">
+                        <input type="checkbox" class="form-control-static" name="isActive" id="isActive" value="1" {% if groups is defined %}{% if groups.isActive == 1 %} checked {% endif %}{% endif %} style="width: 25px;">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name" class="col-sm-2 control-label">Название</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="name" id="name" placeholder="Название" value="{% if groups is defined %}{{ groups.name }}{% endif %}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="descr" class="col-sm-2 control-label">Права</label>
+                    <div class="col-sm-6">
+                        {% for value in roles %}
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="roles[][{{ value.id }}]" {% if g2r[value.id] is defined %}checked{% endif %}>
+                                    {{ value.name }}
+                                </label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+            <div class="box-footer">
+                <button type="submit" class="btn btn-success" name="save" id="save">Сохранить</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

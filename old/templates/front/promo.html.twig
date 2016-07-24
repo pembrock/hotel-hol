@@ -1,0 +1,28 @@
+{% extends '/front/index.html.twig' %}
+{% block content %}
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-header">
+                        <h1>Акции на номера в мини-гостиницах Hotel-hol</h1>
+                    </div>
+                </div>
+                {% for value in promo %}
+                    {#{% if date(value.start_ts) < date('now') and date(value.stop_ts) > date('now') %}#}
+                <div class="col-md-3">
+                    <div class="card color_1">
+                        {% if value.image is not empty %}
+                        <a href="?id={{ value.id }}"><img src="../../public/upload/images/promo/{{ value.image }}" class="img-responsive card_1"></a>
+                        {% endif %}
+                        <div class="caption">
+                            <h3>{{ value.title }}</h3>
+                            <p>{{ value.description|raw }}</p>
+                        </div>
+                    </div>
+                </div>
+                {#{% endif %}#}
+                {% endfor %}
+        </div>
+    </section>
+{% endblock %}

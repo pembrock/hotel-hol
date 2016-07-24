@@ -3,7 +3,7 @@
 // Copyright (c) 2015, Fujana Solutions - Moritz Maleck. All rights reserved.
 // For licensing, see LICENSE.md
 
-session_start();
+//session_start();
 
 if(!isset($_SESSION['username'])) {
     exit;

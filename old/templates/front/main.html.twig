@@ -1,0 +1,113 @@
+{% extends '/front/index.html.twig' %}
+{% block content %}
+<section>
+    <div class="container">
+        <div class="row">
+            {% if settings.ya_map is defined %}
+            <div class="col-md-6">
+                <div class="gold">
+                    {{ settings.ya_map|raw }}
+                </div>
+            </div>
+            {% endif %}
+            <div class="col-md-{% if settings.ya_map is defined %}6{% else %}12{% endif %}">
+                {% if blocks.welcome is defined %}
+                <h1>{{ blocks.welcome.title }}</h1>
+                <p>{{ blocks.welcome.text|striptags }}</p>
+                {% endif %}
+                {% if blocks.howto is defined %}
+                <h3>{{ blocks.howto.title }}</h3>
+                <p>{{ blocks.howto.text|striptags }}</p>
+                {#<form class="form-inline" role="form">
+                    <div class="form-group">
+                        <label class="sr-only" for="InputTel">Телефон</label>
+                        <input type="tel" class="form-control" id="InputTel" placeholder="Введите телефон">
+                    </div>
+                    <button type="button" class="btn btn-success ripple-effect">Забронировать</button>
+                </form> #}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Наши номера -->
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-header">
+                    <h2>Наши гостиницы</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+        {% for hotel in hotels %}
+            <div class="col-sm-6 col-md-4">
+                <div class="card ">
+                    <div class="card-img wid_aut">
+                        <a href="hotels?id={{ hotel.id }}"><img src="../public/upload/images/logos/{{ hotel.logo }}" class="img-responsive card_1"></a>
+                    </div>
+                    <div class="caption">
+                        <h3><a href="hotels?id={{ hotel.id }}">{{ hotel.title }}</a></h3>
+                        <div>
+                            <div>
+							<span class="address">
+								<i class="fa fa-subway"></i> {{ hotel.subway }}<br>
+								<i class="fa fa-mobile"></i> <a href="tel:{{ hotel.phone }}">{{ hotel.phone }}</a></span>
+                            </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12 btn-toolbar">
+                                    <a href="hotels?id={{ hotel.id }}" class="btn btn-primary ripple-effect">Подробней</a>
+                                    {% if hotel.online_link is not empty %}<a href="{{ hotel.online_link }}" class="btn btn-success ripple-effect">Забронировать</a>{% endif %}
+                            </div>
+                        </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Преимущества нашего заведения -->
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-header">
+                    <h2>{{ blocks.advantages.title }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {{ blocks.advantages.text|raw }}
+
+        </div>
+</section>
+
+<!-- Что такое мини-гостиница -->
+    {% if blocks.whatismini is defined %}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-header">
+                    <h2>{{ blocks.whatismini.title }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                {{ blocks.whatismini.text|raw }}
+            </div>
+        </div>
+    </div>
+
+    </div>
+</section>
+        {% endif %}
+{% endblock %}

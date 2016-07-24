@@ -1,0 +1,78 @@
+{% extends '/front/index.html.twig' %}
+{% block content %}
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-header">
+                        <h1>Гостиница {{ hotel.title }}</h1>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card_2 caption color_1">
+							<span class="address">
+								<i class="fa fa-subway"></i> {{ hotel.subway }}<br>
+								<i class="fa fa-map-marker"></i> {{ hotel.address }}</span><br>
+                        <i class="fa fa-envelope"></i> <a href="mailto:{{ hotel.email }}">{{ hotel.email }}</a></span><br>
+                        </span>
+                        <hr><span class="phone"><i class="fa fa-mobile"></i> <a href="tel: {{ hotel.phone }}"> {{ hotel.phone }}</a></span>
+                        {% if hotel.phone2 is not empty %}<hr><span class="phone"><i class="fa fa-mobile"></i> <a href="tel: {{ hotel.phone2 }}"> {{ hotel.phone2 }}</a></span>{% endif %}
+                    </div>
+                    <div class="card_2 caption color_4">
+                        {{ hotel.description|raw }}
+                    </div>
+                    <div class="card_2 caption color_3">
+                        <h3>{{ block.title }}</h3>
+                        <p>
+                        {{ block.text|raw }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    {% for row in info %}
+                    <div class="card_2 caption">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2>{{ row.title }}</h2> {% if row.online_link is not empty %}<a href="{{ row.online_link }}" class="btn btn-success">Забронировать</a>{% endif %}
+                                <hr>
+                            </div>
+                            <div class="col-md-8">
+                                {{ row.description|raw }}
+                            </div>
+                            <div class="col-md-4">
+                                <span class="price">{{ row.cost_day }} руб./сутки</span><br>
+                                <span class="price">{{ row.cost_hour }} руб./час</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            {% if row.images is not null %}
+                                {% for value in row.images %}
+                            <div class="col-md-3 col-sm-6 col-xs-12 thumb">
+                                <a class="fancyimage" rel="group_{{ row.group }}" href="{{ row.path }}/{{ value }}">
+                                    <img class="img-responsive" src="{{ row.path }}/{{ value }}">
+                                </a>
+                            </div>
+                                    {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="col-md-12">
+                    <div class="card_2 caption color_1">
+                        <h2>Как добраться?</h2>
+                        <p>
+                       {{ hotel.address_description|raw }}
+                        </p>
+                        <script type="text/javascript" charset="utf-8" src="{{ hotel.maps_link }}"></script>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

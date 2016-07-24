@@ -1,0 +1,91 @@
+{% extends "/admin/index.html.twig" %}
+{% set menu_selected = 'rates_room' %}
+{% block content %}
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header">
+                <ol class="breadcrumb">
+                    <li><a href="rates_room.php"><i class="fa fa-money"></i> Тарифы на проживание</a></li>
+                    <li><a href="rates_tables.php?tid={{ tid }}"><i class="fa fa-table"></i> Тарифные таблицы для тарифа "{{ rate.title }}"</a></li>
+                    <li class="active">{% if table is not null %}{{ table.title }}{% else %}Новая таблица{% endif %}</li>
+                </ol>
+            </div>
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="isActive" class="control-label">Активно</label>
+                        <input type="checkbox" class="form-control-static" name="isActive" id="isActive" value="1" {% if table is defined %}{% if table.isActive == 1 %} checked {% endif %}{% endif %} style="position:relative; width: 25px; top:10px;">
+                </div>
+                <div class="form-group">
+                    <label for="title" class="control-label">Название</label>
+                        <input type="text" class="form-control" name="title" id="title" placeholder="Название" value="{% if table is defined %}{{ table.title }}{% endif %}" required>
+                </div>
+                <div class="form-group">
+                    <label>Начало действия</label>
+
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <input type="text" class="form-control pull-right" id="datepicker" placeholder="Начало действия" {% if table is defined %}value="{% if table.start_ts is not null %}{{ table.start_ts|date('m/d/Y') }}{% endif %}"{% endif %}>
+                    </div>
+                    <!-- /.input group -->
+                </div>
+                <div class="form-group">
+                    <label>Количество проживающих</label>
+                    <select class="form-control guests">
+                        <option value="-1"> ... </option>
+                        {% for i in 1..settings.guests_count %}
+                            <option value="{{ i }}">{{ i }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                {% if error is defined  %}
+                    <div class="alert-danger" style="padding-left: 10px; border-radius: 4px;">{{ error }}</div>
+                {% endif %}
+                <div class="box hidden preloader">
+                    {#<div class="progress">#}
+                        {#<div class="progress-bar" style="width: 20%"></div>#}
+                    {#</div>#}
+                    <div class="box-header">
+                        <h3 class="box-title">Загрузка данных...</h3>
+                    </div>
+                    <!-- Loading (remove the following to stop the loading)-->
+                    <div class="overlay">
+                        <i class="fa fa-refresh fa-spin"></i>
+                    </div>
+                    <!-- end loading -->
+                </div>
+                <form class="form-horizontal rates-table" method="POST" enctype="multipart/form-data" style="display: none;">
+                    <input type="hidden" name="tid" value="{{ tid }}" class="tid">
+                    <input type="hidden" name="tt" value="{{ tt }}" class="tt">
+                    <div class="box-body">
+                        <table class="table table-striped">
+                            <tr>
+                                <td></td>
+                                {% for value in rooms %}
+                                    <td>{{ value.title }}</td>
+                                {% endfor %}
+                            </tr>
+                            {% for value in hotels %}
+                                <tr>
+                                    <td>{{ value.title }}</td>
+                                    {% for r in rooms %}
+                                        <td>
+                                            <div class="list-group">
+                                                <div class="list-group-item"><input type="text" name="rates_{{ value.id }}_{{ r.id }}_day" class="cost"> Сутки</div>
+                                                <div class="list-group-item"><input type="text" name="rates_{{ value.id }}_{{ r.id }}_hour" class="cost"> Час</div>
+                                            </div>
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-success" name="save" id="save">Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

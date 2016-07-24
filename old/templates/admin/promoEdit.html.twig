@@ -1,0 +1,86 @@
+{% extends "/admin/index.html.twig" %}
+{% set menu_selected = 'promo' %}
+
+{% block content %}
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <ol class="breadcrumb">
+                <li><a href="promo.php"><i class="fa fa-thumbs-o-up"></i> Специальные предложения</a></li>
+                <li class="active">{% if promo is defined %}{{ promo.title }}{% else %}Новое предложение{% endif %}</li>
+            </ol>
+        </div>
+        <form class="form-horizontal" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="id" id="id" value="{% if promo is defined %}{{ promo.id }}{% else %}0{% endif %}">
+            <div class="box-body">
+                {% if error is defined  %}
+                    {{ error }}
+                {% endif %}
+                <div class="form-group">
+                    <label for="isActive" class="col-sm-2 control-label">Активно</label>
+                    <div class="col-sm-6">
+                        <input type="checkbox" class="form-control-static" name="isActive" id="isActive" value="1" {% if promo is defined %}{% if promo.isActive == 1 %} checked {% endif %}{% endif %} style="width: 25px;">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="title" class="col-sm-2 control-label">Название</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="title" id="title" placeholder="Название" value="{% if promo is defined %}{{ promo.title }}{% endif %}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="dateRange" class="col-sm-2 control-label">Срок действия</label>
+
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <input type="text" class="form-control pull-right" id="dateRange" name="dateRange" {% if promo is defined %}value="{% if promo.start_ts is not null and promo.stop_ts is not null %}{{ promo.start_ts|date('m/d/Y') }} - {{ promo.stop_ts|date('m/d/Y') }}{% endif %}"{% endif %} placeholder="Оставьте пустым, если это постоянная акция">
+                        </div>
+                    </div>
+                    <!-- /.input group -->
+                </div>
+
+                <div class="form-group">
+                    <label for="description" class="col-sm-2 control-label">Коротое описание</label>
+                    <div class="col-sm-6">
+                        <textarea name="description" id="editor1" rows="10" cols="80">
+                            {% if promo is defined %}{{ promo.description }}{% endif %}
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="text" class="col-sm-2 control-label">Полное описание</label>
+                    <div class="col-sm-6">
+                        <textarea name="text" id="editor2" rows="10" cols="80">
+                            {% if promo is defined %}{{ promo.text }}{% endif %}
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="image" class="col-sm-2 control-label">Изображение</label>
+                    <div class="col-sm-8">
+                        {% if promo.image is not null %}
+                            <div><img src="{{ promo.image }}" > </div>
+                            <br>
+                        {% endif %}
+                        <input type="file" name="image" class="form-control" id="image">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="slide_image" class="col-sm-2 control-label">Изображение для слайдера</label>
+                    <div class="col-sm-8">
+                        {% if promo.slide_image is not null %}
+                            <div><img src="{{ promo.slide_image }}" width="300"> </div>
+                            <br>
+                        {% endif %}
+                        <input type="file" name="slide_image" class="form-control" id="slide_image">
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <button type="submit" class="btn btn-success" name="save" id="save">Сохранить</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

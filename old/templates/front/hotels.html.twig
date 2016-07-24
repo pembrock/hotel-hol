@@ -1,0 +1,49 @@
+{% extends '/front/index.html.twig' %}
+{% block content %}
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-header">
+                        <h1>{{ block.title }}</h1>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="card_2 caption">
+                        <p>{{ block.text|raw }}</p>
+                    </div>
+                    {% for hotel in hotels %}
+                    <div class="card caption">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h2>Мини-отель «{{ hotel.title }}»</h2>
+                                <p>Контактный телефон: <a href="tel: {{ hotel.phone }}">{{ hotel.phone }}</a><br>
+                                    E-mail: <a href="mailto: {{ hotel.email }}"> {{ hotel.email }}</a><br>
+                                    Адрес: {{ hotel.address }}<br>
+                                    <span class="price">ЦЕНЫ:<br>(час/сутки) от {{ hotel.min_hour }}/{{ hotel.min_day }} р.</span>
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <script type="text/javascript" charset="utf-8" src="{{ hotel.maps_link }}"></script>
+                            </div>
+                            <div class="col-md-4">
+                                <a class="fancyimage" rel="group" href="../../public/upload/images/logos/{{ hotel.logo }}">
+                                    <img class="img-responsive" src="../../public/upload/images/logos/{{ hotel.logo }}">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    <div class="card caption">
+                        <p>Мини-отель – это отличная альтернатива и пафосным гостиницам со швейцарами, и дорогим квартирам на сутки. Комфортабельные номера, спокойные соседи, все возможности для отдыха – это именно то, что мы рады предложить своим постояльцам. Арендовать комнату можно на любое время: хоть на целую неделю, если Вы собрались решить в Москве какие-либо сложные вопросы, а при необходимости – продлить время проживания.
+                            Вас встретит вежливый администратор, который моментально оформит нужные бумаги и даст Вам ключ от номера. Здесь всё, что нужно для отдыха: кровать, столик, санузел (если это предусмотрено спецификацией) и многое другое. У Вас будет возможность привести в порядок себя и свой гардероб, пообедать, поработать с бумагами, если Вы приехали в Москву с деловой целью. </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "/admin/index.html.twig" %}
+{% set menu_selected = 'gallery' %}
+
+{% block content %}
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <ol class="breadcrumb">
+                <li><i class="fa fa-photo active"></i> Галлерея</a></li>
+            </ol>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form class="form-horizontal" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="logo" class="col-sm-2 control-label">Фото</label>
+
+                    <div class="col-sm-8">
+                        <input type="file" name="files[]" id="filer_input2" multiple="multiple">
+                        <div class="jFiler-items jFiler-row">
+                            <ul class="jFiler-items-list jFiler-items-grid">
+                                {% for value in images %}
+                                <li class="jFiler-item" data-jfiler-index="0" style="">
+                                    <div class="jFiler-item-container">
+                                        <div class="jFiler-item-inner">
+                                            <div class="jFiler-item-thumb">
+                                                <div class="jFiler-item-thumb-image">
+                                                    <img src="{{ path }}{{ value }}" draggable="true">
+                                                </div>
+                                            </div>
+                                            <div class="jFiler-item-assets jFiler-row">
+                                                <ul class="list-inline pull-left">
+                                                    <li>
+                                                        <div class="jFiler-item-others text-success">
+                                                            <i class="icon-jfi-check-circle"></i> {{ value }}
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                                <ul class="list-inline pull-right">
+                                                    <li class="del-img" id="{{ value }}">
+                                                        <a class="icon-jfi-trash jFiler-item-trash-action"></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

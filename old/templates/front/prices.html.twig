@@ -1,0 +1,72 @@
+{% extends '/front/index.html.twig' %}
+{% block content %}
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-header">
+                        <h1>{{ block.title }}</h1>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="card_2 caption color_1">
+                       {{ block.text|raw }}
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="card caption">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Выберите количество гостей в номере</label>
+                            <div class="col-sm-8">
+                                <select name="guests" class="form-control input-sm">
+                                    <option></option>
+                                    {% for i in 1..settings.guests_count %}
+                                        <option value="{{ i }}">{{ i }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Выберите тариф</label>
+                            <div class="col-sm-8">
+                                <select name="tariff" class="form-control input-sm">
+                                    <option></option>
+                                    {% for t in rates %}
+                                        <option value="{{ t.id }}">{{ t.title }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div style="clear: both"></div>
+                        {#<div>Текстовое описание тарифа</div>#}
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Отель</th>
+                                    {% for room in rooms %}
+                                    <th>{{ room.title }}</th>
+                                    {% endfor %}
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for hotel in hotels %}
+                                <tr>
+                                    <td><a class="ab1" href="/hotels?id={{ hotel.id }}">«{{ hotel.title }}»</td>
+                                    {% for rate in hotel.rates %}
+                                    <td>{% if rate.cost_hour is not null or rate.cost_day is not null %}сутки - {{ rate.cost_day }}<br> час - {{ rate.cost_hour }}{% endif %}</td>
+
+                                    {% endfor %}
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

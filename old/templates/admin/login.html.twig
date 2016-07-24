@@ -1,0 +1,22 @@
+{% extends '/admin/base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="../../public/admin/css/loginFormStyle.css" />
+{% endblock %}
+{% block body %}
+    <div class="container">
+
+        <form class="form-signin" method="POST" action="">
+            <h2 class="form-signin-heading">Вход</h2>
+            <label for="inputEmail" class="sr-only">E-mail</label>
+            <input type="email" id="inputEmail" class="form-control" placeholder="Email" name="email" required autofocus>
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" id="inputPassword" class="form-control" placeholder="Пароль" name="password" required>
+            {#<div class="checkbox">#}
+                {#<label>#}
+                    {#<input type="checkbox" name="remember" value="remember-me"> Запомнить меня#}
+                {#</label>#}
+            {#</div>#}
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+        </form>
+    </div>
+{% endblock %}

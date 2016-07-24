@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /cgi-bin/
+Sitemap: http://hotel-hol.ru/sitemap.xml

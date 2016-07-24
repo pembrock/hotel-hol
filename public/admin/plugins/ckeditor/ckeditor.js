@@ -1,4 +1,4 @@
-﻿﻿/*
+﻿/*
 Copyright (c) 2003-2016, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or http://ckeditor.com/license
 */
@@ -1086,7 +1086,7 @@ toolbar:"spellchecker,10"});CKEDITOR.dialog.add("checkspell",this.path+(CKEDITOR
 
 CKEDITOR.plugins.add( 'imageuploader', {
     init: function( editor ) {
-        editor.config.filebrowserBrowseUrl = 'ckeditor/plugins/imageuploader/imgbrowser.php';
+        editor.config.filebrowserBrowseUrl = '../public/admin/plugins/ckeditor/plugins/imageuploader/imgbrowser.php';
     }
 });
 CKEDITOR.plugins.add("spoiler",{lang:"en,ru",icons:"spoiler",init:function(b){function i(a){var d=b.document.getHead(),a=b.document.createElement("link",{attributes:{type:"text/css",rel:"stylesheet",href:a}});d.append(a)}function h(a){a.hasClass("hide-icon")?a.removeClass("hide-icon"):a.addClass("hide-icon");a.hasClass("show-icon")?a.removeClass("show-icon"):a.addClass("show-icon");a=a.getParent().getParent().getLast();a.setStyle("display","none"==a.getStyle("display")?"":"none")}function j(){var a=

@@ -1,0 +1,9 @@
+CREATE TABLE `blocks` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`title` VARCHAR(50) NULL DEFAULT NULL,
+	`text` TEXT NULL,
+	`isActive` TINYINT(1) NULL DEFAULT '0',
+	PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+;

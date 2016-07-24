@@ -1,0 +1,26 @@
+{% extends '/front/index.html.twig' %}
+{% block content %}
+    <section>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="page-header">
+							<h2>Галерея</h2>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+				{% if images is not null %}
+                    {% for value in images %}
+					<div class="col-md-3 col-sm-4 col-xs-6 thumb">
+						<a class="fancyimage" rel="group" href="{{ path }}{{ value }}">
+							<img class="img-responsive" height="150" src="{{ path }}{{ value }}">
+						</a>
+					</div>
+					{% endfor %}
+                {% endif %}
+				</div>
+			</div>
+		</section>
+
+{% endblock %}

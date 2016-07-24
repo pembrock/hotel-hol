@@ -1,0 +1,79 @@
+{% extends "/admin/index.html.twig" %}
+{% set menu_selected = 'home' %}
+
+{% block content %}
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <ol class="breadcrumb">
+                <li><a href="?hid={{ hotel.id }}"><i class="fa fa-bed"></i> Номера в гостинице {{ hotel.title }}</a></li>
+                <li class="active">{{ room.title }}</li>
+            </ol>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form class="form-horizontal" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="hid" id="hid" value="{% if hotel is defined %}{{ hotel.id }}{% endif %}">
+            <input type="hidden" name="rid" id="rid" value="{% if room is defined %}{{ room.id }}{% endif %}">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="online_link" class="col-sm-2 control-label">Online бронирование</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="online_link" id="online_link" placeholder="Ссылка на online бронирование" value="{% if description is defined %}{{ description.online_link }}{% endif %}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="description" class="col-sm-2 control-label">Описание</label>
+                    <div class="col-sm-6">
+                        <textarea name="description" id="editor1" rows="10" cols="80">
+                            {% if description is defined %}{{ description.description }}{% endif %}
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="logo" class="col-sm-2 control-label">Фото номера</label>
+
+                    <div class="col-sm-8">
+                        <input type="file" name="files[]" id="filer_input2" multiple="multiple">
+                        <div class="jFiler-items jFiler-row">
+                            <ul class="jFiler-items-list jFiler-items-grid">
+                                {% for value in images %}
+                                <li class="jFiler-item" data-jfiler-index="0" style="">
+                                    <div class="jFiler-item-container">
+                                        <div class="jFiler-item-inner">
+                                            <div class="jFiler-item-thumb">
+                                                <div class="jFiler-item-thumb-image">
+                                                    <img src="{{ path }}{{ value }}" draggable="true">
+                                                </div>
+                                            </div>
+                                            <div class="jFiler-item-assets jFiler-row">
+                                                <ul class="list-inline pull-left">
+                                                    <li>
+                                                        <div class="jFiler-item-others text-success">
+                                                            <i class="icon-jfi-check-circle"></i> {{ value }}
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                                <ul class="list-inline pull-right">
+                                                    <li class="del-img" id="{{ value }}">
+                                                        <a class="icon-jfi-trash jFiler-item-trash-action"></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.box-body -->
+            <!-- /.box-footer -->
+            <div class="box-footer">
+                <button type="submit" class="btn btn-success" name="save" id="save">Сохранить</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

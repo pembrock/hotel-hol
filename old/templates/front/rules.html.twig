@@ -1,0 +1,32 @@
+{% extends '/front/index.html.twig' %}
+{% block content %}
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-header">
+                        <h1>Правила заселения в мини-гостиницу Hotel-hol</h1>
+                    </div>
+                    {% if blocks.rules is defined %}
+                    <div class="card caption color_1">
+                        <h2>{{ blocks.rules.title }}</h2>
+                        <p>{{ blocks.rules.text|raw }}</p>
+                    </div>
+                    {% endif %}
+                    {% if blocks.checkin is defined %}
+                    <div class="card caption color_2">
+                        <h2>{{ blocks.checkin.title }}</h2>
+                        {{ blocks.checkin.text|raw }}
+                    </div>
+                    {% endif %}
+                    {% if blocks.services is defined %}
+                    <div class="card caption color_3">
+                        <h2>{{ blocks.services.title }}</h2>
+                        {{ blocks.services.text|raw }}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

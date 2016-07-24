@@ -1,0 +1,162 @@
+{% extends '/front/base.html.twig' %}
+{% block body %}
+    <header>
+        <!-- == НАВИГАЦИЯ начало ============ -->
+        <nav class="navbar navbar-inverse navbar-fixed-top gold_border" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand logo" href="/"><img src="../../public/img/Logo_5.png"></a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Наши отели <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                {% for hotel in hotels %}
+                                <li><a href="/hotels?id={{ hotel.id }}">{{ hotel.title }}</a></li>
+                                {% endfor %}
+                                <li class="divider"></li>
+                                {#<li><a href="/hotels">Все отели</a></li>#}
+                                <li><a href="/gallery">Галерея</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/promo">Акции</a></li>
+                        <li><a href="/prices">Номера и цены</a></li>
+                        <li><a href="/rules">Правила</a></li>
+                        <li><a href="/contacts">Контакты</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="{{ settings.vk_link }}" target="_blank"><i class="fa fa-vk fa-lg"></i></a></li>
+                        <li><a href="{{ settings.youtube_link }}" target="_blank"><i class="fa fa-youtube-play fa-lg"></i></a></li>
+                        <li><a href="{{ settings.fb_link }}" target="_blank"><i class="fa fa-facebook-official fa-lg"></i></a></li>
+                        <!-- <li class="dropdown">
+                                       <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-language"></i> <b class="caret"></b></a>
+                                       <ul class="dropdown-menu">
+                                           <li><a href="#">Русский</a></li>
+                                           <li><a href="#">Английский</a></li>
+                                           <li><a href="#">Немецкий</a></li>
+                                           <li><a href="#">Китайский</a></li>
+                                           <li><a href="#">Въетнамский</a></li>
+                                       </ul>
+                                   </li>	 -->
+                        <li class="tel_nav"><a href="tel: {{ settings.phone_base }}">{{ settings.phone_base }}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- == НАВИГАЦИЯ конец ============ -->
+        <!-- == КАРУСЕЛЬ начало ============ -->
+        <div id="carousel-example-generic" class="carousel slide hidden-xs gold_border" data-ride="carousel">
+            <ol class="carousel-indicators">
+    {% for value in promo %}
+                <li data-target="#carousel-example-generic" data-slide-to="{{ loop.index-1 }}" {% if loop.index-1 == 0 %}class="active"{% endif %}></li>
+        {% endfor %}
+            </ol>
+            <div class="carousel-inner">
+                {% for value in promo %}
+                <div class="item {% if loop.index == 1 %}active{% endif %} item_image">
+                    <img src="public/upload/images/promo/{{ value.slide_image }}" alt="..." class="">
+                    <div class="carousel-caption">
+                        <p class="price">{{ value.title }}</p>
+                        {{ value.description|raw }}
+                        <a class="btn btn-success btn-raised ripple-effect btn-lg" href="/promo?id={{ value.id }}" role="button">Подробней</a>
+                    </div>
+                </div>
+                    {% endfor %}
+            </div>
+            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+        </div>
+        <!-- == КАРУСЕЛЬ конец ============ -->
+    </header>
+    <main>
+      <div class="container">
+          <div class="row">
+              <div class="col-md-12">
+                <!-- start TL search form 2.0 -->
+                <div id="tl-search-form"><br></div>
+                <script type="text/javascript">
+                    (function(w){
+                        var q=[
+                            ['setContext', 'TL-INT-hotel-hol.newtheme', 'ru'],
+                            ['embed', 'search-form', {container: 'tl-search-form'}]
+                        ];
+                        var t=w.travelline=(w.travelline||{}),ti=t.integration=(t.integration||{});ti.__cq=ti.__cq?ti.__cq.concat(q):q;
+                        if (!ti.__loader){ti.__loader=true;var d=w.document,p=d.location.protocol,s=d.createElement('script');s.type='text/javascript';s.async=true;s.src=(p=='https:'?p:'http:')+'//ibe.tlintegration.com/integration/loader.js';(d.getElementsByTagName('head')[0]||d.getElementsByTagName('body')[0]).appendChild(s);}
+                    })(window);
+                </script>
+                <!-- end TL search form 2.0 -->
+
+              </div>
+          </div>
+      </div>
+      <!-- == БРОНИРОВАНИЕ конец ============ -->
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 center-block">
+            <iframe frameborder="no" scrolling="no" style="text-align:center; width:auto;height:150px;" src="https://yandex.ru/time/widget/?geoid=213&lang=ru&layout=horiz&type=analog&face=digits"></iframe>
+            <!-- <iframe frameborder="no" scrolling="no" style="width:280px;height:150px;" src="https://yandex.ru/time/widget/?geoid=213&lang=ru&layout=horiz&type=digital&face=serif"></iframe> -->
+          </div>
+          <div class="col-md-4 center-block">
+            <iframe src="http://moscow.exdex.ru/ya_widget_freeset/?inc_cbrf=1&css=th,td{border:none}&hlg=1&bid=154" frameborder="0" width="230" height="130" style="overflow:hidden;"></iframe>
+          </div>
+          <div class="col-md-4 center-block">
+            <link rel="stylesheet" type="text/css" href="https://bst1.gismeteo.ru/assets/flat-ui/legacy/css/informer.min.css">
+            <div id="gsInformerID-u7v7v6y8J2r27Q" class="gsInformer" style="width:290px;height:122px">
+              <div class="gsIContent">
+                <div id="cityLink">
+                <a href="https://www.gismeteo.ru/city/daily/4368/" target="_blank">Погода в Москве</a>
+                </div>
+                <div class="gsLinks">
+                  <table>
+                    <tr>
+                        <td>
+                        <div class="leftCol">
+                          <a href="https://www.gismeteo.ru/" target="_blank">
+                            <img alt="Gismeteo" title="Gismeteo" src="https://bst1.gismeteo.ru/assets/flat-ui/img/logo-mini2.png" align="middle" border="0" />
+                            <span>Gismeteo</span>
+                          </a>
+                        </div>
+                        <div class="rightCol">
+                          <a href="https://www.gismeteo.ru/city/weekly/4368/" target="_blank">Прогноз на 2 недели</a>
+                        </div>
+                        </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <script async src="https://www.gismeteo.ru/api/informer/getinformer/?hash=u7v7v6y8J2r27Q" type="text/javascript"></script>
+            <!-- Gismeteo informer END -->
+          </div>
+        </div>
+      </div>  
+    {% block content %}{% endblock %}
+    </main>
+    <!-- == подвал начало ============================== -->
+    <footer>
+        <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                  <hr>
+                  <p class="text-muted">Copyright <i class="fa fa-copyright"></i>{{ 'now'|date('Y') }} Hotel-hol. Все права защищены</p>
+              </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="hidden"></div>
+    <div class="loader">
+        <div class="loader_inner"></div>
+    </div>
+{% endblock %}

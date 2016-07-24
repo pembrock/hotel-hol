@@ -1,0 +1,62 @@
+{% extends "/admin/index.html.twig" %}
+{% set menu_selected = 'info' %}
+
+{% block content %}
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <ol class="breadcrumb">
+                <li><a href="information.php"><i class="fa fa-exclamation-circle"></i> Полезная информация</a></li>
+                <li class="active">{% if info is defined %}{{ info.title }}{% else %}Новая страница{% endif %}</li>
+            </ol>
+        </div>
+        <form class="form-horizontal" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="id" id="id" value="{% if info is defined %}{{ info.id }}{% else %}0{% endif %}">
+            <div class="box-body">
+                {% if error is defined  %}
+                    {{ error }}
+                {% endif %}
+                <div class="form-group">
+                    <label for="isActive" class="col-sm-2 control-label">Опубликовано</label>
+                    <div class="col-sm-6">
+                        <input type="checkbox" class="form-control-static" name="isActive" id="isActive" value="1" {% if info is defined %}{% if info.isActive == 1 %} checked {% endif %}{% endif %} style="width: 25px;">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="title" class="col-sm-2 control-label">Название</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="title" id="title" placeholder="Название" value="{% if info is defined %}{{ info.title }}{% endif %}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="description" class="col-sm-2 control-label">Краткое описание</label>
+                    <div class="col-sm-6">
+                        <textarea name="description" id="editor1" rows="10" cols="80">
+                            {% if info is defined %}{{ info.description }}{% endif %}
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="text" class="col-sm-2 control-label">Полное описание</label>
+                    <div class="col-sm-6">
+                        <textarea name="text" id="editor2" rows="10" cols="80">
+                            {% if info is defined %}{{ info.text }}{% endif %}
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="logo" class="col-sm-2 control-label">Изображение</label>
+                    <div class="col-sm-8">
+                        {% if info.logo is not null %}
+                            <div><img src="{{ info.logo }}" width="300"> </div>
+                            <br>
+                        {% endif %}
+                        <input type="file" name="logo" class="form-control" id="logo">
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <button type="submit" class="btn btn-success" name="save" id="save">Сохранить</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
