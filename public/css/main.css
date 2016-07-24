@@ -468,3 +468,7 @@ i {padding-right: 5px; min-width: 23px; text-align: center;}
 .info-title{
     font-size: 23px;
 }
+
+@media screen and (max-width: 768px) {
+  .informers {display: none;}
+}

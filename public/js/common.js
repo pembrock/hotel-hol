@@ -70,7 +70,7 @@ $(document).ready(function(){
             url: location.href,
             data: {language: 1, lang: lang, alt: alt, title: title},
             success: function(e){
-                window.location = location.href;
+                window.location = e;
             }
         });
 

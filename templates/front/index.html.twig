@@ -11,7 +11,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand logo" href="/"><img src="../../public/img/Logo_5.png"></a>
+                    <a class="navbar-brand logo" href="{{ base_url }}/"><img src="../../public/img/Logo_5.png"></a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
                     <ul class="nav navbar-nav">
@@ -21,7 +21,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ val.title }} <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 {% for hotel in hotels %}
-                                <li><a href="/hotels?id={{ hotel.id }}">{{ hotel.title }}</a></li>
+                                <li><a href="{{ base_url }}/hotels?id={{ hotel.id }}">{{ hotel.title }}</a></li>
                                 {% endfor %}
                             </ul>
                         </li>
@@ -63,11 +63,11 @@
                 {% for value in promo %}
                     {% if value.description is not empty or value.title != "0" %}
                 <div class="item {% if loop.index == 1 %}active{% endif %} item_image">
-                    <img src="public/upload/images/promo/{{ value.slide_image }}" alt="..." class="">
+                    <img src="../public/upload/images/promo/{{ value.slide_image }}" alt="..." class="">
                     <div class="carousel-caption">
                         <p class="price">{{ value.title }}</p>
                         {{ value.description|raw }}
-                        <a class="btn btn-success btn-raised ripple-effect btn-lg" href="/promo?id={{ value.id }}" role="button">{{ titles.more }}</a>
+                        <a class="btn btn-success btn-raised ripple-effect btn-lg" href="{{ base_url }}/promo?id={{ value.id }}" role="button">{{ titles.more }}</a>
                     </div>
                 </div>
                         {% endif %}
@@ -104,7 +104,7 @@
           </div>
       </div>
       <!-- == БРОНИРОВАНИЕ конец ============ -->
-      <div class="container">
+      <div class="container informers">
         <div class="row">
           <div class="col-md-4 center-block">
             <iframe frameborder="no" scrolling="no" style="text-align:center; width:auto;height:150px;" src="https://yandex.ru/time/widget/?geoid=213&lang={% if lang.type == "ru" %}ru{% else %}en{% endif %}&layout=horiz&type=analog&face=digits"></iframe>
