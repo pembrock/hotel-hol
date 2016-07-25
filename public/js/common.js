@@ -83,7 +83,7 @@ $(document).ready(function(){
 		var tid = $('select[name=tariff]').val();
 		$.ajax({
 			type: "POST",
-			url: "/prices",
+			url: base_url + "/prices",
 			data: {getRates: 1, guests: guests, tid: tid},
 			success: function(e){
 				var response = JSON.parse(e);
@@ -104,7 +104,7 @@ $(document).ready(function(){
 		var tid = $(this).val();
 		$.ajax({
 			type: "POST",
-			url: "/prices",
+			url: base_url + "/prices",
 			data: {getRates: 1, guests: guests, tid: tid},
 			success: function(e){
 				var response = JSON.parse(e);

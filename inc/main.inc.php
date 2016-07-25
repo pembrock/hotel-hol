@@ -5,11 +5,16 @@
  * Date: 27.02.2016
  * Time: 15:50
  */
-
+session_start();
 require 'inc.php';
+
 $url = /*$_SERVER['REQUEST_SCHEME'] . */'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 $parse_url = parse_url($url);
 $parse_url['path'] = preg_replace('/^\/(\D{2})\//', '/', $parse_url['path']);
+
+if (!isset($_GET['lang']))
+    header('Location: ' . $parse_url['scheme'] . "://" . $parse_url['host'] . '/ru/');
+
 $base_url = $parse_url['scheme'] . "://" . $parse_url['host'] . '/' . $_GET['lang'];
 $lang_array = $fpdo->from('language')->where(array('isActive' => 1))->fetchAll();
 $language = array();
@@ -19,6 +24,14 @@ foreach($lang_array as $key)
     $language[$key['code']]['alt'] = $key['name'];
     $language[$key['code']]['title'] = $key['name'] . ' (' . $key['code'] . ')';
 
+}
+if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+    $lc = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+}
+if (isset($language[$lc]) && !isset($_SESSION['auto_lang'])) {
+    $_SESSION['auto_lang'] = time() + 3600 * 7;
+    header('Location: ' . $parse_url['scheme'] . "://" . $parse_url['host'] . '/' . $lc . $parse_url['path'] . (isset($parse_url['query']) ? '?' . $parse_url['query'] : ''));
+    exit;
 }
 
 if(isset($_POST['language']))

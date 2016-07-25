@@ -71,7 +71,7 @@
                     <div class="card_2 caption">
                         <div class="row">
                             <div class="col-md-12">
-                                <h2>{{ row.title }}</h2> {% if row.online_link is not empty %}<a href="{{ row.online_link }}" class="btn btn-success">{{ titles.reserve }}</a>{% endif %}
+                                <h2>{{ row.title }}</h2> {% if row.online_link is not empty %}<a href="{{ base_url }}{{ row.online_link }}" class="btn btn-success">{{ titles.reserve }}</a>{% endif %}
                                 <hr>
                             </div>
                             <div class="col-md-8">
@@ -180,7 +180,7 @@
                             <input type="email" name="email" id="email" class="form-control" placeholder="{{ titles.type_email }}" value="" required/>
                         </div>
                         <div class="form-group">
-                            <label for="comment">{{ title.comment }}:</label>
+                            <label for="comment">{{ titles.comment }}:</label>
                             <textarea class="form-control" id="comment" name="comment" required></textarea>
                         </div>
                         <div class="form-group">

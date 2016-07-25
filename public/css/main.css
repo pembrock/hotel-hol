@@ -469,6 +469,16 @@ i {padding-right: 5px; min-width: 23px; text-align: center;}
     font-size: 23px;
 }
 
+.copyright{
+  text-align: center;
+}
+
+.paymentslogo{
+  text-align: center;
+}
+.paymentslogo img{
+  width: 150px;
+}
 @media screen and (max-width: 768px) {
   .informers {display: none;}
 }

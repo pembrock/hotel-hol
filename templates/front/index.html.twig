@@ -26,7 +26,7 @@
                             </ul>
                         </li>
                                 {% else %}
-                        <li><a href="/{{ val.code }}">{{ val.title }}</a></li>
+                        <li><a href="{{ base_url }}/{{ val.code }}">{{ val.title }}</a></li>
                                 {% endif %}
                         {% endfor %}
                         {% if language|length > 0 %}
@@ -181,10 +181,16 @@
     <footer>
         <div class="container">
             <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-12 copyright">
                   <hr>
                   <p class="text-muted">Copyright <i class="fa fa-copyright"></i>{{ 'now'|date('Y') }} Hotel-hol. Все права защищены</p>
               </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 paymentslogo">
+                    <img src="/public/img/PayKeeper.png">
+                    <img src="/public/img/visa-master.png">
+                </div>
             </div>
         </div>
     </footer>
